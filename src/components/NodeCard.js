@@ -16,8 +16,13 @@ class NodeCard extends Component {
                     <Owner ownerInfo={this.props.ownerInfo}/>
                 </div>
                 <div>
+                    {this.props.description}
+                </div>
+                <div>
                     {/* These will have to scale */}
-                    <SensorCard sensorData={this.props.sensorData} />
+                    <SensorCard sensorData={this.props.sensorData[0]} />
+                    <SensorCard sensorData={this.props.sensorData[1]} />
+                    <SensorCard sensorData={this.props.sensorData[2]} />
                 </div>
             </div>
         );
