@@ -17,13 +17,14 @@ class SensorCard extends Component {
                 </div>
                 <div>
                     {/* status of the sensor */}
-                    {/* {this.props.sensorData.status} */}
+                    Status: 
+                    {this.props.sensorData.status}
                 </div>
                 <div>
-                    {this.props.title}
-                    CHART TITLE GOES HERE. OR DOES IT?
+                    {/* {this.props.title} */}
+                    {/* CHART TITLE GOES HERE. OR DOES IT? */}
                 </div>
-                {/* <Chart data={this.props.sensorData.chartData} options={this.props.sensorData.chartOptions} /> */}
+                <Chart data={this.props.sensorData.chartData} options={this.props.sensorData.chartOptions} />
             </div>
         );
     }
