@@ -1,0 +1,26 @@
+.Sensor-card {
+    border-style: groove;
+    float: left;
+    margin: 10px;
+    padding: 10px;
+    /* overflow: hidden; */
+}
+
+.Title {
+    font-size: 1.5em;
+    float: left;
+    margin: 10px;
+
+}
+
+.Owner {
+    float: left;
+    font-size: .8em;
+}
+
+.Owner-name {
+}
+
+.Owner-email {
+
+}
