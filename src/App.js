@@ -16,7 +16,7 @@ class App extends Component {
             name: "Andrew Jong",
             email: "andrew.jong@nasa.gov"
           }}
-          description="This node is monitoring Andrew's lunchbox, to make sure evil ants don't get to it."
+          description="This node is monitoring Andrew's lunchbox, to make sure evil ants don't get to it. Andrew's lunchbox has crackers which are known to be explosive."
           sensorData={[
             {
               status: "Good",
@@ -35,7 +35,7 @@ class App extends Component {
               chartOptions: {
                 legend: {
                   display: true,
-                  position: 'right'
+                  position: 'top'
                 },
                 scales: {
                   yAxes: [{
@@ -63,7 +63,7 @@ class App extends Component {
               chartOptions: {
                 legend: {
                   display: true,
-                  position: 'right'
+                  position: 'top'
                 },
                 scales: {
                   yAxes: [{
@@ -91,7 +91,7 @@ class App extends Component {
               chartOptions: {
                 legend: {
                   display: true,
-                  position: 'right'
+                  position: 'top'
                 },
                 scales: {
                   yAxes: [{
@@ -110,7 +110,7 @@ class App extends Component {
             name: "George Gorospe",
             email: "george.s.gorospe@nasa.gov"
           }}
-          description="This node is monitoring George's lunchbox, to make sure it doesn't spoil."
+          description="This node is monitoring George's lunchbox, to make sure it doesn't spoil. George's lunchbox is actually a squircle, so it's a lunch squircle haha."
           sensorData={[
             {
               status: "Good",
@@ -129,7 +129,7 @@ class App extends Component {
               chartOptions: {
                 legend: {
                   display: true,
-                  position: 'right'
+                  position: 'top'
                 },
                 scales: {
                   yAxes: [{
@@ -157,7 +157,7 @@ class App extends Component {
               chartOptions: {
                 legend: {
                   display: true,
-                  position: 'right'
+                  position: 'top'
                 },
                 scales: {
                   yAxes: [{
@@ -185,7 +185,7 @@ class App extends Component {
               chartOptions: {
                 legend: {
                   display: true,
-                  position: 'right'
+                  position: 'top'
                 },
                 scales: {
                   yAxes: [{

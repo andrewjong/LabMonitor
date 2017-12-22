@@ -8,17 +8,22 @@
 
 .Title {
     font-size: 1.5em;
-    float: left;
+    /* float: left; */
     margin: 10px;
-
+    /* outline: 1px solid black; */
 }
 
 .Owner {
-    float: left;
+    /* float: right; */
     font-size: .8em;
+    /* outline: 1px solid black; */
+}
+#description {
+    text-align: left;
 }
 
 .Owner-name {
+    font-size: 1.2em;
 }
 
 .Owner-email {
