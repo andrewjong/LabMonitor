@@ -1,6 +1,6 @@
 .Node-card {
     border-style: groove;
-    float: left;
+    /* float: left; */
     margin: 2px;
     /* margin: auto; */
     padding: 10px;
