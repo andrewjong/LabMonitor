@@ -110,7 +110,7 @@ class App extends Component {
             name: "George Gorospe",
             email: "george.s.gorospe@nasa.gov"
           }}
-          description="This node is monitoring George's lunchbox, to make sure it doesn't spoil. George's lunchbox is actually a squircle, so it's a lunch squircle haha."
+          description="This node is monitoring George's lunchbox, to make sure it doesn't spoil. George's lunchbox is actually a squircle, so it's a lunchsquircle."
           sensorData={[
             {
               status: "Good",

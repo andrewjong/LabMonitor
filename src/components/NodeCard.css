@@ -1,8 +1,11 @@
 .Node-card {
     border-style: groove;
     float: left;
-    margin: 10px;
+    margin: 2px;
+    /* margin: auto; */
     padding: 10px;
+    width: 90%;
+    max-width: 750px;
     /* overflow: hidden; */
 }
 .Header {
