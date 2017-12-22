@@ -1,4 +1,5 @@
 import React from 'react';
+import './Owner.css'
 
 function Owner(props) {
     return (

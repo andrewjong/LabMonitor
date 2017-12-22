@@ -10,13 +10,15 @@ class NodeCard extends Component {
     }
     render() {
         return (
-            <div className="Sensor-card">
-                <Title title={this.props.title}/>
-                <Owner ownerInfo={this.props.ownerInfo}/>
-                <p id="description">
-                    {this.props.description}
-                </p>
-                <div>
+            <div className="Node-card">
+                <div className="Header">
+                    <Title title={this.props.title} />
+                    <p id="description">
+                        {this.props.description}
+                    </p>
+                    <Owner ownerInfo={this.props.ownerInfo} />
+                </div>
+                <div className="Charts">
                     {/* These will have to scale */}
                     <SensorCard sensorData={this.props.sensorData[0]} />
                     <SensorCard sensorData={this.props.sensorData[1]} />

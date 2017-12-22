@@ -1,0 +1,14 @@
+.Owner {
+    width: 70%;
+    margin: 0 auto;
+    font-size: .9em;
+}
+.Owner-name {
+    display: inline-block;
+    margin: 10px;
+}
+
+.Owner-email {
+    display: inline-block;
+    margin: 10px;
+}

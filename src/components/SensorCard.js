@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import Chart from './Chart';
 
 class SensorCard extends Component {
-    constructor(props){
+    constructor(props) {
         super(props)
         // this.state.chartData =  props.sensorData.chartData
     }
     render() {
         return (
-            <div>
+            <div style={{ margin: 25 + "px" }}>
                 <div>
                     {/* Chart Settings button */}
                 </div>
@@ -17,14 +17,19 @@ class SensorCard extends Component {
                 </div>
                 <div>
                     {/* status of the sensor */}
-                    Status: 
+                    Status:
                     {this.props.sensorData.status}
                 </div>
                 <div>
                     {/* {this.props.title} */}
                     {/* CHART TITLE GOES HERE. OR DOES IT? */}
                 </div>
-                <Chart data={this.props.sensorData.chartData} options={this.props.sensorData.chartOptions} />
+                <Chart data={this.props.sensorData.chartData}
+                    options={
+                        Object.assign(this.props.sensorData.chartOptions, 
+                            {responsive: true,
+                            maintainAspectRatio: false})
+                    } />
             </div>
         );
     }
