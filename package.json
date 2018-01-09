@@ -21,6 +21,7 @@
   },
   "devDependencies": {
     "concurrently": "^3.5.1",
+    "jest": "^22.0.5",
     "minimist": "^1.2.0"
   }
 }
