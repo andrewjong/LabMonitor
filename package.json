@@ -21,6 +21,7 @@
   },
   "devDependencies": {
     "concurrently": "^3.5.1",
-    "minimist": "^1.2.0"
+    "minimist": "^1.2.0",
+    "winston": "^3.0.0-rc1"
   }
 }

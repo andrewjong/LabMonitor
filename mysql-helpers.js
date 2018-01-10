@@ -12,7 +12,7 @@ function makeSQLDate(dateobj) {
     if (date < 10) {
         date = "0" + date;
     }
-    return `${year}-${month}-${date}`
+    return `'${year}-${month}-${date}'`
 }
 
 /**
@@ -23,7 +23,7 @@ function makeSQLTime(dateObj) {
     const hours = dateObj.getHours()
     const min = dateObj.getMinutes()
     const seconds = dateObj.getSeconds()
-    return `${hours}:${min}:${seconds}`
+    return `'${hours}:${min}:${seconds}'`
 }
 
 module.exports = {
