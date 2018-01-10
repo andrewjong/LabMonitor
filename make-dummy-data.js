@@ -1,12 +1,11 @@
 import { setInterval } from 'core-js/library/web/timers'; // ???
-import { hydrate } from '../../.cache/typescript/2.6/node_modules/@types/react-dom';
-
+const { makeSQLDate, makeSQLTime } = require('./mysql-helpers')
 // packages
 const argv = require('minimist')(process.argv.slice(2));
 const mysql = require('mysql')
 
 console.log('These are the args: ')
-console.dir(argv)
+console.log(argv)
 
 let numInstancesCap = 100; // cap on the number of data instances to store in the database
 
@@ -105,24 +104,4 @@ function makeRandomValues(id) {
     // const FIELDS = ["id", "owner", "description", "equipment", "date", "time",
     // "humidity", "temp_ambient", "temp_ir", "carbon_monoxide", "methane", "hydrogen", "sound", "vibration", "battery"];
     return [date, time, humidity, temp_ambient, temp_ir, , carbon_monoxide, methane, hydrogen, sound, vibration, battery]
-}
-
-/**
- * Returns a date string in the form that SQL likes
- */
-function makeSQLDate(dateobj) {
-    let year = dateobj.getFullYear();
-    let month = dateobj.getMonth() + 1;
-    let date = dateobj.getDate();
-    if (month < 10) {
-        month = "0" + month;
-    }
-    return [year, month, date].join('-');
-}
-
-/**
- * Returns a time string in the form that SQL likes
- */
-function makeSQLTime() {
-
 }
