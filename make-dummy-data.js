@@ -1,17 +1,21 @@
 const argv = require('minimist')(process.argv.slice(2));
 const mysql = require('mysql');
 const winston = require('winston');  // logging library
-const logger = winston.createLogger({
-    level: 'info',
-    transports: [
-        // colorize the output to the console
-        new (winston.transports.Console)({ colorize: true })
-    ]
-});
 const { makeSQLDate, makeSQLTime } = require('./mysql-helpers')
 
-// console.log('These are the args: ')
-// console.log(argv)
+const consoleFormat = winston.format.printf(function (info) {
+    return `${info.level}: ${info.message}`;
+});
+const logger = winston.createLogger({
+    transports: [
+        new winston.transports.Console({ format: winston.format.combine(winston.format.colorize(), consoleFormat) })
+    ],
+    level: 'silly',
+});
+
+
+logger.debug('These are the passed args: ')
+logger.debug(argv)
 
 let numInstancesCap = 100; // cap on the number of data instances to store in the database
 
@@ -36,13 +40,13 @@ const connection = mysql.createConnection({
 let timeObj;
 if (argv.c.toLowerCase() === 'start') {
     // code to start generating dummy data 
-    console.log('Starting dummy data generation.')
+    logger.info('Starting dummy data generation.')
 
     // check to make sure can log in as root
     // mysql -u root?
     connection.connect((err) => {
         if (err) throw err;
-        console.log('MySQL connected successfully');
+        logger.verbose('MySQL connected successfully');
     });
 
     // check to make sure mysql server is running
@@ -56,11 +60,11 @@ if (argv.c.toLowerCase() === 'start') {
 
     // continually call addDataPoint every x seconds
     let count = 1;
-    timeObj = setInterval( () => {
+    timeObj = setInterval(() => {
         NODE_IDS.forEach(id => {
             addDataPoint(id);
         })
-        console.log(`======Added ${count} rows for ${NODE_IDS.length}=======`)
+        logger.info(`Added ${count} rows each for ${NODE_IDS.length} nodes`)
         count++;
     }, INTERVAL_SECONDS * 1000);
 
@@ -70,17 +74,17 @@ if (argv.c.toLowerCase() === 'start') {
 
 } else if (argv.c.toLowerCase() === 'stop') {
     // code to gracefully stop generating dummy data
-    console.log('Stopping dummy data generation.');
+    logger.info('Stopping dummy data generation.');
 
     if (typeof timeObj !== 'undefined')
         clearInterval(timeObj); // stop the callback loop
     else
-        console.log("No Dummy data generation process to stop.")
+        logger.info("No Dummy data generation process to stop.")
 
     // close our MySQL connection
     connection.end(err => {
         if (err) throw err;
-        console.log('Connection closed successfully.')
+        logger.info('Connection closed successfully.')
     });
 }
 
@@ -94,7 +98,7 @@ function addDataPoint(id) {
     const valuesAsStr = values.join(', ');
     // add these values into the database
     const query = `INSERT INTO ${table} (${fieldsAsStr}) VALUES (${valuesAsStr})`;
-    console.log(query);
+    logger.verbose(query);
     connection.query(query);
 }
 
