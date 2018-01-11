@@ -1,12 +1,15 @@
 {
-  "name": "labmonitor-x",
+  "name": "labmonitor",
   "version": "0.0.0",
   "private": true,
   "scripts": {
     "client": "cd client && yarn start",
     "server": "yarn start",
     "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
-    "start": "PORT=3001 node ./bin/www"
+    "start": "PORT=3001 node ./bin/www",
+    "test": "jest",
+    "start-dummy-data": "node make-dummy-data.js -c start",
+    "stop-dummy-data": "node make-dummy-data.js -c stop"
   },
   "dependencies": {
     "body-parser": "~1.18.2",
@@ -19,6 +22,7 @@
   },
   "devDependencies": {
     "concurrently": "^3.5.1",
+    "jest": "^22.0.5",
     "nodemon": "^1.14.10"
   }
 }
