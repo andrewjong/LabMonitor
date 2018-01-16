@@ -1,34 +1,24 @@
 const argv = require('minimist')(process.argv.slice(2));
 const mysql = require('mysql');
-const winston = require('winston');  // logging library
 const { makeSQLDate, makeSQLTime } = require('./mysql-helpers');
+const logger = require('./logger')
 
-// pretty format for our logger
-const consoleFormat = winston.format.printf(function (info) {
-    return `${info.level}: ${info.message}`;
-});
-const logger = winston.createLogger({
-    transports: [
-        new winston.transports.Console({ format: winston.format.combine(winston.format.colorize(), consoleFormat) })
-    ],
-    level: 'info',
-});
 
 // see what arguments are passed in
 logger.debug('These are the passed args: ')
 logger.debug(argv)
 
 let MAX_DATA_CAP = 100; // cap on the number of data instances to store in the database
+const INTERVAL_SECONDS = 2; // the delay in seconds in between data insertions
 
 // table node_info
-const TABLE = "sensor_values";
-const NODE_INFO_FIELDS = ["id", "owner", "description", "equipment"];
-const NODE_IDS = [1, 2, 3];
+const TABLE = "sensor_values",
+    NODE_INFO_FIELDS = ["id", "owner", "description", "equipment"],
+    NODE_IDS = [1, 2, 3];
 // table sensor_data
 const SENSOR_DATA_FIELDS = ["id", "date", "time", "humidity", "temp_ambient", "temp_ir", "carbon_monoxide", "methane",
     "hydrogen", "sound", "vibration", "battery"];
 
-const INTERVAL_SECONDS = 2; // the delay in seconds in between data insertions
 
 // mysql connection properties
 const connection = mysql.createConnection({
