@@ -2,11 +2,11 @@ const express = require('express');
 const router = express.Router();
 const mysql = require('mysql');
 const logger = require('../logger');
-
+const {DATABASE, NODE_TABLE, SENSOR_TABLE} = require ('../database-config')
 const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  database: 'labmonitor'
+  database: DATABASE
 });
 
 // get the latest data for each of the listed nodes
@@ -24,7 +24,7 @@ router.get('/', function (req, res, next) {
   });
   // promise for selecting all from the node_info table
   const getNodeInfo = new Promise((resolve, reject) => {
-    const sql = 'SELECT * FROM node_info';
+    const sql = `SELECT * FROM ${NODE_TABLE}`;
     connection.query(sql, (err, nodeInfoData) => {
       if (err) reject(err);
       resolve(nodeInfoData);
@@ -33,7 +33,7 @@ router.get('/', function (req, res, next) {
   // returns a promise 
   const getLatestData = (id) => {
     return new Promise((resolve, reject) => {
-        const sql = `SELECT * FROM sensor_values WHERE id=${id} ORDER BY date, time DESC LIMIT 1`;
+        const sql = `SELECT * FROM ${SENSOR_TABLE} WHERE id=${id} ORDER BY date, time DESC LIMIT 1`;
         connection.query(sql, (err, result) => {
           if (err) reject(err);
           // logger.debug(`Result for id ${id}:` + JSON.stringify(result));

@@ -2,29 +2,24 @@ const argv = require('minimist')(process.argv.slice(2));
 const mysql = require('mysql');
 const { makeSQLDate, makeSQLTime } = require('./mysql-helpers');
 const logger = require('./logger')
+const {DATABASE, NODE_TABLE, NODE_TABLE_FIELDS, SENSOR_TABLE, SENSOR_TABLE_FIELDS} = require ('./database-config');
 
 
 // see what arguments are passed in
 logger.debug('These are the passed args: ')
 logger.debug(argv)
 
-let MAX_DATA_CAP = 100; // cap on the number of data instances to store in the database
+const MAX_DATA_CAP = argv.max || 100; // cap on the number of data instances to store in the database
 const INTERVAL_SECONDS = 2; // the delay in seconds in between data insertions
 
-// table node_info
-const TABLE = "sensor_values",
-    NODE_INFO_FIELDS = ["id", "owner", "description", "equipment"],
-    NODE_IDS = [1, 2, 3];
-// table sensor_data
-const SENSOR_DATA_FIELDS = ["id", "date", "time", "humidity", "temp_ambient", "temp_ir", "carbon_monoxide", "methane",
-    "hydrogen", "sound", "vibration", "battery"];
-
+// the ids to insert dummy data for
+const NODE_IDS = [1, 2, 3];
 
 // mysql connection properties
 const connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    database: 'labmonitor'
+    database: DATABASE
 });
 
 let timeObj; // the time object returned by setInterval, so we can halt it later
@@ -82,12 +77,12 @@ if (argv.c.toLowerCase() === 'start') {
  * @param {int} id the id of the node
  */
 function addDataPoint(id) {
-    const fieldsAsStr = SENSOR_DATA_FIELDS.join(', ');
+    const fieldsAsStr = SENSOR_TABLE_FIELDS.join(', ');
     // make some random values
     const values = makeRandomValues(id);
     const valuesAsStr = values.join(', ');
     // add these values into the database
-    const query = `INSERT INTO ${TABLE} (${fieldsAsStr}) VALUES (${valuesAsStr})`;
+    const query = `INSERT INTO ${SENSOR_TABLE} (${fieldsAsStr}) VALUES (${valuesAsStr})`;
     logger.verbose(query);
     connection.query(query);
 }
@@ -120,21 +115,21 @@ function makeRandomValues(id) {
  */
 let hasCapped = false;
 function capMaxDataPoints() {
-    const countQuery = `SELECT count(*) AS numRows FROM ${TABLE}`
+    const countQuery = `SELECT count(*) AS numRows FROM ${SENSOR_TABLE}`
     connection.query(countQuery, (err, results) => {
         if (err) throw err;
 
         const count = results[0].numRows;
-        logger.debug(`Num rows in ${TABLE} = ${count}`);
+        logger.debug(`Num rows in ${SENSOR_TABLE} = ${count}`);
 
         if (count > MAX_DATA_CAP) {
-            logger.debug(`Database length is greater than MAX_DATA_CAP (${MAX_DATA_CAP})`);
+            logger.verbose(`Database length is greater than MAX_DATA_CAP (${MAX_DATA_CAP})`);
             if (!hasCapped) {
                 logger.info('Number of datapoints capped.')
                 hasCapped = true;
             }
 
-            const deleteQuery = `DELETE FROM ${TABLE} ORDER BY date, time, id DESC LIMIT 1`;
+            const deleteQuery = `DELETE FROM ${SENSOR_TABLE} ORDER BY date, time, id DESC LIMIT 1`;
             connection.query(deleteQuery, (err) => {
                 if (err) throw err;
                 logger.debug('1 row deleted');
