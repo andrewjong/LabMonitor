@@ -3,10 +3,10 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "start": "yarn server",
+    "server": "PORT=3001 nodemon ./bin/www",
     "client": "cd client && yarn start",
-    "server": "yarn start",
     "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
-    "start": "PORT=3001 node ./bin/www",
     "test": "jest",
     "start-dummy-data": "node make-dummy-data.js -c start",
     "stop-dummy-data": "node make-dummy-data.js -c stop"
@@ -26,7 +26,7 @@
     "concurrently": "^3.5.1",
     "jest": "^22.0.5",
     "minimist": "^1.2.0",
-    "nodemon": "^1.14.10",
+    "nodemon": "^1.14.11",
     "winston": "^3.0.0-rc1"
   }
 }

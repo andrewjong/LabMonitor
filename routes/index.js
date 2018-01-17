@@ -61,7 +61,7 @@ router.get('/', function (req, res, next) {
       // promise.all ensures all the latest data is queried before moving on
       return Promise.all(promises);
     })
-    // take the latest node data and write it to the webpage
+    // take the latest entry for each node and write it to the webpage
     .then((latestNodeData) => {
       logger.debug('RESULTS FROM LATEST DATA PER NODE: ');
       // logger.debug(JSON.stringify(latestNodeData));
@@ -69,21 +69,11 @@ router.get('/', function (req, res, next) {
         logger.debug(JSON.stringify(row));
       });
     })
-    // close the connection
+    // close the sql connection
     .then((res) => {
       connection.end();
     });
 
-  // connection.connect((err) => {
-  //   if (err) throw err;
-  //   logger.verbose('MySQL connected successfully');
-  //   const query = 'SELECT * FROM node_info';
-  //   connection.query(query, (err, results) => {
-  //     if (err) throw err;
-  //     logger.info(JSON.stringify(results));
-  //   });
-  // });
-  // connection.end();
   res.render('index', { title: 'Express' });
 });
 
