@@ -3,12 +3,17 @@ import './App.css'
 import NodeCard from './components/NodeCard';
 
 class App extends Component {
-  state = {users: []}
+  state = { users: [] }
 
   componentDidMount() {
-    fetch('/users')
-      .then(res => res.json())
-      .then(users => this.setState({ users }));
+    // fetch('/users')
+    //   .then(res => res.json())
+    //   .then(users => this.setState({ users }));
+    setInterval(() => {
+      fetch('/live-data')
+        .then(res => res.json())
+        .then(latestData => this.setState({ latestData }));
+    }, 5000);
   }
 
   // render() {
