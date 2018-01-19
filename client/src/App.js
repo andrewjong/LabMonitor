@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import './App.css'
 import NodeCard from './components/NodeCard';
 
+const INTERVAL_SECONDS = 2;
+
 class App extends Component {
   state = { users: [] }
 
@@ -12,21 +14,12 @@ class App extends Component {
     setInterval(() => {
       fetch('/live-data')
         .then(res => res.json())
-        .then(latestData => this.setState({ latestData }));
-    }, 5000);
+        .then(latestData => {
+          console.log(JSON.stringify(latestData, null, '\t'));
+          return this.setState({ latestData });
+        });
+    }, INTERVAL_SECONDS * 1000);
   }
-
-  // render() {
-  //   return (
-  //     <div className="App">
-  //       <h1>Users</h1>
-  //       {this.state.users.map(user =>
-  //         <div key={user.id}>{user.username}</div>
-  //       )}
-  //     </div>
-  //   );
-  // }
-
   // something here about generating the Nodes dynamically perhaps
 
   render() {
@@ -35,10 +28,11 @@ class App extends Component {
         <header className="App-header">
           <h1 className="App-title">SHARP LABORATORY</h1>
         </header>
-        <h1>Users</h1>
+        {/* <h1>Users</h1>
         {this.state.users.map(user =>
           <div key={user.id}>{user.username}</div>
-        )}
+        )} */}
+
         <div className="container">
           <NodeCard title="Node 1"
             ownerInfo={{
