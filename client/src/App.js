@@ -3,20 +3,40 @@ import './App.css'
 import NodeCard from './components/NodeCard';
 
 const INTERVAL_SECONDS = 2;
+const MAX_DATA = 10;
 
 class App extends Component {
-  state = { users: [] }
+  // initialize state as an object with an empty array
+  state = { data: [] };
 
   componentDidMount() {
-    // fetch('/users')
-    //   .then(res => res.json())
-    //   .then(users => this.setState({ users }));
     setInterval(() => {
       fetch('/live-data')
-        .then(res => res.json())
+        .then(res => {
+          if (res.ok) return res.json();
+          else throw new Error('Could not connect');
+        })
         .then(latestData => {
-          console.log(JSON.stringify(latestData, null, '\t'));
-          return this.setState({ latestData });
+          // console.log(JSON.stringify(latestData, null, '\t'));
+          const last = this.state.data[this.state.data.length - 1];
+          // console.log('LATEST: ' + JSON.stringify(latestData));
+          // console.log('LAST: ' + JSON.stringify(last));
+          if (!(JSON.stringify(latestData) === JSON.stringify(last))) {
+            console.log('New data detected. Updating state...')
+            // clone the original state
+            const newState = Object.assign({}, this.state);
+            // add the new data
+            newState.data.push(latestData);
+            // don't store in the state more than max amount of datapoints
+            if (newState.data.length > MAX_DATA)
+              newState.data.shift();
+            return this.setState({ newState });
+          } else {
+            console.log('No new data.')
+          }
+        })
+        .catch(err => {
+          console.log(err);
         });
     }, INTERVAL_SECONDS * 1000);
   }
@@ -28,12 +48,20 @@ class App extends Component {
         <header className="App-header">
           <h1 className="App-title">SHARP LABORATORY</h1>
         </header>
-        {/* <h1>Users</h1>
-        {this.state.users.map(user =>
-          <div key={user.id}>{user.username}</div>
-        )} */}
-
         <div className="container">
+          {/* {
+            this.state.data.forEach(node => {
+              // make a node
+              <NodeCard title={`Node ${node.id}`}
+                ownerInfo={{
+                  name: node.owner,
+                }}
+                description={node.description}
+              />
+
+
+            })
+          } */}
           <NodeCard title="Node 1"
             ownerInfo={{
               name: "Andrew Jong",
