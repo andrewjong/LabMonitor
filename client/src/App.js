@@ -54,7 +54,10 @@ class App extends Component {
         });
     }, INTERVAL_SECONDS * 1000);
   }
-  // something here about generating the Nodes dyamically perhaps
+  /**
+   * Hardcode the color for each sensor
+   * @param {string} label 
+   */
   chooseBorderColor(label){
     if (label === "humidity") return 'rgba(80,120,230,1)';
     if (label === "temp_ambient") return 'rgba(255,99,132,1)';
@@ -76,6 +79,7 @@ class App extends Component {
         </header>
         <div className="container">
           {
+            // map over each of the nodes
             Object.keys(this.state.nodes).map(idKey => {
               const values = this.state.nodes[idKey];
               const lastValue = values[values.length - 1];
@@ -121,100 +125,6 @@ class App extends Component {
                 />);
             })
           }
-          {/* <NodeCard title="Node 1"
-            ownerInfo={{
-              name: "Andrew Jong",
-              email: "andrew.jong@nasa.gov"
-            }}
-            description="This node is monitoring Andrew's lunchbox, to make sure evil ants don't get to it. Andrew's lunchbox has crackers which are known to be explosive."
-            sensorData={[
-              {
-                status: "Good",
-                chartData: {
-                  // probably for labels later we can read from props
-                  labels: ["25s", "20s", "15s", "10s", "5s", "0s"],
-                  datasets: [{
-                    label: 'Temperature over time',
-                    // probably for data later we can read from props
-                    data: [12, 19, 3, 5, 2, 3],
-                    backgroundColor: 'rgba(0,0,0,0)',
-                    borderColor: 'rgba(255,99,132,1)',
-                    borderWidth: 1
-                  }]
-                },
-                chartOptions: {
-                  legend: {
-                    display: true,
-                    position: 'top'
-                  },
-                  scales: {
-                    yAxes: [{
-                      ticks: {
-                        beginAtZero: true
-                      }
-                    }]
-                  },
-                }
-              },
-
-              {
-                status: "WARNING",
-                chartData: {
-                  // probably for labels later we can read from props
-                  labels: ["25s", "20s", "15s", "10s", "5s", "0s"],
-                  datasets: [{
-                    label: 'Gas over time',
-                    // probably for data later we can read from props
-                    data: [8, 19, 10, 5, 18, 42],
-                    backgroundColor: 'rgba(0,0,0,0)',
-                    borderColor: 'rgba(99,190,132,1)',
-                    borderWidth: 1
-                  }]
-                },
-                chartOptions: {
-                  legend: {
-                    display: true,
-                    position: 'top'
-                  },
-                  scales: {
-                    yAxes: [{
-                      ticks: {
-                        beginAtZero: true
-                      }
-                    }]
-                  },
-                }
-              },
-              {
-                status: "Good",
-                chartData: {
-                  // probably for labels later we can read from props
-                  labels: ["25s", "20s", "15s", "10s", "5s", "0s"],
-                  datasets: [{
-                    label: 'Vibration over time',
-                    // probably for data later we can read from props
-                    data: [15, 14, 19, 18, 25, 28],
-                    backgroundColor: 'rgba(0,0,0,0)',
-                    borderColor: 'rgba(80,100,190,1)',
-                    borderWidth: 1
-                  }]
-                },
-                chartOptions: {
-                  legend: {
-                    display: true,
-                    position: 'top'
-                  },
-                  scales: {
-                    yAxes: [{
-                      ticks: {
-                        beginAtZero: true
-                      }
-                    }]
-                  },
-                }
-              },
-            ]}
-          /> */}
         </div>
       </div>
     );
