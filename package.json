@@ -1,27 +1,32 @@
 {
-  "name": "lab-monitor-test",
-  "version": "0.1.0",
+  "name": "labmonitor",
+  "version": "0.0.0",
   "private": true,
-  "dependencies": {
-    "chart.js": "^2.7.1",
-    "express": "^4.16.2",
-    "mysql": "^2.15.0",
-    "react": "^16.2.0",
-    "react-chartjs-2": "^2.6.4",
-    "react-dom": "^16.2.0",
-    "react-scripts": "1.0.17"
-  },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
+    "start": "yarn server",
+    "server": "PORT=3001 nodemon ./bin/www",
+    "client": "cd client && yarn start",
+    "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
+    "test": "jest",
     "start-dummy-data": "node make-dummy-data.js -c start",
     "stop-dummy-data": "node make-dummy-data.js -c stop"
   },
+  "dependencies": {
+    "body-parser": "~1.18.2",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "express": "~4.15.5",
+    "jade": "~1.11.0",
+    "morgan": "~1.9.0",
+    "mysql": "^2.15.0",
+    "serve-favicon": "~2.4.5",
+    "socket.io": "^2.0.4"
+  },
   "devDependencies": {
     "concurrently": "^3.5.1",
+    "jest": "^22.0.5",
     "minimist": "^1.2.0",
+    "nodemon": "^1.14.11",
     "winston": "^3.0.0-rc1"
   }
 }

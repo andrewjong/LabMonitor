@@ -2,7 +2,46 @@ import React, { Component } from 'react';
 import './App.css'
 import NodeCard from './components/NodeCard';
 
+const INTERVAL_SECONDS = 2;
+const MAX_DATA = 10;
+
 class App extends Component {
+  // initialize state as an object with an empty array
+  state = { data: [] };
+
+  componentDidMount() {
+    setInterval(() => {
+      fetch('/live-data')
+        .then(res => {
+          if (res.ok) return res.json();
+          else throw new Error('Could not connect');
+        })
+        .then(latestData => {
+          // console.log(JSON.stringify(latestData, null, '\t'));
+          const last = this.state.data[this.state.data.length - 1];
+          // console.log('LATEST: ' + JSON.stringify(latestData));
+          // console.log('LAST: ' + JSON.stringify(last));
+          if (!(JSON.stringify(latestData) === JSON.stringify(last))) {
+            console.log('New data detected. Updating state...')
+            // clone the original state
+            const newState = Object.assign({}, this.state);
+            // add the new data
+            newState.data.push(latestData);
+            // don't store in the state more than max amount of datapoints
+            if (newState.data.length > MAX_DATA)
+              newState.data.shift();
+            return this.setState({ newState });
+          } else {
+            console.log('No new data.')
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }, INTERVAL_SECONDS * 1000);
+  }
+  // something here about generating the Nodes dynamically perhaps
+
   render() {
     return (
       <div className="App">
@@ -10,6 +49,19 @@ class App extends Component {
           <h1 className="App-title">SHARP LABORATORY</h1>
         </header>
         <div className="container">
+          {/* {
+            this.state.data.forEach(node => {
+              // make a node
+              <NodeCard title={`Node ${node.id}`}
+                ownerInfo={{
+                  name: node.owner,
+                }}
+                description={node.description}
+              />
+
+
+            })
+          } */}
           <NodeCard title="Node 1"
             ownerInfo={{
               name: "Andrew Jong",
