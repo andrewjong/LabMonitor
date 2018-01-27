@@ -5,23 +5,11 @@ const express = require('express');
 const router = express.Router();
 const logger = require('../logger');
 const mysql = require('mysql');
-
+const { connection, connectMySQL } = require('../mysql-connection');
 const { DATABASE, NODE_TABLE, SENSOR_TABLE } = require('../database-config');
 
 /* GET latest data */
 router.get('/', (req, res, next) => {
-    const connection = mysql.createConnection({
-        host: 'localhost',
-        user: 'root',
-        database: DATABASE
-    });
-    // promise for creating a MySQL connection
-    const connectMySQL = new Promise((resolve, reject) => {
-        connection.connect((err) => {
-            if (err) throw err;
-            resolve('MySQL connected successfully');
-        })
-    });
     // promise for selecting all from the node_info table
     const getNodeInfo = new Promise((resolve, reject) => {
         const sql = `SELECT * FROM ${NODE_TABLE}`;
