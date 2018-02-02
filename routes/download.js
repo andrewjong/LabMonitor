@@ -7,7 +7,7 @@ const { connection, connectMySQL } = require('../mysql-connection');
 const { DATABASE, NODE_TABLE, SENSOR_TABLE } = require('../database-config');
 
 router.get('/', (req, res) => {
-    let fileName = 'sensordata';
+    let fileName = './data/sensordata';
     const getAllData = (nodeid) => new Promise((resolve, reject) => {
         let sql = `SELECT * FROM ${SENSOR_TABLE}`;
         if (nodeid!='none' && nodeid >= 0) {
@@ -17,7 +17,6 @@ router.get('/', (req, res) => {
         } else {
             logger.debug(`No id provided, downloading all. nodeid=${nodeid}.`)
             fileName += `_all.csv`;
-
         }
         sql += ` ORDER BY ID, DATE, TIME`;
 
