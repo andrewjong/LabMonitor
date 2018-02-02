@@ -5,7 +5,7 @@
   "scripts": {
     "start": "yarn server",
     "server": "PORT=3001 nodemon ./bin/www",
-    "client": "cd client && yarn start",
+    "client": "BROWSER=none cd client && yarn start",
     "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
     "test": "jest",
     "start-dummy-data": "node make-dummy-data.js -c start",
