@@ -1,3 +1,5 @@
+const mysql = require('mysql');
+const { DATABASE, NODE_TABLE, SENSOR_TABLE } = require('./database-config');
 
 const connection = mysql.createConnection({
     host: 'localhost',
@@ -5,14 +7,16 @@ const connection = mysql.createConnection({
     database: DATABASE
 });
 // promise for creating a MySQL connection
-const connectMySQL = new Promise((resolve, reject) => {
-    connection.connect((err) => {
-        if (err) throw err;
-        resolve('MySQL connected successfully');
-    })
-});
+connection.connect();
+
+// const connectMySQL = new Promise((resolve, reject) => {
+//     connection.connect((err) => {
+//         if (err) throw err;
+//         resolve('MySQL connected successfully');
+//     })
+// });
 
 module.exports = {
     connection,
-    connectMySQL
+    // connectMySQL
 }

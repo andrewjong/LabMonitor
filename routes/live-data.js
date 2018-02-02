@@ -1,12 +1,16 @@
 /**
  * This file describes the route to get the latest (most recent) data from the database.
  */
+const path = require('path');
+const fs = require('fs');
 const express = require('express');
 const router = express.Router();
 const logger = require('../logger');
 const mysql = require('mysql');
 const { connection, connectMySQL } = require('../mysql-connection');
 const { DATABASE, NODE_TABLE, SENSOR_TABLE } = require('../database-config');
+
+
 
 /* GET latest data */
 router.get('/', (req, res, next) => {
@@ -34,10 +38,11 @@ router.get('/', (req, res, next) => {
     }
 
     // connect to mysql, then see what nodes are in the database
-    connectMySQL.then((message) => {
-        logger.verbose(message);
-        return getNodeInfo;
-    })
+    // connectMySQL.then((message) => {
+    //     logger.verbose(message);
+    //     return getNodeInfo;
+    // })
+    getNodeInfo
         // with the nodes present in the database, use each one's ID to get its latest sensor data
         .then((nodeInfoData) => {
             // debug
@@ -55,10 +60,10 @@ router.get('/', (req, res, next) => {
         // take the latest entry for each node and write it to the webpage
         .then((latestData) => {
             // end the MySQL connnection
-            connection.end((err) => {
-                if (err) throw err;
-                logger.debug('MySQL connection closed successfully.');
-            });
+            // connection.end((err) => {
+            //     if (err) logger.debug("Can't close MySQL connection! It may have already quit.");
+            //     logger.debug('MySQL connection closed successfully.');
+            // });
 
             logger.debug('RESULTS FROM LATEST DATA PER NODE: ');
             latestData.forEach(row => {
