@@ -12,7 +12,6 @@ import {
   InputGroupAddon, Form, FormGroup, Label, Input, FormText, Badge, Container
 } from 'reactstrap';
 import classnames from 'classnames';
-import {Text} from 'react-native';
 
 const INTERVAL_SECONDS = 2;
 const MAX_DATA = 10;
@@ -120,14 +119,12 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-        <Jumbotron>
-        <Text style={{color: 'black'}}>
+          <Jumbotron>
             <h1 align="center"><font size="30">{LAB_NAME} Lab</font></h1>
             <center>
               <font size="20"><b>Manager: {MANAGER_NAME}<br /></b></font>
               <font size="20"><b>{EMAIL}@nasa.gov</b></font>
             </center>
-            </Text>
           </Jumbotron>
         </header>
         <div class="row">
