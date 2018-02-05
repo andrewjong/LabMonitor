@@ -58,7 +58,7 @@ class App extends Component {
   }
 
 
-  componentDidMount() {
+  componentWillMount() {
     setInterval(() => {
       fetch('/live-data')
         .then(res => {
@@ -212,8 +212,8 @@ class App extends Component {
             <Row>
               <Col sm="6">
                 <Card body>
-                  <CardTitle>Special Title Treatment</CardTitle>
-                  <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
+                  <CardTitle>Download General Lab Nodes Information</CardTitle>
+                  <CardText>Information about the lab nodes' data points can be found here.</CardText>
                   <Button>Go somewhere</Button>
                 </Card>
               </Col>
@@ -223,6 +223,20 @@ class App extends Component {
                   <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
                   <Button>Go somewhere</Button>
                 </Card>
+                <FormGroup>
+                    <Label for="exampleSelect">Select</Label>
+                    <Input type="select" name="selectMulti" id="exampleSelectMulti" multiple>
+                      <option>Battery</option>
+                      <option>Carbon Monoxide</option>
+                      <option>Humidity</option>
+                      <option>Hydrogen</option>
+                      <option>Methane</option>
+                      <option>Sound</option>
+                      <option>Temperature Ambient</option>
+                      <option>Temperature IR</option>
+                      <option>Vibration</option>
+                    </Input>
+                  </FormGroup>
               </Col>
             </Row>
           </TabPane>
@@ -243,16 +257,7 @@ class App extends Component {
                     <Label for="examplePassword">Password</Label>
                     <Input type="password" name="password" id="examplePassword" placeholder="password placeholder" />
                   </FormGroup>
-                  <FormGroup>
-                    <Label for="exampleSelect">Select</Label>
-                    <Input type="select" name="select" id="exampleSelect">
-                      <option>1</option>
-                      <option>2</option>
-                      <option>3</option>
-                      <option>4</option>
-                      <option>5</option>
-                    </Input>
-                  </FormGroup>
+                  
                   <FormGroup>
                     <Label for="exampleSelectMulti">Select Multiple</Label>
                     <Input type="select" name="selectMulti" id="exampleSelectMulti" multiple>
