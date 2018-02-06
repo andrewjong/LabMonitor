@@ -12,6 +12,9 @@ import {
   InputGroupAddon, Form, FormGroup, Label, Input, FormText, Badge, Container
 } from 'reactstrap';
 import classnames from 'classnames';
+import Center from 'react-center';
+
+import { CSVLink, CSVDownload } from 'react-csv';
 
 const INTERVAL_SECONDS = 2;
 const MAX_DATA = 10;
@@ -115,6 +118,12 @@ class App extends Component {
     var LAB_NAME = this.state.value;
     var MANAGER_NAME = this.state.manager;
     var EMAIL = this.state.email;
+    var data = [
+      ['firstname', 'lastname', 'email'],
+      ['Ahmed', 'Tomi', 'ah@smthing.co.com'],
+      ['Raed', 'Labes', 'rl@smthing.co.com'],
+      ['Yezzi', 'Min l3b', 'ymin@cocococo.com']
+    ];
 
     return (
       <div className="App">
@@ -209,36 +218,26 @@ class App extends Component {
 
 
           <TabPane tabId="2">
-            <Row>
-              <Col sm="6">
-                <Card body>
-                  <CardTitle>Download General Lab Nodes Information</CardTitle>
-                  <CardText>Information about the lab nodes' data points can be found here.</CardText>
-                  <Button>Go somewhere</Button>
-                </Card>
-              </Col>
-              <Col sm="6">
-                <Card body>
-                  <CardTitle>Special Title Treatment</CardTitle>
-                  <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
-                  <Button>Go somewhere</Button>
-                </Card>
+            <Center>
+              <div>
+                <br></br>
                 <FormGroup>
-                    <Label for="exampleSelect">Select</Label>
-                    <Input type="select" name="selectMulti" id="exampleSelectMulti" multiple>
-                      <option>Battery</option>
-                      <option>Carbon Monoxide</option>
-                      <option>Humidity</option>
-                      <option>Hydrogen</option>
-                      <option>Methane</option>
-                      <option>Sound</option>
-                      <option>Temperature Ambient</option>
-                      <option>Temperature IR</option>
-                      <option>Vibration</option>
-                    </Input>
-                  </FormGroup>
-              </Col>
-            </Row>
+                  <Label for="exampleSelect">Selection the nodes required for download to .csv</Label>
+                  <Input type="select" name="selectMulti" id="exampleSelectMulti" multiple>
+                    <option>Battery</option>
+                    <option>Carbon Monoxide</option>
+                    <option>Humidity</option>
+                    <option>Hydrogen</option>
+                    <option>Methane</option>
+                    <option>Sound</option>
+                    <option>Temperature Ambient</option>
+                    <option>Temperature IR</option>
+                    <option>Vibration</option>
+                  </Input>
+                </FormGroup>
+                <CSVLink data={data} ><Button color="primary" size="lg" block>Download Now</Button></CSVLink>
+              </div>
+            </Center>
           </TabPane>
 
 
@@ -257,7 +256,7 @@ class App extends Component {
                     <Label for="examplePassword">Password</Label>
                     <Input type="password" name="password" id="examplePassword" placeholder="password placeholder" />
                   </FormGroup>
-                  
+
                   <FormGroup>
                     <Label for="exampleSelectMulti">Select Multiple</Label>
                     <Input type="select" name="selectMulti" id="exampleSelectMulti" multiple>
