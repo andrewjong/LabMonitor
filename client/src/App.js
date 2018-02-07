@@ -36,7 +36,6 @@ class App extends Component {
     super(props);
 
     // form
-    // this.state = { value: '', manager: '', email: ''};
     this.handleChange = this.handleChange.bind(this);
 
     // tabs
@@ -118,13 +117,14 @@ class App extends Component {
     var LAB_NAME = this.state.value;
     var MANAGER_NAME = this.state.manager;
     var EMAIL = this.state.email;
-    var data = [
-      ['firstname', 'lastname', 'email'],
-      ['Ahmed', 'Tomi', 'ah@smthing.co.com'],
-      ['Raed', 'Labes', 'rl@smthing.co.com'],
-      ['Yezzi', 'Min l3b', 'ymin@cocococo.com']
-    ];
-
+    //var NODE_POINTS = this.state.nodes[id];
+    const NODE_DATA = [["humidity"], ["temp_ambient"], ["temp_ir"], ["carbon_monoxide"], ["methane"], ["hydrogen"], ["sound"], ["vibration"], ["battery"] ];
+    {/*Object.keys(this.state.nodes).map(idKey => {
+      const values = this.state.nodes[idKey];
+      const lastValue = values[values.length - 1];
+      const owner = lastValue.owner || '';
+      const sensorLabels = ["humidity", "temp_ambient", "temp_ir", "carbon_monoxide", "methane", "hydrogen", "sound", "vibration", "battery"];
+    const sensorData = sensorLabels.map(label => { */}
     return (
       <div className="App">
         <header className="App-header">
@@ -207,15 +207,7 @@ class App extends Component {
                 </center>
               </Col>
             </Row>
-
-
-            {/*
-            <input type="text" onChange={this.onChange.bind(this)}/>
-        You typed: <code>{this.state.typed}</code>
-            */}
           </TabPane>
-
-
 
           <TabPane tabId="2">
             <Center>
@@ -235,14 +227,10 @@ class App extends Component {
                     <option>Vibration</option>
                   </Input>
                 </FormGroup>
-                <CSVLink data={data} ><Button color="primary" size="lg" block>Download Now</Button></CSVLink>
+                <CSVLink data={NODE_DATA} ><Button color="primary" size="lg" block>Download Now</Button></CSVLink>
               </div>
             </Center>
           </TabPane>
-
-
-
-
 
           <TabPane tabId="3">
             <Row>
@@ -256,17 +244,7 @@ class App extends Component {
                     <Label for="examplePassword">Password</Label>
                     <Input type="password" name="password" id="examplePassword" placeholder="password placeholder" />
                   </FormGroup>
-
-                  <FormGroup>
-                    <Label for="exampleSelectMulti">Select Multiple</Label>
-                    <Input type="select" name="selectMulti" id="exampleSelectMulti" multiple>
-                      <option>1</option>
-                      <option>2</option>
-                      <option>3</option>
-                      <option>4</option>
-                      <option>5</option>
-                    </Input>
-                  </FormGroup>
+                  
                   <FormGroup>
                     <Label for="exampleText">Text Area</Label>
                     <Input type="textarea" name="text" id="exampleText" />
