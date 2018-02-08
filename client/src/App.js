@@ -15,6 +15,9 @@ import {
   InputGroupAddon, Form, FormGroup, Label, Input, FormText, Badge, Container
 } from 'reactstrap';
 import classnames from 'classnames';
+import Center from 'react-center';
+
+import { CSVLink, CSVDownload } from 'react-csv';
 
 // time between polling for new data in seconds
 const INTERVAL_SECONDS = 2;
@@ -45,7 +48,6 @@ class App extends Component {
     super(props);
 
     // form
-    // this.state = { value: '', manager: '', email: ''};
     this.handleChange = this.handleChange.bind(this);
 
     // tabs
@@ -168,7 +170,14 @@ class App extends Component {
     var LAB_NAME = this.state.value;
     var MANAGER_NAME = this.state.manager;
     var EMAIL = this.state.email;
-
+    //var NODE_POINTS = this.state.nodes[id];
+    const NODE_DATA = [["humidity"], ["temp_ambient"], ["temp_ir"], ["carbon_monoxide"], ["methane"], ["hydrogen"], ["sound"], ["vibration"], ["battery"] ];
+    {/*Object.keys(this.state.nodes).map(idKey => {
+      const values = this.state.nodes[idKey];
+      const lastValue = values[values.length - 1];
+      const owner = lastValue.owner || '';
+      const sensorLabels = ["humidity", "temp_ambient", "temp_ir", "carbon_monoxide", "methane", "hydrogen", "sound", "vibration", "battery"];
+    const sensorData = sensorLabels.map(label => { */}
     return (
       <div className="App">
         <header className="App-header">
@@ -251,38 +260,30 @@ class App extends Component {
                 </center>
               </Col>
             </Row>
-
-
-            {/*
-            <input type="text" onChange={this.onChange.bind(this)}/>
-        You typed: <code>{this.state.typed}</code>
-            */}
           </TabPane>
-
-
 
           <TabPane tabId="2">
-            <Row>
-              <Col sm="6">
-                <Card body>
-                  <CardTitle>Special Title Treatment</CardTitle>
-                  <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
-                  <Button>Go somewhere</Button>
-                </Card>
-              </Col>
-              <Col sm="6">
-                <Card body>
-                  <CardTitle>Special Title Treatment</CardTitle>
-                  <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
-                  <Button>Go somewhere</Button>
-                </Card>
-              </Col>
-            </Row>
+            <Center>
+              <div>
+                <br></br>
+                <FormGroup>
+                  <Label for="exampleSelect">Selection the nodes required for download to .csv</Label>
+                  <Input type="select" name="selectMulti" id="exampleSelectMulti" multiple>
+                    <option>Battery</option>
+                    <option>Carbon Monoxide</option>
+                    <option>Humidity</option>
+                    <option>Hydrogen</option>
+                    <option>Methane</option>
+                    <option>Sound</option>
+                    <option>Temperature Ambient</option>
+                    <option>Temperature IR</option>
+                    <option>Vibration</option>
+                  </Input>
+                </FormGroup>
+                <CSVLink data={NODE_DATA} ><Button color="primary" size="lg" block>Download Now</Button></CSVLink>
+              </div>
+            </Center>
           </TabPane>
-
-
-
-
 
           <TabPane tabId="3">
             <Row>
@@ -296,26 +297,7 @@ class App extends Component {
                     <Label for="examplePassword">Password</Label>
                     <Input type="password" name="password" id="examplePassword" placeholder="password placeholder" />
                   </FormGroup>
-                  <FormGroup>
-                    <Label for="exampleSelect">Select</Label>
-                    <Input type="select" name="select" id="exampleSelect">
-                      <option>1</option>
-                      <option>2</option>
-                      <option>3</option>
-                      <option>4</option>
-                      <option>5</option>
-                    </Input>
-                  </FormGroup>
-                  <FormGroup>
-                    <Label for="exampleSelectMulti">Select Multiple</Label>
-                    <Input type="select" name="selectMulti" id="exampleSelectMulti" multiple>
-                      <option>1</option>
-                      <option>2</option>
-                      <option>3</option>
-                      <option>4</option>
-                      <option>5</option>
-                    </Input>
-                  </FormGroup>
+                  
                   <FormGroup>
                     <Label for="exampleText">Text Area</Label>
                     <Input type="textarea" name="text" id="exampleText" />
