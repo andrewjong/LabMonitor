@@ -1,50 +1,75 @@
+/**
+ * This file defines the core of the react app. This is where things start.
+ */
 import React, { Component } from 'react';
 import './App.css'
 import NodeCard from './components/NodeCard';
 
+// time between polling for new data in seconds
 const INTERVAL_SECONDS = 2;
+// max amount of data to store in the state
 const MAX_DATA = 10;
-
-/*
-state = {
-  nodes: {
-    1: [{}, {}, {}],
-    2: [{}, {}, {}],
-    3: [{}, {}, {}]
+// sensor labels for a node 
+const SENSOR_LABELS = ["humidity", "temp_ambient", "temp_ir", "carbon_monoxide", "methane", "hydrogen", "sound", "vibration", "battery"];
+// graphical options for Chart.JS
+const CHART_OPTIONS = {
+  legend: {
+    display: true,
+    position: 'top'
+  },
+  scales: {
+    yAxes: [{
+      ticks: {
+        beginAtZero: true
+      }
+    }]
   }
 }
-*/
+
 class App extends Component {
-  // initialize state as an object with an empty array
+  // initialize the state as an object with property 'nodes', which points to an object
+  // the 'nodes' object will map each nodeid to an array of data
   state = { nodes: {} };
 
-  componentDidMount() {
+  componentWillMount() {
     setInterval(() => {
+      // fetch the latest data
       fetch('/live-data')
+        // make sure it worked
         .then(res => {
           if (res.ok) return res.json();
           else throw new Error('Could not connect');
         })
+        // else if it didn't, log it
         .catch(err => {
           console.log(err);
         })
+        // add the latest data to our state of past data
         .then(latestData => {
           if (!latestData) throw new Error('No data');
+
+          // latestData is an array of node objects
           latestData.map(node => {
             // clone the original state
             const newState = Object.assign({}, this.state);
-            // init the array of datapoints if necessary
+            // check to see if our state has this node in its mapping. if not, add it and set its data to an empty array
             if (typeof newState.nodes[node.id] === 'undefined') newState.nodes[node.id] = [];
-            const dataPoints = newState.nodes[node.id];
-            const lastPoint = dataPoints[dataPoints.length - 1];
+
+            const dataPoints = newState.nodes[node.id]; // the existing datapoints for this node in our state
+            const lastPoint = dataPoints[dataPoints.length - 1]; // the latest datapoint for this node in our state
+
+            // check if the fetched data is the same as our state's most recent data for that node. we should update if
+            // it's not the same (i.e. new data)
             if (!(JSON.stringify(node) === JSON.stringify(lastPoint))) {
               console.log('New data detected. Updating state...')
               // add the new data
               newState.nodes[node.id].push(node);
               // don't store in the state more than max amount of datapoints
               if (newState.nodes[node.id].length > MAX_DATA) newState.nodes[node.id].shift();
+
+              // set the new state
               return this.setState({ newState });
-            } else {
+            } else {  // if it is the same, 
               console.log(`No new data for node id ${node.id}`)
             }
           });
@@ -56,9 +81,9 @@ class App extends Component {
   }
   /**
    * Hardcode the color for each sensor
-   * @param {string} label 
+   * @param {string} label the label
    */
-  chooseBorderColor(label){
+  chooseBorderColor(label) {
     if (label === "humidity") return 'rgba(80,120,230,1)';
     if (label === "temp_ambient") return 'rgba(255,99,132,1)';
     if (label === "temp_ir") return 'rgba(255,99,132,1)';
@@ -71,6 +96,32 @@ class App extends Component {
     return 'rgba(0,0,0,1)';
   }
 
+  /**
+   * Takes the data for a node and transforms it into an object suitable for a NodeCard component
+   * @param {Object[]} dataPoints the array containing the stored state data for a node
+   * @returns {Object} object suited for NodeCard component. Has 'status', 'chartData', and 'chartOptions' properties.
+   */
+  makeDataWithChartOptions(dataPoints) {
+    const timeLabels = dataPoints.map(point => point.time);
+    return SENSOR_LABELS.map(sensorLabel => {
+      return {
+        status: "Good",
+        chartData: {
+          labels: timeLabels,
+          datasets: [{
+            label: sensorLabel,
+            data: dataPoints.map(point => point[sensorLabel]),
+            backgroundColor: this.chooseBorderColor(sensorLabel).replace(',1)', ',.5)'),
+            borderColor: this.chooseBorderColor(sensorLabel),
+            borderWidth: 1
+          }],
+        },
+        chartOptions: CHART_OPTIONS
+      }
+    });
+  }
+
+  // render each of the nodes in the state into its own NodeCard
   render() {
     return (
       <div className="App">
@@ -81,46 +132,22 @@ class App extends Component {
           {
             // map over each of the nodes
             Object.keys(this.state.nodes).map(idKey => {
-              const values = this.state.nodes[idKey];
-              const lastValue = values[values.length - 1];
-              const owner = lastValue.owner || '';
-              const sensorLabels = ["humidity", "temp_ambient", "temp_ir", "carbon_monoxide", "methane", "hydrogen", "sound", "vibration", "battery"];
-              const sensorData = sensorLabels.map(label => {
-                return {
-                  status: "Good",
-                  chartData: {
-                    labels: values.map(timePoint => timePoint.time),
-                    datasets: [{
-                      label: label,
-                      data: values.map(timePoint => timePoint[label]),
-                      backgroundColor: this.chooseBorderColor(label).replace(',1)', ',.5)'),
-                      borderColor: this.chooseBorderColor(label),
-                      borderWidth: 1
-                    }],
-                  },
-                  chartOptions: {
-                    legend: {
-                      display: true,
-                      position: 'top'
-                    },
-                    scales: {
-                      yAxes: [{
-                        ticks: {
-                          beginAtZero: true
-                        }
-                      }]
-                    },
-                  }
-                }
-              });
+              const dataPoints = this.state.nodes[idKey];
+              const sensorData = this.makeDataWithChartOptions(dataPoints);
 
+              // use the most recent datapoint for the owner and description info
+              const latestDataPoint = dataPoints[dataPoints.length - 1];
+              const owner = latestDataPoint.owner || '';
+              const description = latestDataPoint.description || '';
+
+              // put in a NodeCard for each node
               return (
                 <NodeCard title={`Node ${idKey}`}
                   ownerInfo={{
                     name: owner,
                     email: `${owner.split(' ').join('.')}@nasa.gov`
                   }}
-                  description={lastValue.description}
+                  description={latestDataPoint.description}
                   sensorData={sensorData}
                 />);
             })
