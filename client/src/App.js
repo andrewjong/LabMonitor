@@ -20,7 +20,7 @@ import Center from 'react-center';
 import { CSVLink, CSVDownload } from 'react-csv';
 
 import Tabs from './tabs';
-import Overview from './Overview';
+import Overview from './components/Overview';
 import ReactDOM from 'react-dom';
 
 
@@ -236,7 +236,7 @@ class App extends Component {
           <TabPane tabId="1">
             <Row>
               <Col sm="12">
-                <overview/>
+                <Overview/>
               </Col>
             </Row>
           </TabPane>

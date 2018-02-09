@@ -15,10 +15,10 @@ import classnames from 'classnames';
 import Center from 'react-center';
 
 const tabs = (props) => {
+            console.log("hello");
     return (
         <div class="tabs">
             <div class="col-md-4 col-md-offset-3"></div>
-
             <Nav tabs>
                 <NavItem>
                     <NavLink
@@ -29,6 +29,7 @@ const tabs = (props) => {
             </NavLink>
                 </NavItem>
 
+            {/*
                 <NavItem>
                     <NavLink
                         className={classnames({ active: this.state.activeTab === '2' })}
@@ -55,6 +56,7 @@ const tabs = (props) => {
                         Start
             </NavLink>
                 </NavItem>
+            */}
             </Nav>
         </div>
 
