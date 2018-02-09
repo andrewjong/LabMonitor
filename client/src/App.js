@@ -19,8 +19,11 @@ import Center from 'react-center';
 
 import { CSVLink, CSVDownload } from 'react-csv';
 
-import tabs from './tabs';
+import Tabs from './tabs';
+import Overview from './overview';
+import ReactDOM from 'react-dom';
 import overview from './overview';
+
 
 // time between polling for new data in seconds
 const INTERVAL_SECONDS = 2;
@@ -234,7 +237,7 @@ class App extends Component {
           <TabPane tabId="1">
             <Row>
               <Col sm="12">
-                <overview test={this.prop}/>
+                <overview/>
               </Col>
             </Row>
           </TabPane>
@@ -383,5 +386,13 @@ class App extends Component {
     );
   }
 }
+function testing(props){
+  return props.overview;
+}
 
 export default App;
+
+ReactDOM.render(
+  <App />, overview,
+  document.getElementById('root')
+);

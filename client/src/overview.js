@@ -16,7 +16,7 @@ import Center from 'react-center';
 
 const overview = (props) => {
     return (
-        <div> class="overview">
+        <div> className="overview">
               <center>
                 <h1>Curent Lab Status: Good</h1>
                 <img src={greenstatus} alt="Shows a green check mark, which means status is good" />
