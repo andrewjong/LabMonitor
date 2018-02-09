@@ -20,9 +20,8 @@ import Center from 'react-center';
 import { CSVLink, CSVDownload } from 'react-csv';
 
 import Tabs from './tabs';
-import Overview from './overview';
+import Overview from './Overview';
 import ReactDOM from 'react-dom';
-import overview from './overview';
 
 
 // time between polling for new data in seconds
@@ -392,7 +391,4 @@ function testing(props){
 
 export default App;
 
-ReactDOM.render(
-  <App />, overview,
-  document.getElementById('root')
-);
+

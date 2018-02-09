@@ -14,7 +14,7 @@ import {
 import classnames from 'classnames';
 import Center from 'react-center';
 
-const overview = (props) => {
+const Overview = (props) => {
     return (
         <div> className="overview">
               <center>
@@ -43,4 +43,4 @@ const overview = (props) => {
         </div>
     )
 }
-export default overview;
+export default Overview;
