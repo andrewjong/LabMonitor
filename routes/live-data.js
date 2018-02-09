@@ -1,29 +1,24 @@
 /**
  * This file describes the route to get the latest (most recent) data from the database.
  */
+const path = require('path');
+const fs = require('fs');
 const express = require('express');
 const router = express.Router();
 const logger = require('../logger');
 const mysql = require('mysql');
-
+const { connection, connectMySQL } = require('../mysql-connection');
 const { DATABASE, NODE_TABLE, SENSOR_TABLE } = require('../database-config');
 
-/* GET latest data */
+/* GET latest data for all nodes */
 router.get('/', (req, res, next) => {
-    const connection = mysql.createConnection({
-        host: 'localhost',
-        user: 'root',
-        database: DATABASE
-    });
-    // promise for creating a MySQL connection
-    const connectMySQL = new Promise((resolve, reject) => {
-        connection.connect((err) => {
-            if (err) throw err;
-            resolve('MySQL connected successfully');
-        })
-    });
-    // promise for selecting all from the node_info table
+    /**
+     * Returns an array containing all the node metainfo, i.e. nodeid, owner, description. 
+     * 
+     * @returns {Promise.<Object[]>} array containing an object representing each node's metainfo
+     */
     const getNodeInfo = new Promise((resolve, reject) => {
+        // get all the data from the node table.
         const sql = `SELECT * FROM ${NODE_TABLE}`;
         connection.query(sql, (err, nodeInfoData) => {
             if (err) reject(err);
@@ -31,7 +26,10 @@ router.get('/', (req, res, next) => {
         });
     });
     /** 
-     * Returns a promise that attaches the latest data for a node to its node info 
+     * Extends an object containing a node's metainfo by adding the latest data for that node.
+     * 
+     * @param {Object} nodeInfo contains metainfo about a node that includes the node's id (nodeInfo.id).
+     * @returns {Promise.<Object>} an object containing metainfo and the latest data for that node's id
      */
     const attachLatestData = (nodeInfo) => {
         return new Promise((resolve, reject) => {
@@ -45,38 +43,32 @@ router.get('/', (req, res, next) => {
         });
     }
 
-    // connect to mysql, then see what nodes are in the database
-    connectMySQL.then((message) => {
-        logger.verbose(message);
-        return getNodeInfo;
-    })
-        // with the nodes present in the database, use each one's ID to get its latest sensor data
+    // first get a list of all the nodes registered in the database
+    getNodeInfo
         .then((nodeInfoData) => {
-            // debug
+            // debug, print each array element on a new line
             logger.debug('RESULTS FROM NODE INFO: ');
             nodeInfoData.forEach(row => {
                 logger.debug(JSON.stringify(row, null, '\t'));
             });
 
+            // with the node info object, use each one's ID to attach its latest sensor data
             let dataPromises = nodeInfoData.map(info => {
                 return attachLatestData(info);
             })
             // promise.all ensures all the latest data is queried and the connection closed before moving on
+            // returns an array
             return Promise.all(dataPromises);
         })
         // take the latest entry for each node and write it to the webpage
         .then((latestData) => {
-            // end the MySQL connnection
-            connection.end((err) => {
-                if (err) throw err;
-                logger.debug('MySQL connection closed successfully.');
-            });
-
+            // debug
             logger.debug('RESULTS FROM LATEST DATA PER NODE: ');
             latestData.forEach(row => {
                 logger.debug(JSON.stringify(row, null, '\t'));
             });
 
+            // send json to the client, an array of objects
             res.status(200).json(latestData);
         });
 })
