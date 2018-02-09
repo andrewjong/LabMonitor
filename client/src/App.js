@@ -19,6 +19,9 @@ import Center from 'react-center';
 
 import { CSVLink, CSVDownload } from 'react-csv';
 
+import tabs from './tabs';
+import overview from './overview';
+
 // time between polling for new data in seconds
 const INTERVAL_SECONDS = 2;
 // max amount of data to store in the state
@@ -42,7 +45,6 @@ const CHART_OPTIONS = {
 
 class App extends Component {
   // initialize state as an object with an empty array
-  // state = { nodes: {} };
 
   constructor(props) {
     super(props);
@@ -167,17 +169,11 @@ class App extends Component {
 
   // render each of the nodes in the state into its own NodeCard
   render() {
+    // State variables for lab header
     var LAB_NAME = this.state.value;
     var MANAGER_NAME = this.state.manager;
     var EMAIL = this.state.email;
-    //var NODE_POINTS = this.state.nodes[id];
-    const NODE_DATA = [["humidity"], ["temp_ambient"], ["temp_ir"], ["carbon_monoxide"], ["methane"], ["hydrogen"], ["sound"], ["vibration"], ["battery"] ];
-    {/*Object.keys(this.state.nodes).map(idKey => {
-      const values = this.state.nodes[idKey];
-      const lastValue = values[values.length - 1];
-      const owner = lastValue.owner || '';
-      const sensorLabels = ["humidity", "temp_ambient", "temp_ir", "carbon_monoxide", "methane", "hydrogen", "sound", "vibration", "battery"];
-    const sensorData = sensorLabels.map(label => { */}
+
     return (
       <div className="App">
         <header className="App-header">
@@ -189,9 +185,11 @@ class App extends Component {
             </center>
           </Jumbotron>
         </header>
+
+<tabs/>
+{/*
         <div class="row">
           <div class="col-md-4 col-md-offset-3"></div>
-
           <Nav tabs>
             <NavItem>
               <NavLink
@@ -230,37 +228,17 @@ class App extends Component {
             </NavItem>
           </Nav>
         </div>
-
+*/}
         <TabContent activeTab={this.state.activeTab}>
+
           <TabPane tabId="1">
             <Row>
               <Col sm="12">
-                <center>
-                  <h1>Curent Lab Status: Good</h1>
-                  <img src={greenstatus} alt="Shows a green check mark, which means status is good" />
-                  <header className="MeterSubTitle">
-                    <h1 align="center">Meter</h1>
-                  </header>
-                  <ReactSpeedometer
-                    //Values of speedometer
-                    maxValue={100}
-                    value={50}
-
-                    //Size of speedometer
-                    width="500"
-                    height="500"
-
-                    //Colors of speedometer
-                    startColor="green"
-                    endColor="red"
-                    needleColor="black"
-                    needleTransitionDuration={4000}
-                    needleTransition="easeElastic"
-                  />
-                </center>
+                <overview test={this.prop}/>
               </Col>
             </Row>
           </TabPane>
+
 
           <TabPane tabId="2">
             <Center>
@@ -280,7 +258,7 @@ class App extends Component {
                     <option>Vibration</option>
                   </Input>
                 </FormGroup>
-                <CSVLink data={NODE_DATA} ><Button color="primary" size="lg" block>Download Now</Button></CSVLink>
+                <CSVLink data={"hello"} ><Button color="primary" size="lg" block>Download Now</Button></CSVLink>
               </div>
             </Center>
           </TabPane>
@@ -297,7 +275,7 @@ class App extends Component {
                     <Label for="examplePassword">Password</Label>
                     <Input type="password" name="password" id="examplePassword" placeholder="password placeholder" />
                   </FormGroup>
-                  
+
                   <FormGroup>
                     <Label for="exampleText">Text Area</Label>
                     <Input type="textarea" name="text" id="exampleText" />
