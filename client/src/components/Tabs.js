@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
-import './App.css'
-import NodeCard from './components/NodeCard';
+import '../App.css'
+import NodeCard from './NodeCard';
 
-import greenstatus from './greenstatus.png';
+import greenstatus from '../greenstatus.png';
 import ReactSpeedometer from "react-d3-speedometer";
 import 'bootstrap/dist/css/bootstrap.css';
 
@@ -14,22 +14,43 @@ import {
 import classnames from 'classnames';
 import Center from 'react-center';
 
-const tabs = (props) => {
-            console.log("hello");
-    return (
-        <div class="tabs">
-            <div class="col-md-4 col-md-offset-3"></div>
-            <Nav tabs>
-                <NavItem>
-                    <NavLink
-                        className={classnames({ active: this.state.activeTab === '1' })}
-                        onClick={() => { this.toggle('1'); }}
-                    >
-                        Overview
-            </NavLink>
-                </NavItem>
+class Tabs extends Component {
 
-            {/*
+  constructor(props) {
+    super(props);
+
+
+
+    // tabs
+    this.toggle = this.toggle.bind(this);
+    this.state = {
+      activeTab: '1',
+      nodes: []
+    };
+  }
+
+  toggle(tab) {
+    if (this.state.activeTab !== tab) {
+      this.setState({
+        activeTab: tab
+      });
+    }
+  }
+    //const tabs = (props) => {
+    render() {
+        return (
+            <div class="tabs">
+                <div class="col-md-4 col-md-offset-3"></div>
+                <Nav tabs>
+                    <NavItem>
+                        <NavLink
+                            className={classnames({ active: this.state.activeTab === '1' })}
+                            onClick={() => { this.toggle('1'); }}
+                        >
+                            Overview
+            </NavLink>
+                    </NavItem>
+
                 <NavItem>
                     <NavLink
                         className={classnames({ active: this.state.activeTab === '2' })}
@@ -56,11 +77,12 @@ const tabs = (props) => {
                         Start
             </NavLink>
                 </NavItem>
-            */}
-            </Nav>
-        </div>
+
+                </Nav>
+            </div>
 
 
-    )
+        );
+    }
 }
-export default tabs;
+export default Tabs;

@@ -19,9 +19,10 @@ import Center from 'react-center';
 
 import { CSVLink, CSVDownload } from 'react-csv';
 
-import Tabs from './tabs';
+import Tabs from './components/Tabs';
 import Overview from './components/Overview';
-import ReactDOM from 'react-dom';
+import Download from './components/Download';
+import Nodes from './components/Nodes';
 
 
 // time between polling for new data in seconds
@@ -180,16 +181,17 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <Jumbotron>
+          <font color="black">
             <h1 align="center"><font size="30">{LAB_NAME} Lab</font></h1>
             <center>
               <font size="20"><b>Manager: {MANAGER_NAME}<br /></b></font>
               <font size="20"><b>{EMAIL}@nasa.gov</b></font>
             </center>
+            </font>
           </Jumbotron>
         </header>
 
-<tabs/>
-{/*
+{/*<Tabs/> */}
         <div class="row">
           <div class="col-md-4 col-md-offset-3"></div>
           <Nav tabs>
@@ -230,7 +232,7 @@ class App extends Component {
             </NavItem>
           </Nav>
         </div>
-*/}
+
         <TabContent activeTab={this.state.activeTab}>
 
           <TabPane tabId="1">
@@ -241,87 +243,12 @@ class App extends Component {
             </Row>
           </TabPane>
 
-
           <TabPane tabId="2">
-            <Center>
-              <div>
-                <br></br>
-                <FormGroup>
-                  <Label for="exampleSelect">Selection the nodes required for download to .csv</Label>
-                  <Input type="select" name="selectMulti" id="exampleSelectMulti" multiple>
-                    <option>Battery</option>
-                    <option>Carbon Monoxide</option>
-                    <option>Humidity</option>
-                    <option>Hydrogen</option>
-                    <option>Methane</option>
-                    <option>Sound</option>
-                    <option>Temperature Ambient</option>
-                    <option>Temperature IR</option>
-                    <option>Vibration</option>
-                  </Input>
-                </FormGroup>
-                <CSVLink data={"hello"} ><Button color="primary" size="lg" block>Download Now</Button></CSVLink>
-              </div>
-            </Center>
+          <Download/>
           </TabPane>
 
           <TabPane tabId="3">
-            <Row>
-              <Col sm="6">
-                <Form>
-                  <FormGroup>
-                    <Label for="exampleEmail">Email</Label>
-                    <Input type="email" name="email" id="exampleEmail" placeholder="with a placeholder" />
-                  </FormGroup>
-                  <FormGroup>
-                    <Label for="examplePassword">Password</Label>
-                    <Input type="password" name="password" id="examplePassword" placeholder="password placeholder" />
-                  </FormGroup>
-
-                  <FormGroup>
-                    <Label for="exampleText">Text Area</Label>
-                    <Input type="textarea" name="text" id="exampleText" />
-                  </FormGroup>
-                  <FormGroup>
-                    <Label for="exampleFile">File</Label>
-                    <Input type="file" name="file" id="exampleFile" />
-                    <FormText color="muted">
-                      This is some placeholder block-level help text for the above input.
-            It's a bit lighter and easily wraps to a new line.
-          </FormText>
-                  </FormGroup>
-                  <FormGroup tag="fieldset">
-                    <legend>Radio Buttons</legend>
-                    <FormGroup check>
-                      <Label check>
-                        <Input type="radio" name="radio1" />{' '}
-                        Option one is this and that—be sure to include why it's great
-            </Label>
-                    </FormGroup>
-                    <FormGroup check>
-                      <Label check>
-                        <Input type="radio" name="radio1" />{' '}
-                        Option two can be something else and selecting it will deselect option one
-            </Label>
-                    </FormGroup>
-                    <FormGroup check disabled>
-                      <Label check>
-                        <Input type="radio" name="radio1" disabled />{' '}
-                        Option three is disabled
-            </Label>
-                    </FormGroup>
-                  </FormGroup>
-                  <FormGroup check>
-                    <Label check>
-                      <Input type="checkbox" />{' '}
-                      Check me out
-          </Label>
-                  </FormGroup>
-                  <Button>Submit</Button>
-                </Form>
-              </Col>
-
-            </Row>
+            <Nodes/>
           </TabPane>
 
           <TabPane tabId="4">
@@ -355,7 +282,9 @@ class App extends Component {
               </row>
             </Col>
           </TabPane>
+
         </TabContent>
+
         <div className="container">
           {
             // map over each of the nodes
@@ -384,9 +313,6 @@ class App extends Component {
       </div>
     );
   }
-}
-function testing(props){
-  return props.overview;
 }
 
 export default App;
