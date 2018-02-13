@@ -15,73 +15,26 @@ import classnames from 'classnames';
 import Center from 'react-center';
 
 class Tabs extends Component {
-
-  constructor(props) {
-    super(props);
-
-
-
-    // tabs
-    this.toggle = this.toggle.bind(this);
-    this.state = {
-      activeTab: '1',
-      nodes: []
-    };
-  }
-
-  toggle(tab) {
-    if (this.state.activeTab !== tab) {
-      this.setState({
-        activeTab: tab
-      });
-    }
-  }
-    //const tabs = (props) => {
     render() {
+        // State variables for lab header
+        var LAB_NAME = this.state.value;
+        var MANAGER_NAME = this.state.manager;
+        var EMAIL = this.state.email;
+    
         return (
-            <div class="tabs">
-                <div class="col-md-4 col-md-offset-3"></div>
-                <Nav tabs>
-                    <NavItem>
-                        <NavLink
-                            className={classnames({ active: this.state.activeTab === '1' })}
-                            onClick={() => { this.toggle('1'); }}
-                        >
-                            Overview
-            </NavLink>
-                    </NavItem>
-
-                <NavItem>
-                    <NavLink
-                        className={classnames({ active: this.state.activeTab === '2' })}
-                        onClick={() => { this.toggle('2'); }}
-                    >
-                        Download Data Set
-            </NavLink>
-                </NavItem>
-
-                <NavItem>
-                    <NavLink
-                        className={classnames({ active: this.state.activeTab === '3' })}
-                        onClick={() => { this.toggle('3'); }}
-                    >
-                        Add/Remove Nodes
-            </NavLink>
-                </NavItem>
-
-                <NavItem>
-                    <NavLink
-                        className={classnames({ active: this.state.activeTab === '4' })}
-                        onClick={() => { this.toggle('4'); }}
-                    >
-                        Start
-            </NavLink>
-                </NavItem>
-
-                </Nav>
-            </div>
-
-
+          <div className="App">
+            <header className="App-header">
+              <Jumbotron>
+                <font color="black">
+                  <h1 align="center"><font size="30">{LAB_NAME} Lab</font></h1>
+                  <center>
+                    <font size="20"><b>Manager: {MANAGER_NAME}<br /></b></font>
+                    <font size="20"><b>{EMAIL}@nasa.gov</b></font>
+                  </center>
+                </font>
+              </Jumbotron>
+          </header>
+</div>
         );
     }
 }

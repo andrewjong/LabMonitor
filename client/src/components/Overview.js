@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import './Overview.css'
 import NodeCard from './NodeCard';
 
 import greenstatus from '../greenstatus.png';
@@ -16,12 +15,12 @@ import Center from 'react-center';
 
 import ReactDOM from 'react-dom';
 //const Overview = (props) => {
-  class Overview extends Component {
+class Overview extends Component {
   // return (
   render() {
     return (
       <div>
-              <center>
+        <center>
           <h1>Curent Lab Status: Good</h1>
           <img src={greenstatus} alt="Shows a green check mark, which means status is good" />
           <header className="MeterSubTitle">

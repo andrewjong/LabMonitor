@@ -181,17 +181,14 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <Jumbotron>
-          <font color="black">
-            <h1 align="center"><font size="30">{LAB_NAME} Lab</font></h1>
-            <center>
-              <font size="20"><b>Manager: {MANAGER_NAME}<br /></b></font>
-              <font size="20"><b>{EMAIL}@nasa.gov</b></font>
-            </center>
-            </font>
+              <h1 align="center"><font size="30">{LAB_NAME} Lab</font></h1>
+              <center>
+                <font size="20"><b>Manager: {MANAGER_NAME}<br /></b></font>
+                <font size="20"><b>{EMAIL}@nasa.gov</b></font>
+              </center>
           </Jumbotron>
         </header>
 
-{/*<Tabs/> */}
         <div class="row">
           <div class="col-md-4 col-md-offset-3"></div>
           <Nav tabs>
@@ -238,17 +235,17 @@ class App extends Component {
           <TabPane tabId="1">
             <Row>
               <Col sm="12">
-                <Overview/>
+                <Overview />
               </Col>
             </Row>
           </TabPane>
 
           <TabPane tabId="2">
-          <Download/>
+            <Download />
           </TabPane>
 
           <TabPane tabId="3">
-            <Nodes/>
+            <Nodes />
           </TabPane>
 
           <TabPane tabId="4">
@@ -316,5 +313,3 @@ class App extends Component {
 }
 
 export default App;
-
-

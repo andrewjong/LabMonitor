@@ -8,5 +8,5 @@ import Tabs from './components/Tabs';
 import Download from './components/Download';
 import Nodes from './components/Nodes';
 
-ReactDOM.render(<App overview={Overview} tabs={Tabs} download={Download} nodes={Nodes}/>, document.getElementById('root'));
+ReactDOM.render(<App overview={Overview} tabs={Tabs} download={Download} nodes={Nodes} />, document.getElementById('root'));
 registerServiceWorker();
