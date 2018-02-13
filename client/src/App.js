@@ -4,22 +4,14 @@
 import React, { Component } from 'react';
 import './App.css'
 import NodeCard from './components/NodeCard';
-
-import greenstatus from './greenstatus.png';
-import ReactSpeedometer from "react-d3-speedometer";
 import 'bootstrap/dist/css/bootstrap.css';
-
 import {
   Jumbotron, Button, TabContent, TabPane,
-  Nav, NavItem, NavLink, Card, CardTitle, CardText, Row, Col, InputGroup,
-  InputGroupAddon, Form, FormGroup, Label, Input, FormText, Badge, Container
+  Nav, NavItem, NavLink, Row, Col, InputGroup,
+  Form, FormGroup, Label, Input, Badge,
 } from 'reactstrap';
 import classnames from 'classnames';
-import Center from 'react-center';
 
-import { CSVLink, CSVDownload } from 'react-csv';
-
-import Tabs from './components/Tabs';
 import Overview from './components/Overview';
 import Download from './components/Download';
 import Nodes from './components/Nodes';
@@ -47,7 +39,6 @@ const CHART_OPTIONS = {
 }
 
 class App extends Component {
-  // initialize state as an object with an empty array
 
   constructor(props) {
     super(props);
@@ -177,21 +168,31 @@ class App extends Component {
     var MANAGER_NAME = this.state.manager;
     var EMAIL = this.state.email;
 
+    let array = [];
+    var count;
+
+    for (count = 0; count < 4; count++) {
+      <h1>"hello"</h1>
+
+
+    }
     return (
       <div className="App">
         <header className="App-header">
           <Jumbotron>
-              <h1 align="center"><font size="30">{LAB_NAME} Lab</font></h1>
-              <center>
-                <font size="20"><b>Manager: {MANAGER_NAME}<br /></b></font>
-                <font size="20"><b>{EMAIL}@nasa.gov</b></font>
-              </center>
+            <h1 align="center"><font size="30">{LAB_NAME} Lab</font></h1>
+            <center>
+              <font size="20"><b>Manager: {MANAGER_NAME}<br /></b></font>
+              <font size="20"><b>{EMAIL}@nasa.gov</b></font>
+            </center>
           </Jumbotron>
         </header>
+
 
         <div class="row">
           <div class="col-md-4 col-md-offset-3"></div>
           <Nav tabs>
+
             <NavItem>
               <NavLink
                 className={classnames({ active: this.state.activeTab === '1' })}

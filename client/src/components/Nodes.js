@@ -1,22 +1,11 @@
-import React, { Component, PropTypes } from 'react';
-import NodeCard from './NodeCard';
-
-import greenstatus from '../greenstatus.png';
-import ReactSpeedometer from "react-d3-speedometer";
+import React, {Component} from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
-
 import {
-  Jumbotron, Button, TabContent, TabPane,
-  Nav, NavItem, NavLink, Card, CardTitle, CardText, Row, Col, InputGroup,
-  InputGroupAddon, Form, FormGroup, Label, Input, FormText, Badge, Container
+  Button, Row, Col, Form, FormGroup, Label, Input, FormText
 } from 'reactstrap';
-import classnames from 'classnames';
 import Center from 'react-center';
 
-import ReactDOM from 'react-dom';
-//const Overview = (props) => {
-  class Nodes extends Component {
-  // return (
+ class Nodes extends Component {
   render() {
     return (
       <Center>
