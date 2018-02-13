@@ -1,3 +1,6 @@
+/**
+ * Overview for frontend of tab on the website
+ */
 import React, { Component } from 'react';
 import greenstatus from '../greenstatus.png';
 import ReactSpeedometer from "react-d3-speedometer";

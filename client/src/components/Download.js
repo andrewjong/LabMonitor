@@ -1,6 +1,8 @@
-import React, {Component} from 'react';
+/**
+ * This file is where people can  choose what nodes todownload 
+ */
+import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
-
 import {
   Button, FormGroup, Label, Input
 } from 'reactstrap';

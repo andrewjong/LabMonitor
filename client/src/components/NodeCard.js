@@ -20,7 +20,7 @@ class NodeCard extends Component {
                 </div>
                 <div className="Charts">
                     {
-                        this.props.sensorData.map(data => 
+                        this.props.sensorData.map(data =>
                             <SensorCard sensorData={data} />
                         )
                     }

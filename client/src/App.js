@@ -168,14 +168,6 @@ class App extends Component {
     var MANAGER_NAME = this.state.manager;
     var EMAIL = this.state.email;
 
-    let array = [];
-    var count;
-
-    for (count = 0; count < 4; count++) {
-      <h1>"hello"</h1>
-
-
-    }
     return (
       <div className="App">
         <header className="App-header">
