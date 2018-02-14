@@ -5,12 +5,13 @@ import React, { Component } from 'react';
 import greenstatus from '../greenstatus.png';
 import ReactSpeedometer from "react-d3-speedometer";
 import 'bootstrap/dist/css/bootstrap.css';
+import './Overview.css'
 
 class Overview extends Component {
   // return (
   render() {
     return (
-      <div>
+      <div className='front'>
         <center>
           <h1>Curent Lab Status: Good</h1>
           <img src={greenstatus} alt="Shows a green check mark, which means status is good" />

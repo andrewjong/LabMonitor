@@ -7,14 +7,14 @@ import {
   Button, FormGroup, Label, Input
 } from 'reactstrap';
 import Center from 'react-center';
+import './Download.css'
 
 class Download extends Component {
   // return (
   render() {
     return (
       <Center>
-        <div>
-          <br></br>
+        <div className="options">
           <FormGroup>
             <Label for="exampleSelect">Selection the nodes required for download to .csv</Label>
             <Input type="select" name="selectMulti" id="exampleSelectMulti" multiple>

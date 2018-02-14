@@ -37,3 +37,8 @@
     min-height: 10em;
     width: 90%;
 }
+
+.form{
+  padding: 10px;
+  text-align: left;
+}

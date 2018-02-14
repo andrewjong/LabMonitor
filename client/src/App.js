@@ -6,7 +6,7 @@ import './App.css'
 import NodeCard from './components/NodeCard';
 import 'bootstrap/dist/css/bootstrap.css';
 import {
-  Jumbotron, Button, TabContent, TabPane,
+  Jumbotron, Button, TabContent, TabPane, Container,
   Nav, NavItem, NavLink, Row, Col, InputGroup,
   Form, FormGroup, Label, Input, Badge,
 } from 'reactstrap';
@@ -243,6 +243,7 @@ class App extends Component {
 
           <TabPane tabId="4">
             <Col sm={{ size: 6, order: 10, offset: 3 }}>
+            <div className='form'>
               <row>
                 <Form onSubmit={this.handleSubmit}>
 
@@ -270,6 +271,7 @@ class App extends Component {
                 </Form>
                 <Button color="primary" size="lg" block>Submit</Button>
               </row>
+              </div>
             </Col>
           </TabPane>
 
