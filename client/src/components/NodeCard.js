@@ -17,6 +17,7 @@ class NodeCard extends Component {
                         {this.props.description}
                     </p>
                     <Owner ownerInfo={this.props.ownerInfo} />
+
                 </div>
                 <div className="Charts">
                     {

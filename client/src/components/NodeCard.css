@@ -1,3 +1,7 @@
+.Charts{
+    display: flex;
+    flex-wrap: wrap
+}
 .Node-card {
     border-style: groove;
     /* float: left; */

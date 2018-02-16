@@ -8,7 +8,11 @@ function Owner(props) {
                 {props.ownerInfo.name}
             </div>
             <div className="Owner-email">
-                <a href={"mailto:" + props.ownerInfo.email}>{props.ownerInfo.email}</a>
+                {
+                    props.ownerInfo.email && 
+                    <a href={"mailto:" + props.ownerInfo.email}>{props.ownerInfo.email}</a>
+                }
+
             </div>
         </div>
     );

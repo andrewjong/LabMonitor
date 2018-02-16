@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
 import Chart from './Chart';
+import './Chart.css'
+// import { defaults } from 'react-chartjs-2';
+// // Disable animating charts by default.
+// defaults.global.animation.duration = 2000;
+// defaults.global.animation.easing = 'linear';
+
 
 class SensorCard extends Component {
     constructor(props) {
@@ -26,9 +32,15 @@ class SensorCard extends Component {
                 </div>
                 <Chart data={this.props.sensorData.chartData}
                     options={
-                        Object.assign(this.props.sensorData.chartOptions, 
-                            {responsive: true,
-                            maintainAspectRatio: false})
+                        Object.assign(this.props.sensorData.chartOptions,
+                            {
+                                responsive: true,
+                                animation: {
+                                    easing: 'linear',
+                                    duration: 3000
+                                },
+                                maintainAspectRatio: false
+                            })
                     } />
             </div>
         );
