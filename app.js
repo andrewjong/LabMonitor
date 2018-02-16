@@ -9,6 +9,7 @@ const index = require('./routes/index');
 const users = require('./routes/users');
 const liveData = require('./routes/live-data')
 const download = require('./routes/download')
+const manage = require('./routes/manage-node')
 
 const app = express();
 
@@ -29,6 +30,7 @@ app.use('/', index);
 app.use('/users', users);
 app.use('/live-data', liveData)
 app.use('/download', download)
+app.use('/manage-node', manage)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

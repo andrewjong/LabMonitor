@@ -5,7 +5,15 @@ const mysql = require('mysql')
 const { connection, connectMySQL } = require('../mysql-connection');
 const { DATABASE, NODE_TABLE, NODE_TABLE_FIELDS } = require('../database-config');
 
+router.all('/', (req, res) => {
+  res.status(200).send('hi');
+});
+
 router.post('/add', (req, res, next) => {
+  // first we must get the id
+
+
+
   const values = [req.body.owner, req.body.equipment, req.body.description];
   if (values.length !== NODE_TABLE_FIELDS.length) res.status(400).send('Invalid query: Field length and values length do not match.')
 
@@ -21,6 +29,7 @@ router.post('/add', (req, res, next) => {
         logger.error(err);
       }
     } else {
+      res.status(200);
       logger.debug(results);
     }
   });
