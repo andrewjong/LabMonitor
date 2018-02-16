@@ -27,8 +27,21 @@ router.post('/add', (req, res, next) => {
 });
 
 router.post('/delete', (req, res, next) => {
-  req.body.id;
   const sql = `DELETE FROM ${NODE_TABLE} WHERE id=${req.body.id}`
+  connection.query(sql, (err, results) => {
+    if (err) {
+      if (err.sqlMessage)  // client made invalid sql error
+        res.status(400).send('Invalid query: ' + err.sqlMessage)
+      else if (err.code === 'ECONNREFUSED')
+        res.status(500).send('Server could not establish database connection.');
+      else {
+        res.status(500);
+        logger.error(err);
+      }
+    } else {
+      logger.debug(results);
+    }
+  });
 });
 
 router.post('/edit', (req, res, next) => {
