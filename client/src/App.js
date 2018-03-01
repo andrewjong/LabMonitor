@@ -12,11 +12,16 @@ import {
 } from 'reactstrap';
 import classnames from 'classnames';
 
-import Overview from './components/Overview';
 import Download from './components/Download';
 import Nodes from './components/Nodes';
 
+import './semantic/dist/semantic.min.css';
+import { Sidebar, Segment, Menu, Image, Icon, Header } from 'semantic-ui-react';
+import LabHeader from './components/LabHeader';
+import SideTab from './components/Routing/SideTab';
 
+import RoutingPaths from './components/Routing/RoutingPaths';
+ 
 // time between polling for new data in seconds
 const INTERVAL_SECONDS = 2;
 // max amount of data to store in the state
@@ -39,6 +44,10 @@ const CHART_OPTIONS = {
 }
 
 class App extends Component {
+
+  state = { visible: false }
+
+  toggleVisibility = () => this.setState({ visible: !this.state.visible })
 
   constructor(props) {
     super(props);
@@ -167,115 +176,21 @@ class App extends Component {
     var LAB_NAME = this.state.value;
     var MANAGER_NAME = this.state.manager;
     var EMAIL = this.state.email;
+    const { visible } = this.state;
 
     return (
+
       <div className="App">
+
+      <LabHeader/>
+      <SideTab/>
+      <RoutingPaths/>
+
+
+
+     {/* 
         <header className="App-header">
-          <Jumbotron>
-            <h1 align="center"><font size="30">{LAB_NAME} Lab</font></h1>
-            <center>
-              <font size="20"><b>Manager: {MANAGER_NAME}<br /></b></font>
-              <font size="20"><b>{EMAIL}@nasa.gov</b></font>
-            </center>
-          </Jumbotron>
-        </header>
-
-
-        <div class="row">
-          <div class="col-md-4 col-md-offset-3"></div>
-          <Nav tabs>
-
-            <NavItem>
-              <NavLink
-                className={classnames({ active: this.state.activeTab === '1' })}
-                onClick={() => { this.toggle('1'); }}
-              >
-                Overview
-            </NavLink>
-            </NavItem>
-
-            <NavItem>
-              <NavLink
-                className={classnames({ active: this.state.activeTab === '2' })}
-                onClick={() => { this.toggle('2'); }}
-              >
-                Download Data Set
-            </NavLink>
-            </NavItem>
-
-            <NavItem>
-              <NavLink
-                className={classnames({ active: this.state.activeTab === '3' })}
-                onClick={() => { this.toggle('3'); }}
-              >
-                Add/Remove Nodes
-            </NavLink>
-            </NavItem>
-
-            <NavItem>
-              <NavLink
-                className={classnames({ active: this.state.activeTab === '4' })}
-                onClick={() => { this.toggle('4'); }}
-              >
-                Start
-            </NavLink>
-            </NavItem>
-          </Nav>
-        </div>
-
-        <TabContent activeTab={this.state.activeTab}>
-
-          <TabPane tabId="1">
-            <Row>
-              <Col sm="12">
-                <Overview />
-              </Col>
-            </Row>
-          </TabPane>
-
-          <TabPane tabId="2">
-            <Download />
-          </TabPane>
-
-          <TabPane tabId="3">
-            <Nodes />
-          </TabPane>
-
-          <TabPane tabId="4">
-            <Col sm={{ size: 6, order: 10, offset: 3 }}>
-            <div className='form'>
-              <row>
-                <Form onSubmit={this.handleSubmit}>
-
-                  <FormGroup>
-                    <Label for="Lab Title">Lab Name</Label>
-                    <InputGroup>
-                      <Input input type="value" name="value" onChange={this.handleChange.bind(this)} value={this.state.value} placeholder="Lab Name" />
-                    </InputGroup>
-                  </FormGroup>
-
-                  <FormGroup>
-                    <Label for="Lab Title">Lab Manager's Name</Label>
-                    <InputGroup>
-                      <Input input type="manager" name="manager" value={this.state.manager} onChange={this.handleChange.bind(this)} placeholder="First and Last Name" />
-                    </InputGroup>
-                  </FormGroup>
-
-                  <FormGroup>
-                    <Label for="Email">Email</Label>
-                    <InputGroup>
-                      <Input input type="email" name="email" value={this.state.email} onChange={this.handleChange.bind(this)} placeholder="username" />
-                      <h3><Badge color="primary">@nasa.gov</Badge></h3>
-                    </InputGroup>
-                  </FormGroup>
-                </Form>
-                <Button color="primary" size="lg" block>Submit</Button>
-              </row>
-              </div>
-            </Col>
-          </TabPane>
-
-        </TabContent>
+         
 
         <div className="container">
           {
@@ -302,6 +217,7 @@ class App extends Component {
             })
           }
         </div>
+        */}
       </div>
     );
   }
