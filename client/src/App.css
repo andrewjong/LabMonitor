@@ -1,12 +1,13 @@
+@import '~/node_modules/bootstrap/dist/bootstrap.css';
 .App {
   text-align: center;
 }
 
 .App-header {
   background-color: #222;
-  height: 60px;
+  height: 375px;
   padding: 20px;
-  color: white;
+  color: black;
 }
 
 .App-title {
@@ -19,8 +20,19 @@
   font-size: large;
 }
 
-.container{
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
+#row{
+  position: fixed;
+    /* center the div */
+    right: 0;
+    left: 0;
+    margin-right: auto;
+    margin-left: auto;
+    /* give it dimensions */
+    min-height: 10em;
+    width: 90%;
+}
+
+.form{
+  padding: 10px;
+  text-align: left;
 }

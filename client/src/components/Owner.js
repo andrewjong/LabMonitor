@@ -1,3 +1,6 @@
+/**
+ * Owner props information
+ */
 import React from 'react';
 import './Owner.css'
 

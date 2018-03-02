@@ -1,3 +1,6 @@
+/**
+ * Sensor node status
+ */
 import React, { Component } from 'react';
 import Chart from './Chart';
 
