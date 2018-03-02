@@ -18,7 +18,7 @@ import Nodes from './components/Nodes';
 import './semantic/dist/semantic.min.css';
 import { Sidebar, Segment, Menu, Image, Icon, Header } from 'semantic-ui-react';
 import LabHeader from './components/LabHeader';
-import SideTab from './components/Routing/SideTab';
+import Navigation from './components/Routing/Navigation';
 
 import RoutingPaths from './components/Routing/RoutingPaths';
 
@@ -123,7 +123,7 @@ class App extends Component {
 
       <div className="App">
         <LabHeader />
-        <SideTab />
+        <Navigation />
         <RoutingPaths nodes={this.state.nodes}/>
       </div>
     );
