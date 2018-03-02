@@ -1,0 +1,15 @@
+@import '~/node_modules/bootstrap/dist/bootstrap.css';
+
+.dropMenu {
+
+
+  padding: 20px;
+
+}
+
+
+.container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+  }
