@@ -21,28 +21,11 @@ import LabHeader from './components/LabHeader';
 import SideTab from './components/Routing/SideTab';
 
 import RoutingPaths from './components/Routing/RoutingPaths';
- 
+
 // time between polling for new data in seconds
 const INTERVAL_SECONDS = 2;
 // max amount of data to store in the state
 const MAX_DATA = 10;
-// sensor labels for a node 
-const SENSOR_LABELS = ["humidity", "temp_ambient", "temp_ir", "carbon_monoxide", "methane", "hydrogen", "sound", "vibration", "battery"];
-// graphical options for Chart.JS
-const CHART_OPTIONS = {
-  legend: {
-    display: true,
-    position: 'top'
-  },
-  scales: {
-    yAxes: [{
-      ticks: {
-        beginAtZero: true
-      }
-    }]
-  }
-}
-
 class App extends Component {
 
   state = { visible: false }
@@ -128,48 +111,6 @@ class App extends Component {
         });
     }, INTERVAL_SECONDS * 1000);
   }
-  /**
-   * Hardcode the color for each sensor
-   * @param {string} label the label
-   */
-  chooseBorderColor(label) {
-    if (label === "humidity") return 'rgba(80,120,230,1)';
-    if (label === "temp_ambient") return 'rgba(255,99,132,1)';
-    if (label === "temp_ir") return 'rgba(255,99,132,1)';
-    if (label === "carbon_monoxide") return 'rgba(220,220,80,1)';
-    if (label === "methane") return 'rgba(180,255,132,1)';
-    if (label === "hydrogen") return 'rgba(80,200,180,1)';
-    if (label === "sound") return 'rgba(180,180,255,1)';
-    if (label === "vibration") return 'rgba(100,50,132,1)';
-    if (label === "battery") return 'rgba(80,80,80,1)';
-    return 'rgba(0,0,0,1)';
-  }
-
-  /**
-   * Takes the data for a node and transforms it into an object suitable for a NodeCard component
-   * @param {Object[]} dataPoints the array containing the stored state data for a node
-   * @returns {Object} object suited for NodeCard component. Has 'status', 'chartData', and 'chartOptions' properties.
-   */
-  makeDataWithChartOptions(dataPoints) {
-    const timeLabels = dataPoints.map(point => point.time);
-    return SENSOR_LABELS.map(sensorLabel => {
-      return {
-        status: "Good",
-        chartData: {
-          labels: timeLabels,
-          datasets: [{
-            label: sensorLabel,
-            data: dataPoints.map(point => point[sensorLabel]),
-            backgroundColor: this.chooseBorderColor(sensorLabel).replace(',1)', ',.5)'),
-            borderColor: this.chooseBorderColor(sensorLabel),
-            borderWidth: 1
-          }],
-        },
-        chartOptions: CHART_OPTIONS
-      }
-    });
-  }
-
   // render each of the nodes in the state into its own NodeCard
   render() {
     // State variables for lab header
@@ -181,43 +122,9 @@ class App extends Component {
     return (
 
       <div className="App">
-
-      <LabHeader/>
-      <SideTab/>
-      <RoutingPaths/>
-
-
-
-     {/* 
-        <header className="App-header">
-         
-
-        <div className="container">
-          {
-            // map over each of the nodes
-            Object.keys(this.state.nodes).map(idKey => {
-              const dataPoints = this.state.nodes[idKey];
-              const sensorData = this.makeDataWithChartOptions(dataPoints);
-
-              // use the most recent datapoint for the owner and description info
-              const latestDataPoint = dataPoints[dataPoints.length - 1];
-              const owner = latestDataPoint.owner || '';
-              const description = latestDataPoint.description || '';
-
-              // put in a NodeCard for each node
-              return (
-                <NodeCard title={`Node ${idKey}`}
-                  ownerInfo={{
-                    name: owner,
-                    email: `${owner.split(' ').join('.')}@nasa.gov`
-                  }}
-                  description={latestDataPoint.description}
-                  sensorData={sensorData}
-                />);
-            })
-          }
-        </div>
-        */}
+        <LabHeader />
+        <SideTab />
+        <RoutingPaths nodes={this.state.nodes}/>
       </div>
     );
   }
