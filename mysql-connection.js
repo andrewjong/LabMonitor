@@ -1,4 +1,5 @@
 const mysql = require('mysql');
+const logger = require('./logger');
 const { DATABASE, NODE_TABLE, SENSOR_TABLE } = require('./database-config');
 
 const connection = mysql.createConnection({
@@ -7,14 +8,9 @@ const connection = mysql.createConnection({
     database: DATABASE
 });
 // promise for creating a MySQL connection
-connection.connect();
-
-// const connectMySQL = new Promise((resolve, reject) => {
-//     connection.connect((err) => {
-//         if (err) throw err;
-//         resolve('MySQL connected successfully');
-//     })
-// });
+connection.connect(err => 
+    logger.error(`MySQL connection error: ${err}. 
+    Please make sure MySQL is running.`));
 
 module.exports = {
     connection,
