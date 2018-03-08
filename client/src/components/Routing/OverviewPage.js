@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import './OverviewPage.css'
 import NodeCard from '../NodeCard'
 import { Bar, Line, Pie } from 'react-chartjs-2';
+import { Card } from 'semantic-ui-react'
+import SensorCard from '../SensorCard'
 
 // sensor labels for a node 
 const SENSOR_LABELS = ["humidity", "temp_ambient", "temp_ir", "carbon_monoxide", "methane", "hydrogen", "sound", "vibration", "battery"];
@@ -60,6 +62,40 @@ const makeDataWithChartOptions = (dataPoints) => {
   });
 }
 
+const makeNodeCards = (nodes) => {
+  return Object.keys(nodes).map(idKey => {
+    const dataPoints = nodes[idKey];
+    const sensorData = makeDataWithChartOptions(dataPoints);
+
+    // use the most recent datapoint for the owner and description info
+    const latestDataPoint = dataPoints[dataPoints.length - 1];
+    const owner = latestDataPoint.owner || 'None';
+    const description = latestDataPoint.description || 'None';
+
+    // put in a NodeCard for each node
+    return (
+      <Card color='blue' style={{minWidth: '400px'}}>
+        <Card.Content>
+          <Card.Header>
+            {`Node ${idKey}`}
+          </Card.Header>
+          <Card.Meta>
+            {`Owner: ${owner}`}
+          </Card.Meta>
+          <Card.Description>
+            {description}
+          </Card.Description>
+        </Card.Content>
+        {
+          sensorData.map(data =>
+            <SensorCard sensorData={data} />
+          )
+        }
+      </Card>
+    );
+  });
+
+}
 
 /**
  * Load the graphs on the overview page.
@@ -67,31 +103,11 @@ const makeDataWithChartOptions = (dataPoints) => {
 const OverviewPage = (props) => {
   // console.log(`OverviewPage Props=${JSON.stringify(props)}`)
   // define a list of node cards
-  const nodeCards = Object.keys(props.nodes).map(idKey => {
-    const dataPoints = props.nodes[idKey];
-    const sensorData = makeDataWithChartOptions(dataPoints);
-
-    // use the most recent datapoint for the owner and description info
-    const latestDataPoint = dataPoints[dataPoints.length - 1];
-    const owner = latestDataPoint.owner || '';
-    const description = latestDataPoint.description || '';
-
-    // put in a NodeCard for each node
-    return (
-      <NodeCard title={`Node ${idKey}`}
-        ownerInfo={{
-          name: owner,
-          email: `${owner.split(' ').join('.')}@nasa.gov`
-        }}
-        description={latestDataPoint.description}
-        sensorData={sensorData}
-      />);
-  });
-
+  const nodeCards = makeNodeCards(props.nodes);
   return (
-    <div className="container" >
+    <Card.Group>
       {nodeCards}
-    </div >
+    </Card.Group>
   );
 }
 
