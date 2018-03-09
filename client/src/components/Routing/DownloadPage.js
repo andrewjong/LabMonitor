@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Dropdown, Button, Segment, Checkbox, Icon } from 'semantic-ui-react'
+import { Dropdown, Button, Segment, Checkbox, Icon, Grid } from 'semantic-ui-react'
 import './DownloadPage.css'
 
 /*
@@ -58,40 +58,41 @@ const sensorTypes = [
   "Battery", "Carbon Monoxide", "Humidity", "Hydrogen", "Methane",
   "Sound", "Temperature Ambient", "Temperature IR", "Vibration"
 ];
-const DownloadPage = (props) => {
-  const nodeMaps = Object.keys(props.nodes).map(idKey => {
-    const CreateSegmentMap = () => (
-      nodeSamples.map(SegmentNodes)
-    )
+//const DownloadPage = (props) => {
 
-    const SegmentNodes = nodeNumber => (
-      <Segment>
-        Node {nodeNumber}
+//const nodeMaps = Object.keys(props.nodes).map(idKey => {
+class Application extends Component {
+  CreateSegmentMap = () => (
+    nodeSamples.map(this.SegmentNodes)
+  )
 
-        <div className="checkMarks">
-          {CreateSenorTypesMap}
-        </div>
+  SegmentNodes = nodeNumber => (
+    <Segment>
+      Node {nodeNumber}
 
-        <div className="button">
-          <Button icon labelPosition='right' color="green">
-            Download
-        <Icon name='download' />
-          </Button>
-        </div>
+      <div className="checkMarks">
+      <Grid.Row>
+        {this.CreateSenorTypesMap()}
+        </Grid.Row>
+      </div>
 
-      </Segment>
-    )
+      <div className="button">
+        <Button content="Download" icon='download' color="green"/>
+      </div>
 
-    const CreateSenorTypesMap = () => (
-      sensorTypes.map(CheckMark)
-    )
+    </Segment>
+  )
+  CreateSenorTypesMap = () => (
+    sensorTypes.map(this.CheckMark)
 
-    const CheckMark = checkNames => (
-      <Checkbox label={checkNames}>
-      </Checkbox>
-    )
+  )
+  CheckMark = checkNames => (
+    <Checkbox label={checkNames}>
+    </Checkbox>
+  )
 
-  })
+  //}
+
 
 
 
@@ -165,16 +166,20 @@ const DownloadPage = (props) => {
       )
     */
 
-  return (
-    <div className="container">
 
-      {nodeMaps}
+  render() {
+    return (
+      <div className="container">
 
-    </div>
-  );
+      {this.CreateSegmentMap()}
 
-
-
+      </div>
+    );
+  }
 }
 
-export default DownloadPage;
+
+//}
+
+
+export default Application;

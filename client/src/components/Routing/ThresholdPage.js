@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import { Dropdown, Button, Segment, Checkbox, Icon, Grid, Table } from 'semantic-ui-react'
+import { Slider } from 'antd';
+import SlidingBar from './Slider'
 
 
     
     const TableExampleFixed = () => (
 
       <div>
+        <SlidingBar/>
       <p>Default values set in the nodes</p>
       <Table padded>
         <Table.Header>
