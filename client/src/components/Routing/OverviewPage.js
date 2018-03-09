@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './OverviewPage.css'
 import NodeCard from '../NodeCard'
 import { Bar, Line, Pie } from 'react-chartjs-2';
-import { Card } from 'semantic-ui-react'
+import { Card, Grid, Dropdown } from 'semantic-ui-react'
 import SensorCard from '../SensorCard'
 
 // sensor labels for a node 
@@ -62,42 +62,51 @@ const makeDataWithChartOptions = (dataPoints) => {
   });
 }
 
-const makeNodeCards = (nodes) => {
-  return Object.keys(nodes).map(idKey => {
-    const dataPoints = nodes[idKey];
-    const sensorData = makeDataWithChartOptions(dataPoints);
+const makeNodeCard = (nodedata) => {
+  const dataPoints = nodedata;
+  const sensorData = makeDataWithChartOptions(dataPoints);
 
-    // use the most recent datapoint for the owner and description info
-    const latestDataPoint = dataPoints[dataPoints.length - 1];
-    const owner = latestDataPoint.owner || 'None';
-    const description = latestDataPoint.description || 'None';
+  // use the most recent datapoint for the owner and description info
+  const latestDataPoint = dataPoints[dataPoints.length - 1];
+  const title = latestDataPoint.equipment || 'None'
+  const owner = latestDataPoint.owner || 'None';
+  const description = latestDataPoint.description || 'None';
 
-    // put in a NodeCard for each node
-    return (
-      <Card color='blue' style={{ maxHeight: '80vh', minWidth: '400px' }}>
-        <Card.Content>
-          <Card.Header>
-            {`Node ${idKey}`}
-          </Card.Header>
-          <Card.Meta>
-            {`Owner: ${owner}`}
-          </Card.Meta>
-          <Card.Description>
-            {description}
-          </Card.Description>
-          <Card.Content>
-            {
-              sensorData.map(data =>
-                <SensorCard sensorData={data} />
-              )
-            }
-          </Card.Content>
+  // put in a NodeCard for each node
+  return (
+    <Card color='blue' fluid centered>
+      <Card.Content>
+        <Card.Header>
+          {title}
+        </Card.Header>
+        <Card.Meta>
+          {`Owner: ${owner}`}
+        </Card.Meta>
+        <Card.Description>
+          {description}
+        </Card.Description>
+        <Grid centered divided>
+          {
+            sensorData.map(data => <SensorCard sensorData={data} />)
+          }
+        </Grid>
 
-        </Card.Content>
-      </Card>
-    );
+      </Card.Content>
+    </Card>
+  );
+}
+
+const getOptions = (nodes) => {
+  return Object.keys(nodes).map(idkey => {
+    const latest = nodes[idkey][nodes[idkey].length - 1]
+    const equipment = latest.equipment
+    console.log(equipment)
+    return ({
+      key: equipment,
+      text: equipment,
+      value: equipment
+    })
   });
-
 }
 
 /**
@@ -106,11 +115,19 @@ const makeNodeCards = (nodes) => {
 const OverviewPage = (props) => {
   // console.log(`OverviewPage Props=${JSON.stringify(props)}`)
   // define a list of node cards
-  const nodeCards = makeNodeCards(props.nodes);
+  const options = getOptions(props.nodes)
+  console.log('THIS IS PROPS ' + JSON.stringify(props))
+  console.log('THIS IS PROPS.NODES[1]' + JSON.stringify(props.nodes['1']))
+  let nodeCard;
+  if (props.nodes['1'])
+    nodeCard = makeNodeCard(props.nodes['1'])
+  else
+    nodeCard = '';
   return (
-    <Card.Group>
-      {nodeCards}
-    </Card.Group>
+    <div>
+      <Dropdown fluid selection search placeholder="Select experiment" options={options} />
+      {nodeCard}
+    </div>
   );
 }
 

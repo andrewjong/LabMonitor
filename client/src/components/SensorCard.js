@@ -20,8 +20,7 @@ class SensorCard extends Component {
                 </div>
                 <div>
                     {/* status of the sensor */}
-                    Status:
-                    {this.props.sensorData.status}
+                    {`Status: ${this.props.sensorData.status}`}
                 </div>
                 <div>
                     {/* {this.props.title} */}
@@ -29,9 +28,11 @@ class SensorCard extends Component {
                 </div>
                 <Chart data={this.props.sensorData.chartData}
                     options={
-                        Object.assign(this.props.sensorData.chartOptions, 
-                            {responsive: true,
-                            maintainAspectRatio: false})
+                        Object.assign(this.props.sensorData.chartOptions,
+                            {
+                                responsive: true,
+                                maintainAspectRatio: false
+                            })
                     } />
             </div>
         );

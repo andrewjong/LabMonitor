@@ -28,7 +28,6 @@ const INTERVAL_SECONDS = 2;
 const MAX_DATA = 10;
 class App extends Component {
 
-  state = { visible: false }
 
   toggleVisibility = () => this.setState({ visible: !this.state.visible })
 
@@ -42,7 +41,7 @@ class App extends Component {
     this.toggle = this.toggle.bind(this);
     this.state = {
       activeTab: '1',
-      nodes: []
+      nodes: {}
     };
   }
 
@@ -61,7 +60,6 @@ class App extends Component {
 
   // initialize the state as an object with property 'nodes', which points to an object
   // the 'nodes' object will map each nodeid to an array of data
-  state = { nodes: {} };
 
   componentWillMount() {
     setInterval(() => {
@@ -79,6 +77,7 @@ class App extends Component {
         // add the latest data to our state of past data
         .then(latestData => {
           if (!latestData) throw new Error('No data');
+          // console.log(`THIS IS THE STATE: ` + JSON.stringify(this.state))
 
           // latestData is an array of node objects
           latestData.map(node => {
