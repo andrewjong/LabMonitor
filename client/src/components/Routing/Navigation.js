@@ -17,11 +17,11 @@ const Navigation = () => (
 			<div className="TabButtons">
 				<Menu attached='top' size="massive" name="Options">
 					<Menu.Item as={Nav} to="/" name="Overview"> <Icon name='area graph' />
-						Overview
+						Live Data
 					</Menu.Item>
 
 					<Menu.Item as={Nav} to="/download" name="Download Dataset"> <Icon name='download' />
-						Download Dataset
+						Download
 					</Menu.Item>
 
 					<Menu.Item as={Nav} to="/threshold" name="Nodes"> <Icon name='edit' />

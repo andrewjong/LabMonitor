@@ -74,7 +74,7 @@ const makeNodeCards = (nodes) => {
 
     // put in a NodeCard for each node
     return (
-      <Card color='blue' style={{minWidth: '400px'}}>
+      <Card color='blue' style={{ maxHeight: '80vh', minWidth: '400px' }}>
         <Card.Content>
           <Card.Header>
             {`Node ${idKey}`}
@@ -85,12 +85,15 @@ const makeNodeCards = (nodes) => {
           <Card.Description>
             {description}
           </Card.Description>
+          <Card.Content>
+            {
+              sensorData.map(data =>
+                <SensorCard sensorData={data} />
+              )
+            }
+          </Card.Content>
+
         </Card.Content>
-        {
-          sensorData.map(data =>
-            <SensorCard sensorData={data} />
-          )
-        }
       </Card>
     );
   });
