@@ -96,6 +96,10 @@ const makeNodeCard = (nodedata) => {
   );
 }
 
+/**
+ * Get list of experiment choice options from data
+ * @param {} nodes 
+ */
 const getOptions = (nodes) => {
   return Object.keys(nodes).map(idkey => {
     const latest = nodes[idkey][nodes[idkey].length - 1]
@@ -109,26 +113,36 @@ const getOptions = (nodes) => {
   });
 }
 
-/**
- * Load the graphs on the overview page.
- */
-const OverviewPage = (props) => {
-  // console.log(`OverviewPage Props=${JSON.stringify(props)}`)
-  // define a list of node cards
-  const options = getOptions(props.nodes)
-  console.log('THIS IS PROPS ' + JSON.stringify(props))
-  console.log('THIS IS PROPS.NODES[1]' + JSON.stringify(props.nodes['1']))
-  let nodeCard;
-  if (props.nodes['1'])
-    nodeCard = makeNodeCard(props.nodes['1'])
-  else
-    nodeCard = '';
-  return (
-    <div>
-      <Dropdown fluid selection search placeholder="Select experiment" options={options} />
-      {nodeCard}
-    </div>
-  );
+class OverviewPage extends Component {
+  constructor(props) {
+    super(props);
+    this.setState({
+      experiment: null // the chosen experiment to display charts for
+    });
+
+  }
+
+  /**
+   * Render the graphs on the overview page.
+   */
+  render() {
+    const options = getOptions(this.props.nodes)
+    let nodeCard;
+    if (this.props.nodes['1'])
+      nodeCard = makeNodeCard(this.props.nodes['1'])
+    else
+      nodeCard = '';
+    return (
+      <div>
+        {/* TODO: MAKE THE CARD HEADER A DROPDOWN MENU INSTEAD OF HAVING A SEPARATE ONE */}
+        <Dropdown centered inline selection search
+          placeholder="Select experiment" noResultsMessage="No experiments available"
+          options={options} />
+        {nodeCard}
+      </div>
+    );
+
+  }
 }
 
 export default OverviewPage
