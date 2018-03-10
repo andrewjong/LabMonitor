@@ -11,21 +11,22 @@ const style = {
 };
 
 const marks = {
-  0: '0°C',
-  26: '26°C',
-  37: '37°C',
-  100: {
+  0: '0 Volts °C',
+  3.0: '3.0 Volts',
+  3.2: '3.2 Volts',
+  10: {
+
     style: {
       color: '#f50',
     },
-    label: <strong>100°C</strong>,
+    label: <strong>3.2+</strong>,
   },
 };
 
 class SlidingBar extends React.Component {
 render() {
     return (
-  <div style={{ height: 300 }}>
+  <div style={{ height: 500 }}>
     <div style={style}>
       <Slider vertical defaultValue={30} />
     </div>
@@ -33,7 +34,7 @@ render() {
       <Slider vertical range step={10} defaultValue={[20, 50]} />
     </div>
     <div style={style}>
-      <Slider vertical range marks={marks} defaultValue={[26, 37]} />
+      <Slider vertical range marks={marks} defaultValue={[65, 80]} min={65} max={120}/>
     </div>
   </div>
     )
@@ -41,6 +42,7 @@ render() {
 }
 
 export default SlidingBar;
+
 
 /*
 class IntegerStep extends React.Component {
