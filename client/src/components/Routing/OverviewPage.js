@@ -62,40 +62,6 @@ const makeDataWithChartOptions = (dataPoints) => {
   });
 }
 
-const makeNodeCard = (nodedata) => {
-  const dataPoints = nodedata;
-  const sensorData = makeDataWithChartOptions(dataPoints);
-
-  // use the most recent datapoint for the owner and description info
-  const latestDataPoint = dataPoints[dataPoints.length - 1];
-  const title = latestDataPoint.equipment || 'None'
-  const owner = latestDataPoint.owner || 'None';
-  const description = latestDataPoint.description || 'None';
-
-  // put in a NodeCard for each node
-  return (
-    <Card color='blue' fluid centered>
-      <Card.Content>
-        <Card.Header>
-          {title}
-        </Card.Header>
-        <Card.Meta>
-          {`Owner: ${owner}`}
-        </Card.Meta>
-        <Card.Description>
-          {description}
-        </Card.Description>
-        <Grid centered divided>
-          {
-            sensorData.map(data => <SensorCard sensorData={data} />)
-          }
-        </Grid>
-
-      </Card.Content>
-    </Card>
-  );
-}
-
 /**
  * Get list of experiment choice options from data
  * @param {} nodes 
@@ -104,11 +70,10 @@ const getOptions = (nodes) => {
   return Object.keys(nodes).map(idkey => {
     const latest = nodes[idkey][nodes[idkey].length - 1]
     const equipment = latest.equipment
-    console.log(equipment)
     return ({
-      key: equipment,
+      key: latest.id,
       text: equipment,
-      value: equipment
+      value: latest.id
     })
   });
 }
@@ -116,28 +81,74 @@ const getOptions = (nodes) => {
 class OverviewPage extends Component {
   constructor(props) {
     super(props);
-    this.setState({
-      experiment: null // the chosen experiment to display charts for
-    });
+    const nodes = this.props.nodes;
+    const firstExperiment = nodes[Object.keys(nodes)[0]]
+    this.state = {
+      experiment: firstExperiment
+    };
 
+  }
+
+  /**
+   * Change the experiment based on the selected option
+   */
+  handleChange = (event, {name, value}) => {
+    // alert('Change detected!')
+    const experiment = this.props.nodes[value]
+    this.setState({experiment})
+  }
+
+  makeNodeCard = () => {
+    const dataPoints = this.state.experiment;
+    const sensorData = makeDataWithChartOptions(dataPoints);
+
+    // use the most recent datapoint for the owner and description info
+    const latestDataPoint = dataPoints[dataPoints.length - 1];
+    const options = getOptions(this.props.nodes);
+    const title = latestDataPoint.equipment || 'None'
+    const owner = latestDataPoint.owner || 'None';
+    const description = latestDataPoint.description || 'None';
+
+    // put in a NodeCard for each node
+    return (
+      <Card color='blue' fluid centered >
+        <Card.Content>
+          <Card.Header>
+            <Dropdown centered inline 
+              noResultsMessage="No experiments available"
+              options={options} defaultValue={title}
+              onChange={this.handleChange}
+              />
+          </Card.Header>
+          <Card.Meta>
+            {`Experiment by ${owner}`}
+          </Card.Meta>
+          <Card.Description>
+            {description}
+          </Card.Description>
+          <Grid centered divided>
+            {
+              sensorData.map(data => <SensorCard sensorData={data} />)
+            }
+          </Grid>
+
+        </Card.Content>
+      </Card>
+    );
   }
 
   /**
    * Render the graphs on the overview page.
    */
   render() {
-    const options = getOptions(this.props.nodes)
     let nodeCard;
-    if (this.props.nodes['1'])
-      nodeCard = makeNodeCard(this.props.nodes['1'])
+    if (this.state.experiment)
+      nodeCard = this.makeNodeCard(this.state.experiment)
     else
       nodeCard = '';
     return (
       <div>
         {/* TODO: MAKE THE CARD HEADER A DROPDOWN MENU INSTEAD OF HAVING A SEPARATE ONE */}
-        <Dropdown centered inline selection search
-          placeholder="Select experiment" noResultsMessage="No experiments available"
-          options={options} />
         {nodeCard}
       </div>
     );
