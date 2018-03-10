@@ -8,8 +8,7 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import Download from './components/Download';
 import Nodes from './components/Nodes';
-
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter } from 'react-router-dom';
 
 ReactDOM.render((
     <BrowserRouter>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Dropdown, Button, Segment, Checkbox, Icon } from 'semantic-ui-react'
+import { Dropdown, Button, Segment, Checkbox, Icon, Grid } from 'semantic-ui-react'
 import './DownloadPage.css'
 
 /*
@@ -58,6 +58,7 @@ const sensorTypes = [
   "Battery", "Carbon Monoxide", "Humidity", "Hydrogen", "Methane",
   "Sound", "Temperature Ambient", "Temperature IR", "Vibration"
 ];
+<<<<<<< HEAD
 const DownloadPage = (props) => {
   const nodeMaps = Object.keys(props.nodes).map(idKey => {
     const CreateSegmentMap = () => (
@@ -95,6 +96,46 @@ const DownloadPage = (props) => {
 
 
 
+=======
+//const DownloadPage = (props) => {
+
+//const nodeMaps = Object.keys(props.nodes).map(idKey => {
+class Application extends Component {
+  CreateSegmentMap = () => (
+    nodeSamples.map(this.SegmentNodes)
+  )
+
+  SegmentNodes = nodeNumber => (
+    <Segment>
+      Node {nodeNumber}
+
+      <div className="checkMarks">
+      <Grid.Row>
+        {this.CreateSenorTypesMap()}
+        </Grid.Row>
+      </div>
+
+      <div className="button">
+        <Button content="Download" icon='download' color="green"/>
+      </div>
+
+    </Segment>
+  )
+  CreateSenorTypesMap = () => (
+    sensorTypes.map(this.CheckMark)
+
+  )
+  CheckMark = checkNames => (
+    <Checkbox label={checkNames}>
+    </Checkbox>
+  )
+
+  //}
+
+
+
+
+>>>>>>> master
 
   /*
   const DownloadPage = (props) => {
@@ -165,6 +206,7 @@ const DownloadPage = (props) => {
       )
     */
 
+<<<<<<< HEAD
   return (
     <div className="container">
 
@@ -178,3 +220,22 @@ const DownloadPage = (props) => {
 }
 
 export default DownloadPage;
+=======
+
+  render() {
+    return (
+      <div className="container">
+
+      {this.CreateSegmentMap()}
+
+      </div>
+    );
+  }
+}
+
+
+//}
+
+
+export default Application;
+>>>>>>> master

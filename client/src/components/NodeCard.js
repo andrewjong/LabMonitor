@@ -17,10 +17,11 @@ class NodeCard extends Component {
                         {this.props.description}
                     </p>
                     <Owner ownerInfo={this.props.ownerInfo} />
+
                 </div>
                 <div className="Charts">
                     {
-                        this.props.sensorData.map(data =>
+                        this.props.sensorData.map(data => 
                             <SensorCard sensorData={data} />
                         )
                     }
