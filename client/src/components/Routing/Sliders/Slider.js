@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom'
 import { Slider, InputNumber, Row, Col } from 'antd';
 import 'antd/dist/antd.css';
-import '../../index.css';
+import '../../../index.css';
+import Slider1 from 'react-rangeslider'
 
 const style = {
   float: 'left',
@@ -11,34 +12,75 @@ const style = {
 };
 
 const marks = {
-  0: '0 Volts °C',
-  3.0: '3.0 Volts',
-  3.2: '3.2 Volts',
-  10: {
+  //65: '0 Volts °C',
+  38: '38°C/100°F',
+  66: '66°C/150°F',
+  93: {
 
     style: {
       color: '#f50',
     },
-    label: <strong>3.2+</strong>,
+    label: <strong>93°C/200°F</strong>,
   },
+  120: '120°C/248°F'
+};
+const mark1 = {
+  //65: '0 Volts °C',
+  18: '18°C/65°F',
+  32: '32°C/90°F',
+  38: {
+
+    style: {
+      color: '#f50',
+    },
+    label: <strong>38°C/100°F</strong>,
+  },
+  149: '149°C/300°F'
 };
 
 class SlidingBar extends React.Component {
-render() {
+  /*
+  state = {
+    inputValue: 1,
+  }
+  onChange = (value) => {
+    this.setState({
+      inputValue: value,
+    });
+  }
+
+  constructor(props, context) {
+    super(props, context)
+    this.state = {
+      value: 12.5
+    }
+  }
+
+  handleChange = (value) => {
+    this.setState({
+      value: value
+    })
+  }
+*/
+  render() {
+    //const { value } = this.state;
     return (
-  <div style={{ height: 500 }}>
-    <div style={style}>
-      <Slider vertical defaultValue={30} />
-    </div>
-    <div style={style}>
-      <Slider vertical range step={10} defaultValue={[20, 50]} />
-    </div>
-    <div style={style}>
-      <Slider vertical range marks={marks} defaultValue={[65, 80]} min={65} max={120}/>
-    </div>
-  </div>
+
+      <div style={{ height: 500 }}>
+        <div style={style}>
+
+              <Slider vertical min={0} max={1} step={0.01} />
+        </div>
+        <div style={style}>
+          <Slider vertical range marks={marks} defaultValue={[0, 50]} min={0} max={120} />
+        </div>
+        <div style={style}>
+          <Slider vertical range marks={mark1} defaultValue={[0, 50]} min={0} max={149} />
+        </div>
+      </div>
     )
-}
+  }
+
 }
 
 export default SlidingBar;
@@ -88,7 +130,7 @@ ReactDOM.render(
       <IntegerStep />
     </div>
   , document.getElementById('root'));
-   */``         
+   */``
 /*
 class IntegerStep extends React.Component {
     state = {

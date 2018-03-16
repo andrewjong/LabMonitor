@@ -58,45 +58,6 @@ const sensorTypes = [
   "Battery", "Carbon Monoxide", "Humidity", "Hydrogen", "Methane",
   "Sound", "Temperature Ambient", "Temperature IR", "Vibration"
 ];
-<<<<<<< HEAD
-const DownloadPage = (props) => {
-  const nodeMaps = Object.keys(props.nodes).map(idKey => {
-    const CreateSegmentMap = () => (
-      nodeSamples.map(SegmentNodes)
-    )
-
-    const SegmentNodes = nodeNumber => (
-      <Segment>
-        Node {nodeNumber}
-
-        <div className="checkMarks">
-          {CreateSenorTypesMap}
-        </div>
-
-        <div className="button">
-          <Button icon labelPosition='right' color="green">
-            Download
-        <Icon name='download' />
-          </Button>
-        </div>
-
-      </Segment>
-    )
-
-    const CreateSenorTypesMap = () => (
-      sensorTypes.map(CheckMark)
-    )
-
-    const CheckMark = checkNames => (
-      <Checkbox label={checkNames}>
-      </Checkbox>
-    )
-
-  })
-
-
-
-=======
 //const DownloadPage = (props) => {
 
 //const nodeMaps = Object.keys(props.nodes).map(idKey => {
@@ -135,7 +96,6 @@ class Application extends Component {
 
 
 
->>>>>>> master
 
   /*
   const DownloadPage = (props) => {
@@ -206,21 +166,6 @@ class Application extends Component {
       )
     */
 
-<<<<<<< HEAD
-  return (
-    <div className="container">
-
-      {nodeMaps}
-
-    </div>
-  );
-
-
-
-}
-
-export default DownloadPage;
-=======
 
   render() {
     return (
@@ -238,4 +183,3 @@ export default DownloadPage;
 
 
 export default Application;
->>>>>>> master

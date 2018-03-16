@@ -29,7 +29,7 @@ const StartPage = () => (
       <input placeholder='Phone Number' />
     </Form.Field>
     
-    <Button type='submit'>Submit</Button>
+    <Button type='submit' color="primary">Submit</Button>
   </Form>
   </Grid>
   </div>
