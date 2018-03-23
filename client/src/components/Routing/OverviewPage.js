@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
 import './OverviewPage.css'
-import NodeCard from '../NodeCard'
-import { Bar, Line, Pie } from 'react-chartjs-2';
 import { Card, Grid, Dropdown } from 'semantic-ui-react'
 import SensorCard from '../SensorCard'
 
 // sensor labels for a node 
-const SENSOR_LABELS = ["humidity", "temp_ambient", "temp_ir", "carbon_monoxide", "methane", "hydrogen", "sound", "vibration", "battery"];
+const SENSOR_GROUPS = [
+  ["humidity"],
+  ["temp_ambient", "temp_ir"], // group temperature together
+  ["carbon_monoxide", "methane", "hydrogen"], // group gases together
+  ["sound"], 
+  ["vibration"], 
+  ["battery"]
+];
 // graphical options for Chart.JS
 const CHART_OPTIONS = {
   legend: {
@@ -25,37 +30,44 @@ const CHART_OPTIONS = {
  * Mapping of sensor to rgba color.
  */
 const BORDER_COLORS = {
-  humidity: 'rgba(80,120,230,1)',
-  temp_ambient: 'rgba(255,99,132,1)',
-  temp_ir: 'rgba(255,99,132,1)',
-  carbon_monoxide: 'rgba(220,220,80,1)',
-  methane: 'rgba(180,255,132,1)',
-  hydrogen: 'rgba(80,200,180,1)',
-  sound: 'rgba(180,180,255,1)',
-  vibration: 'rgba(100,50,132,1)',
-  battery: 'rgba(80,80,80,1)',
+  humidity: 'rgba(80,120,230,0.9)',
+  temp_ambient: 'rgba(255,99,132,0.9)',
+  temp_ir: 'rgba(255, 131, 58,0.9)',
+  carbon_monoxide: 'rgba(220,220,80,0.9)',
+  methane: 'rgba(180,255,132,0.9)',
+  hydrogen: 'rgba(80,200,180,0.9)',
+  sound: 'rgba(180,180,255,0.9)',
+  vibration: 'rgba(100,50,132,0.9)',
+  battery: 'rgba(80,80,80,0.9)',
 }
 
-
+const toCapitalCase = str => {
+  str.split(" ").map(word => word[0].toUpperCase()+word.slice(1)).join(" ")
+}
 /**
- * Takes the data for a node and transforms it into an object suitable for a NodeCard component
+ * Takes the data for a node and transforms it into an object suitable for a 
  * @param {Object[]} dataPoints the array containing the stored state data for a node
  * @returns {Object} object suited for NodeCard component. Has 'status', 'chartData', and 'chartOptions' properties.
  */
 const makeDataWithChartOptions = (dataPoints) => {
   const timeLabels = dataPoints.map(point => point.time);
-  return SENSOR_LABELS.map(sensorLabel => {
+  return SENSOR_GROUPS.map(sensorGroup => {
+    const datasets = sensorGroup.map(label => {
+      return {
+        label: label,
+        data: dataPoints.map(point => point[label]),
+        backgroundColor: BORDER_COLORS[label], //.replace(',1)', ',.5)'), // make the background slightly transparent
+        fill: false,
+        borderColor: BORDER_COLORS[label],
+        borderWidth: 1
+      }
+    });
+
     return {
       status: "Good",
       chartData: {
         labels: timeLabels,
-        datasets: [{
-          label: sensorLabel,
-          data: dataPoints.map(point => point[sensorLabel]),
-          backgroundColor: BORDER_COLORS[sensorLabel].replace(',1)', ',.5)'),
-          borderColor: BORDER_COLORS[sensorLabel],
-          borderWidth: 1
-        }],
+        datasets: datasets,
       },
       chartOptions: CHART_OPTIONS
     }
@@ -92,10 +104,10 @@ class OverviewPage extends Component {
   /**
    * Change the experiment based on the selected option
    */
-  handleChange = (event, {name, value}) => {
+  handleChange = (event, { name, value }) => {
     // alert('Change detected!')
     const experiment = this.props.nodes[value]
-    this.setState({experiment})
+    this.setState({ experiment })
   }
 
   makeNodeCard = () => {
@@ -114,11 +126,11 @@ class OverviewPage extends Component {
       <Card color='blue' fluid centered >
         <Card.Content>
           <Card.Header>
-            <Dropdown centered inline 
+            <Dropdown centered inline
               noResultsMessage="No experiments available"
               options={options} defaultValue={title}
               onChange={this.handleChange}
-              />
+            />
           </Card.Header>
           <Card.Meta>
             {`Experiment by ${owner}`}
