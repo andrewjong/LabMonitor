@@ -24,7 +24,9 @@ const CHART_OPTIONS = {
         beginAtZero: true
       }
     }]
-  }
+  },
+  responsive: false,
+  maintainAspectRatio: false
 }
 /**
  * Mapping of sensor to rgba color.
@@ -47,7 +49,7 @@ const toCapitalCase = str => {
 /**
  * Takes the data for a node and transforms it into an object suitable for a 
  * @param {Object[]} dataPoints the array containing the stored state data for a node
- * @returns {Object} object suited for NodeCard component. Has 'status', 'chartData', and 'chartOptions' properties.
+ * @returns {Object} object suited for NodeCard Has 'status', 'chartData', and 'chartOptions' properties.
  */
 const makeDataWithChartOptions = (dataPoints) => {
   const timeLabels = dataPoints.map(point => point.time);
@@ -123,12 +125,12 @@ class OverviewPage extends Component {
 
     // put in a NodeCard for each node
     return (
-      <Card color='blue' fluid centered >
+      <Card fluid centered>
         <Card.Content>
           <Card.Header>
             <Dropdown centered inline
               noResultsMessage="No experiments available"
-              options={options} defaultValue={title}
+              options={options} defaultValue={title} placeholder="Select an experiment"
               onChange={this.handleChange}
             />
           </Card.Header>
@@ -145,6 +147,9 @@ class OverviewPage extends Component {
           </Grid>
 
         </Card.Content>
+        {
+          // Something down here for hidden charts? or should we put it on top? probably bottom makes more sense because they're hidden
+        }
       </Card>
     );
   }
@@ -157,10 +162,9 @@ class OverviewPage extends Component {
     if (this.state.experiment)
       nodeCard = this.makeNodeCard(this.state.experiment)
     else
-      nodeCard = '';
+      nodeCard = 'Please refresh the state';
     return (
       <div>
-        {/* TODO: MAKE THE CARD HEADER A DROPDOWN MENU INSTEAD OF HAVING A SEPARATE ONE */}
         {nodeCard}
       </div>
     );
