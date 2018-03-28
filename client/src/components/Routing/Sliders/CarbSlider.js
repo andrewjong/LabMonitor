@@ -17,11 +17,16 @@ const marks = {
   4: '4 PPM',
   7: '7 PPM',
   8: {
-
     style: {
       color: '#f50',
     },
     label: <strong>8 PPM</strong>,
+  },
+  10: {
+    style: {
+      color: '#f50',
+    },
+    label: <strong>10 PPM</strong>,
   },
 }
 
@@ -33,7 +38,7 @@ class SlidingBar extends React.Component {
       <div style={{ height: 500 }}>
         <div style={style}>
 
-          <Slider vertical range marks={marks} defaultValue={[2, 5]} min={0} max={10} step={0.01}/>
+          <Slider vertical range marks={marks} defaultValue={[0, 5]} min={0} max={10} step={0.01}/>
 
 
         </div>

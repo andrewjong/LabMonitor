@@ -13,16 +13,21 @@ const style = {
 
 const marks = {
   //65: '0 Volts °C',
-  38: '38°C/100°F',
-  66: '66°C/150°F',
-  93: {
-
+  0: '0% RH',
+  40: '40% RH',
+  60: '60 RH',
+  70: {
     style: {
       color: '#f50',
     },
-    label: <strong>93°C/200°F</strong>,
+    label: <strong>70% RH</strong>,
   },
-  120: '120°C/248°F'
+  100: {
+    style: {
+      color: '#f50',
+    },
+    label: <strong>100% RH</strong>,
+  }
 }
 
 class SlidingBar extends React.Component {
@@ -33,7 +38,7 @@ class SlidingBar extends React.Component {
       <div style={{ height: 500 }}>
         <div style={style}>
 
-          <Slider vertical min={0} max={4} step={0.01} />
+          <Slider vertical range marks={marks} defaultValue={[0, 50]} min={0} max={100} step={1}/>
         </div>
       </div>
     )

@@ -12,7 +12,7 @@ const style = {
 };
 
 const marks = {
-  //65: '0 Volts °C',
+  0: '0°C/32°F',
   38: '38°C/100°F',
   66: '66°C/150°F',
   93: {
@@ -27,13 +27,12 @@ const marks = {
 
 class SlidingBar extends React.Component {
   render() {
-    //const { value } = this.state;
     return (
 
       <div style={{ height: 500 }}>
         <div style={style}>
 
-          <Slider vertical min={0} max={4} step={0.01} />
+          <Slider vertical range marks={marks} defaultValue={[0, 38]} min={0} max={120} step={1} />
         </div>
       </div>
     )

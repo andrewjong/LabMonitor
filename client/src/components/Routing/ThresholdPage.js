@@ -4,10 +4,14 @@ import { Slider } from 'antd';
 import SlidingBar from './Sliders/Slider'
 import SlidingBatt from './Sliders/BattSlider'
 import SlidingCarb from './Sliders/CarbSlider'
+import SlidingHum from './Sliders/HumSlider'
+import SlidingHyd from './Sliders/HydSlider'
+import SlidingSou from './Sliders/SouSlider'
+import SlidingMet from './Sliders/MetSlider'
+import SlidingTempA from './Sliders/TempASlider'
+import SlidingTempIR from './Sliders/TempIR'
+import SlidingVib from './Sliders/VibSlider'
 
-
-
-//const TableExampleFixed = () => (
 export default class AccordionExampleStyled extends Component {
   state = { activeIndex: 0 }
 
@@ -18,7 +22,6 @@ export default class AccordionExampleStyled extends Component {
 
     this.setState({ activeIndex: newIndex })
   }
-
 
   render() {
     const { activeIndex } = this.state
@@ -63,11 +66,11 @@ export default class AccordionExampleStyled extends Component {
 
               <Table.Row>
                 <Table.Cell>Humidity</Table.Cell>
-                <Table.Cell>Normal Room</Table.Cell>
+                <Table.Cell>20% RH</Table.Cell>
                 <Table.Cell>
-                  Above 10%
+                  30% RH
             </Table.Cell>
-                <Table.Cell>Above 30%+</Table.Cell>
+                <Table.Cell>40% RH+</Table.Cell>
               </Table.Row>
 
               <Table.Row>
@@ -112,7 +115,7 @@ export default class AccordionExampleStyled extends Component {
                 <Table.Cell>
                   66.1-93°C (151-200°F)
             </Table.Cell>
-                <Table.Cell>93.1°C+ (2001°F)</Table.Cell>
+                <Table.Cell>93.1°C+ (201°F)</Table.Cell>
               </Table.Row>
 
               <Table.Row>
@@ -144,22 +147,20 @@ export default class AccordionExampleStyled extends Component {
           <SlidingCarb />
         </Accordion.Content>
 
-
         <Accordion.Title active={activeIndex === 3} index={3} onClick={this.handleClick}>
           <Icon name='dropdown' />
           Humidity Slider
         </Accordion.Title>
         <Accordion.Content active={activeIndex === 3}>
-          <SlidingBar />
+          <SlidingHum />
         </Accordion.Content>
-
 
         <Accordion.Title active={activeIndex === 4} index={4} onClick={this.handleClick}>
           <Icon name='dropdown' />
           Hydrogen Slider
         </Accordion.Title>
         <Accordion.Content active={activeIndex === 4}>
-          <SlidingBar />
+          <SlidingHyd />
         </Accordion.Content>
 
         <Accordion.Title active={activeIndex === 5} index={5} onClick={this.handleClick}>
@@ -167,15 +168,15 @@ export default class AccordionExampleStyled extends Component {
           Methane Slider
         </Accordion.Title>
         <Accordion.Content active={activeIndex === 5}>
-          <SlidingBar />
+          <SlidingMet />
         </Accordion.Content>
 
         <Accordion.Title active={activeIndex === 6} index={6} onClick={this.handleClick}>
           <Icon name='dropdown' />
           Sound Slider
-        </Accordion.Title> 
+        </Accordion.Title>
         <Accordion.Content active={activeIndex === 6}>
-          <SlidingBar />
+          <SlidingSou />
         </Accordion.Content>
 
         <Accordion.Title active={activeIndex === 7} index={7} onClick={this.handleClick}>
@@ -183,7 +184,7 @@ export default class AccordionExampleStyled extends Component {
           Temperature Ambient Slider
         </Accordion.Title>
         <Accordion.Content active={activeIndex === 7}>
-          <SlidingBar />
+          <SlidingTempA />
         </Accordion.Content>
 
         <Accordion.Title active={activeIndex === 8} index={8} onClick={this.handleClick}>
@@ -191,7 +192,7 @@ export default class AccordionExampleStyled extends Component {
           Temperature IR Slider
         </Accordion.Title>
         <Accordion.Content active={activeIndex === 8}>
-          <SlidingBar />
+          <SlidingTempIR />
         </Accordion.Content>
 
         <Accordion.Title active={activeIndex === 9} index={9} onClick={this.handleClick}>
@@ -199,13 +200,10 @@ export default class AccordionExampleStyled extends Component {
           Vibration Slider
         </Accordion.Title>
         <Accordion.Content active={activeIndex === 9}>
+          <SlidingVib />
           <SlidingBar />
         </Accordion.Content>
       </Accordion>
     )
   }
 }
-   // )
-
-   // export default TableExampleFixed
-

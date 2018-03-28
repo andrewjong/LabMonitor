@@ -2,55 +2,6 @@ import React, { Component } from 'react';
 import { Dropdown, Button, Segment, Checkbox, Icon, Grid } from 'semantic-ui-react'
 import './DownloadPage.css'
 
-/*
-const options = [
-  { key: 'battery', text: 'Battery', value: 'battery' },
-  { key: 'carbonMonoxide', text: 'Carbon Monoxide', value: 'carbonMonoxide' },
-  { key: 'humidity', text: 'Humidity', value: 'humidity' },
-  { key: 'hydrogen', text: 'Hydrogen', value: 'hydrogen' },
-  { key: 'methane', text: 'Methane', value: 'methane' },
-  { key: 'sound', text: 'Sound', value: 'sound' },
-  { key: 'temperatureAmbient', text: 'Temperature Ambient', value: 'temperatureAmbient' },
-  { key: 'temperatureIR', text: 'Temperature IR', value: 'temperatureIR' },
-  { key: 'vibration', text: 'Vibration', value: 'Vibration' },
-]
-
-const renderLabel = label => ({
-  color: 'blue',
-  content: `${label.text}`,
-
-})
-
-const DropdownExampleMultipleSearchSelection = () => (
-  <div className="dropMenu">
-
-    <div className="searchBar">
-      <Dropdown size="massive" placeholder='Select/Search Node(s) Information to Download'
-        fluid multiple search selection options={options} renderLabel={renderLabel}/>
-    </div>
-
-    <div className="downloadButton">
-      <Button primary>Download</Button>
-    </div>
-
-  </div>
-)
-
-export default DropdownExampleMultipleSearchSelection
-
-
-
-const sensorTypes = ["humidity", "temp_ambient", "temp_ir", "carbon_monoxide", "methane", "hydrogen", "sound", "vibration", "battery"];
-
-const SegmentExampleSegment = () => (
-  <Segment>
-    Node${sensorTypes}
-  </Segment>
-)
-
-export default SegmentExampleSegment
-*/
-
 const nodeSamples = [
   "1", "2", "3", "4"
 ];
@@ -58,9 +9,7 @@ const sensorTypes = [
   "Battery", "Carbon Monoxide", "Humidity", "Hydrogen", "Methane",
   "Sound", "Temperature Ambient", "Temperature IR", "Vibration"
 ];
-//const DownloadPage = (props) => {
 
-//const nodeMaps = Object.keys(props.nodes).map(idKey => {
 class Application extends Component {
   CreateSegmentMap = () => (
     nodeSamples.map(this.SegmentNodes)

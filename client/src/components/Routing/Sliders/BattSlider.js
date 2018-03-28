@@ -24,7 +24,7 @@ const marks = {
   2: {
 
     style: {
-      color: '#f50',
+      color: 'red',
     },
     label: <strong>2 Volts</strong>,
   },
