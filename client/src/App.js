@@ -66,10 +66,11 @@ class App extends Component {
           // it's not the same (i.e. new data)
           if (!(JSON.stringify(node) === JSON.stringify(lastPoint))) {
             console.log('New data detected. Updating state...')
+            // don't store in the state more than max amount of datapoints
+            // if (newState.nodes[node.id].length > MAX_DATA) newState.nodes[node.id].shift();
+
             // add the new data
             newState.nodes[node.id].push(node);
-            // don't store in the state more than max amount of datapoints
-            if (newState.nodes[node.id].length > MAX_DATA) newState.nodes[node.id].shift();
 
             // set the new state
             return this.setState({ newState });

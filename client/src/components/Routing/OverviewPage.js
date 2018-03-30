@@ -115,7 +115,7 @@ class OverviewPage extends Component {
     const nodes = this.props.nodes;
     const firstExperiment = nodes[Object.keys(nodes)[0]]
     this.state = {
-      experiment: firstExperiment
+      activeExperiment: firstExperiment
     };
 
   }
@@ -130,7 +130,7 @@ class OverviewPage extends Component {
   }
 
   makeNodeCard = () => {
-    const dataPoints = this.state.experiment;
+    const dataPoints = this.state.activeExperiment;
     const sensorData = makeDataWithChartOptions(dataPoints);
 
     // use the most recent datapoint for the owner and description info
@@ -176,8 +176,8 @@ class OverviewPage extends Component {
    */
   render() {
     let nodeCard;
-    if (this.state.experiment)
-      nodeCard = this.makeNodeCard(this.state.experiment)
+    if (this.state.activeExperiment)
+      nodeCard = this.makeNodeCard(this.state.activeExperiment)
     else
       nodeCard = 'Please refresh the state';
     return (
