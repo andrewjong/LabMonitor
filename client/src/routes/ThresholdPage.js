@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import { Dropdown, Button, Segment, Checkbox, Icon, Grid, Table, Accordion } from 'semantic-ui-react'
 import { Slider } from 'antd';
-import SlidingBar from './Sliders/Slider'
-import SlidingBatt from './Sliders/BattSlider'
-import SlidingCarb from './Sliders/CarbSlider'
-import SlidingHum from './Sliders/HumSlider'
-import SlidingHyd from './Sliders/HydSlider'
-import SlidingSou from './Sliders/SouSlider'
-import SlidingMet from './Sliders/MetSlider'
-import SlidingTempA from './Sliders/TempASlider'
-import SlidingTempIR from './Sliders/TempIR'
-import SlidingVib from './Sliders/VibSlider'
+import SlidingBar from '../components/sliders/Slider'
+import SlidingBatt from '../components/sliders/BattSlider'
+import SlidingCarb from '../components/sliders/CarbSlider'
+import SlidingHum from '../components/sliders/HumSlider'
+import SlidingHyd from '../components/sliders/HydSlider'
+import SlidingSou from '../components/sliders/SouSlider'
+import SlidingMet from '../components/sliders/MetSlider'
+import SlidingTempA from '../components/sliders/TempASlider'
+import SlidingTempIR from '../components/sliders/TempIR'
+import SlidingVib from '../components/sliders/VibSlider'
 
 export default class AccordionExampleStyled extends Component {
   state = { activeIndex: 0 }

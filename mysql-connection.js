@@ -8,11 +8,13 @@ const connection = mysql.createConnection({
     database: DATABASE
 });
 // promise for creating a MySQL connection
-connection.connect(err => 
-    logger.error(`MySQL connection error: ${err}. 
-    Please make sure MySQL is running.`));
+connection.connect(err => {
+    if (err) {
+        logger.error(`MySQL connection error: ${err}. 
+        Please make sure MySQL is running.`);
+    }
+});
 
 module.exports = {
     connection,
-    // connectMySQL
 }

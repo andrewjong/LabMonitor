@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom'
 import { Slider, InputNumber, Row, Col } from 'antd';
 import 'antd/dist/antd.css';
-import '../../../index.css';
 import Slider1 from 'react-rangeslider'
 
 const style = {
@@ -12,33 +11,30 @@ const style = {
 };
 
 const marks = {
-  0: '0% Hydrogen/Oxygen Ratio',
-  2: '2% Hydrogen/Oxygen Ratio',
-  4: {
-
+   0: '0°C/32°F',
+   18: '18°C/65°F',
+   32: '32°C/90°F',
+   38: {
+     style: {
+       color: '#f50',
+     },
+     label: <strong>38°C/100°F</strong>,
+   },
+   45:  {
     style: {
       color: '#f50',
     },
-    label: <strong>4% Hydrogen/Oxygen Ratio</strong>,
-  },
-  6: {
-
-    style: {
-      color: '#f50',
-    },
-    label: <strong>6% Hydrogen/Oxygen Ratio</strong>,
+    label: <strong>45°C/113°F</strong>,
   },
 }
 
 class SlidingBar extends React.Component {
   render() {
-    //const { value } = this.state;
     return (
 
       <div style={{ height: 500 }}>
         <div style={style}>
-
-          <Slider vertical range marks={marks} defaultValue={[0, 2]} min={0} max={6} step={0.01} />
+        <Slider vertical range marks={marks} defaultValue={[0, 32]} min={0} max={45} />
         </div>
       </div>
     )
