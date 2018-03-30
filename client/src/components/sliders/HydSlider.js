@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom'
 import { Slider, InputNumber, Row, Col } from 'antd';
 import 'antd/dist/antd.css';
-import '../../../index.css';
 import Slider1 from 'react-rangeslider'
 
 const style = {
