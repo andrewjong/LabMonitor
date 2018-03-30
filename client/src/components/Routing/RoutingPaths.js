@@ -13,7 +13,9 @@ const RoutingPaths = (extraProps) => (
     <Route exact path="/" render={(props) => (
       <OverviewPage {...props} nodes={extraProps.nodes} />
     )} />
-    <Route exact path="/download" component={DownloadPage} />
+    <Route exact path="/download" render={(props) => (
+      <DownloadPage {...props} nodes={extraProps.nodes} />
+    )} />
     <Route exact path="/threshold" component={ThresholdPage} />
     <Route exact path="/start" component={StartPage} />
   </Switch>
