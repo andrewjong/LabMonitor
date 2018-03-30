@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import {Form, Grid, Table, Button } from 'semantic-ui-react'
-
+import { Form, Grid, Table, Button } from 'semantic-ui-react'
+/*
 const StartPage = () => (
 <div>
 
@@ -20,7 +20,7 @@ const StartPage = () => (
 <p> Input email and phone number to enter if nodes detect non-nominal behavior </p>
     <Form.Field>
       <label>Email Address</label>
-      <input placeholder='email' />
+      <input type="email" id="mail" name="mail" placeholder='email' />
     </Form.Field>
 
 
@@ -35,4 +35,54 @@ const StartPage = () => (
   </div>
 )
 
+
 export default StartPage
+*/
+
+class StartPage extends Component {
+  render() {
+    
+
+    return (
+
+      <div>
+       
+        <Grid centered>
+          <Form class="ui">
+            <Form.Field  onsubmit="return validateForm()" method="post">
+              <p> Set Contact Information to be displayed in website </p>
+              <label>First Name</label>
+              <input placeholder='First Name' id="empty" type='empty' 
+              />
+            </Form.Field>
+
+            <Form.Field>
+              <label>Last Name</label>
+              <input placeholder='Last Name' type="empty" />
+            </Form.Field>
+
+            <p> Input email and phone number to enter if nodes detect non-nominal behavior </p>
+
+            <Form.Field onsubmit="return validateForm()" method="post">
+              <label>Email Address</label>
+              <input type="email" id="mail" name="mail" placeholder='email' />
+            </Form.Field>
+
+
+            <Form.Field onsubmit="return validateForm()" method="post">
+              <label>Phone Number</label>
+              <input type='contain' placeholder='Phone Number' length="10"  />
+            </Form.Field>
+
+            <Button type='submit' color="primary">Submit</Button>
+          </Form>
+        </Grid>
+       
+      </div>
+      
+    )
+  }
+
+}
+
+export default StartPage;

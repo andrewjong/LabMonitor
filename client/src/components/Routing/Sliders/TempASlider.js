@@ -25,7 +25,7 @@ const marks = {
     style: {
       color: '#f50',
     },
-    label: <strong>'45°C/113°F'</strong>,
+    label: <strong>45°C/113°F</strong>,
   },
 }
 
