@@ -21,12 +21,28 @@ const CHART_OPTIONS = {
   scales: {
     yAxes: [{
       ticks: {
-        beginAtZero: true
+        suggestedMin: 0,
+        suggestedMax: 60,
+        stepSize: 20
       }
-    }]
-  },
+    }],
+    xAxes: [{
+      ticks: {
+        maxTicksLimit: 4
+      }
+    }],
+  }, 
   responsive: false,
-  maintainAspectRatio: false
+  maintainAspectRatio: true,
+  animation: {
+    duration: 3000,
+    easing: 'linear'
+  },
+  tooltips: {
+    mode: 'index',
+    intersect: false,
+    animationDuration: 200
+  }
 }
 /**
  * Mapping of sensor to rgba color.
@@ -61,7 +77,8 @@ const makeDataWithChartOptions = (dataPoints) => {
         backgroundColor: BORDER_COLORS[label], //.replace(',1)', ',.5)'), // make the background slightly transparent
         fill: false,
         borderColor: BORDER_COLORS[label],
-        borderWidth: 1
+        borderWidth: 1,
+        lineTension: 0
       }
     });
 

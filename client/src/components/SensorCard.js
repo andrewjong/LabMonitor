@@ -27,13 +27,8 @@ class SensorCard extends Component {
                     {/* CHART TITLE GOES HERE. OR DOES IT? */}
                 </div>
                 <Chart data={this.props.sensorData.chartData}
-                    options={
-                        Object.assign(this.props.sensorData.chartOptions,
-                            {
-                                responsive: true,
-                                maintainAspectRatio: false
-                            })
-                    } />
+                    options={this.props.sensorData.chartOptions}
+                />
             </div>
         );
     }
