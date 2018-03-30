@@ -6,9 +6,9 @@ import './App.css'
 
 import './semantic/dist/semantic.min.css';
 import LabHeader from './components/LabHeader';
-import Navigation from './components/Routing/Navigation';
+import Navigation from './routes/Navigation';
 
-import RoutingPaths from './components/Routing/RoutingPaths';
+import RoutingPaths from './routes/RoutingPaths';
 
 // time between polling for new data in seconds
 const INTERVAL_SECONDS = 2;

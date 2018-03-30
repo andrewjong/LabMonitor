@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './OverviewPage.css'
 import { Card, Grid, Dropdown } from 'semantic-ui-react'
-import SensorCard from '../SensorCard'
+import SensorCard from '../components/SensorCard'
 
 // sensor labels for a node 
 const SENSOR_GROUPS = [
