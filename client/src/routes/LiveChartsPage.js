@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './OverviewPage.css'
+import './LiveChartsPage.css'
 import { Card, Grid, Dropdown } from 'semantic-ui-react'
 import SensorCard from '../components/SensorCard'
 

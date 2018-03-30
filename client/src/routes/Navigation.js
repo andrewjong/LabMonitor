@@ -17,7 +17,7 @@ const Navigation = () => (
 			<div className="TabButtons">
 				<Menu attached='top' size="massive" name="Options">
 					<Menu.Item as={Nav} to="/" name="Overview"> <Icon name='area graph' />
-						Live Data
+						Live Charts
 					</Menu.Item>
 
 					<Menu.Item as={Nav} to="/download" name="Download Dataset"> <Icon name='download' />
