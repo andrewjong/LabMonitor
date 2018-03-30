@@ -59,9 +59,8 @@ const BORDER_COLORS = {
   battery: 'rgba(80,80,80,0.9)',
 }
 
-const toCapitalCase = str => {
-  str.split(" ").map(word => word[0].toUpperCase()+word.slice(1)).join(" ")
-}
+const toCapitalCase = str => str.split(" ").map(word => word[0].toUpperCase()+word.slice(1)).join(" ");
+
 /**
  * Takes the data for a node and transforms it into an object suitable for a 
  * @param {Object[]} dataPoints the array containing the stored state data for a node
@@ -113,24 +112,25 @@ class OverviewPage extends Component {
   constructor(props) {
     super(props);
     const nodes = this.props.nodes;
-    const firstExperiment = nodes[Object.keys(nodes)[0]]
+    const firstID = Object.keys(nodes)[0] // because the first id is not necessarily 0. eg. where 0 has been deleted
     this.state = {
-      activeExperiment: firstExperiment
+      activeExperimentID: firstID,
+      experiments: nodes
     };
-
   }
 
   /**
    * Change the experiment based on the selected option
    */
-  handleChange = (event, { name, value }) => {
+  changeExperiment = (event, { value }) => {
     // alert('Change detected!')
-    const experiment = this.props.nodes[value]
-    this.setState({ experiment })
+    const newState = Object.assign(this.state, {activeExperimentID: value})
+    this.setState(newState)
   }
 
-  makeNodeCard = () => {
-    const dataPoints = this.state.activeExperiment;
+  makeExperimentCard = () => {
+    const id = this.state.activeExperimentID;
+    const dataPoints = this.state.experiments[id];
     const sensorData = makeDataWithChartOptions(dataPoints);
 
     // use the most recent datapoint for the owner and description info
@@ -148,7 +148,7 @@ class OverviewPage extends Component {
             <Dropdown centered inline
               noResultsMessage="No experiments available"
               options={options} defaultValue={title} placeholder="Select an experiment"
-              onChange={this.handleChange}
+              onChange={this.changeExperiment}
             />
           </Card.Header>
           <Card.Meta>
@@ -175,14 +175,14 @@ class OverviewPage extends Component {
    * Render the graphs on the overview page.
    */
   render() {
-    let nodeCard;
-    if (this.state.activeExperiment)
-      nodeCard = this.makeNodeCard(this.state.activeExperiment)
+    let experimentCard;
+    if (this.state.activeExperimentID)
+      experimentCard = this.makeExperimentCard()
     else
-      nodeCard = 'Please refresh the state';
+      experimentCard = 'Please refresh the state';
     return (
       <div>
-        {nodeCard}
+        {experimentCard}
       </div>
     );
 
