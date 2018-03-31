@@ -16,6 +16,7 @@ class SensorCard extends Component {
     }
     render() {
         return (
+            
             <div style={{ margin: 25 + "px" }}>
                 <div>
                     {/* {this.props.title} */}

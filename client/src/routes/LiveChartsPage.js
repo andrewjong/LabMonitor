@@ -135,7 +135,7 @@ class OverviewPage extends Component {
     this.setState(newState);
   }
 
-  makeExperimentCard = () => {
+  makeMainDisplay = () => {
     const id = this.state.activeExperimentID;
     const dataPoints = this.state.experiments[id];
     const sensorData = makeDataWithChartOptions(dataPoints);
@@ -148,18 +148,18 @@ class OverviewPage extends Component {
     const description = latestDataPoint.description || 'None';
 
     return (
-      <Card fluid centered>
-        <Card.Content>
-          <Card.Header>
-            <Dropdown centered inline
-              noResultsMessage="No experiments available"
-              options={experimentOptions} defaultValue={title} placeholder="Select an experiment"
-              onChange={this.changeExperiment}
-            />
-          </Card.Header>
+      <Grid centered>
+        <Grid.Row>
+          <Dropdown centered inline
+            noResultsMessage="No experiments available"
+            options={experimentOptions} defaultValue={title} placeholder="Select an experiment"
+            onChange={this.changeExperiment}
+          />
+        </Grid.Row>
+        <Grid.Row>
           <ExperimentCard sensorData={sensorData} title={title} owner={owner} description={description} />
-        </Card.Content>
-      </Card>
+        </Grid.Row>
+      </Grid>
     );
   }
 
@@ -169,7 +169,7 @@ class OverviewPage extends Component {
   render() {
     let experimentCard;
     if (this.state.activeExperimentID)
-      experimentCard = this.makeExperimentCard()
+      experimentCard = this.makeMainDisplay()
     else
       experimentCard = 'Please refresh the state';
     return (

@@ -21,9 +21,9 @@ class ExperimentCard extends React.Component {
         return (
             <Card fluid centered>
                 <Card.Content>
-                    <Card.Meta>
+                    <Card.Header>
                         {`Experiment by ${this.props.owner}`}
-                    </Card.Meta>
+                    </Card.Header>
                     <Card.Description>
                         {this.props.description}
                     </Card.Description>
