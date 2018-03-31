@@ -6,18 +6,29 @@ class ExperimentCard extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            hiddenSensors: {
-                'humidity': false,
-                'temperature': false,
-                'gas': false,
-                'sound': false,
-                'vibration': false,
-                'battery': false
+            shownSensors: {
+                'humidity': true,
+                'temperature': true,
+                'gas': true,
+                'sound': true,
+                'vibration': true,
+                'battery': true
             }
+        }
+        this.makeHideCallBack = this.makeHideCallBack.bind(this);
+    }
+
+    makeHideCallBack = sensorGroup => {
+        return () => {
+            const newState = Object.assign({}, this.state)
+            newState.shownSensors[sensorGroup] = !newState.shownSensors[sensorGroup];
+            this.setState(newState);
+            // console.log(JSON.stringify(this.state.shownSensors))
         }
     }
 
     render() {
+        const shownData = this.props.sensorData.filter(data => this.state.shownSensors[data.title]);
         return (
             <Card fluid centered>
                 <Card.Content>
@@ -27,9 +38,9 @@ class ExperimentCard extends React.Component {
                     <Card.Description>
                         {this.props.description}
                     </Card.Description>
-                    <Grid centered divided>
+                    <Grid divided container>
                         {
-                            this.props.sensorData.map(data => <SensorCard sensorData={data} />)
+                            shownData.map(data => <SensorCard sensorData={data} hideSensor={this.makeHideCallBack(data.title)} />)
                         }
                     </Grid>
                 </Card.Content>
