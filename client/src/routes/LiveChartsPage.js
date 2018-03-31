@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
 import './LiveChartsPage.css'
 import { Card, Grid, Dropdown } from 'semantic-ui-react'
+import ExperimentCard from '../components/ExperimentCard'
 import SensorCard from '../components/SensorCard'
 
 // sensor labels for a node 
-const SENSOR_GROUPS = [
-  ["humidity"],
-  ["temp_ambient", "temp_ir"], // group temperature together
-  ["carbon_monoxide", "methane", "hydrogen"], // group gases together
-  ["sound"], 
-  ["vibration"], 
-  ["battery"]
-];
+const SENSOR_GROUPS = {
+  'humidity': ['humidity'],
+  'temperature': ['temp_ambient', 'temp_ir'],
+  'gas': ["carbon_monoxide", "methane", "hydrogen"], // group gases together
+  'sound': ['sound'],
+  'vibration': ['vibration'],
+  'battery': ['battery']
+};
+
 // graphical options for Chart.JS
 const CHART_OPTIONS = {
   legend: {
@@ -31,7 +33,7 @@ const CHART_OPTIONS = {
         maxTicksLimit: 4
       }
     }],
-  }, 
+  },
   responsive: false,
   maintainAspectRatio: true,
   animation: {
@@ -59,7 +61,7 @@ const BORDER_COLORS = {
   battery: 'rgba(80,80,80,0.9)',
 }
 
-const toCapitalCase = str => str.split(" ").map(word => word[0].toUpperCase()+word.slice(1)).join(" ");
+const toCapitalCase = str => str.split(" ").map(word => word[0].toUpperCase() + word.slice(1)).join(" ");
 
 /**
  * Takes the data for a node and transforms it into an object suitable for a 
@@ -68,20 +70,11 @@ const toCapitalCase = str => str.split(" ").map(word => word[0].toUpperCase()+wo
  */
 const makeDataWithChartOptions = (dataPoints) => {
   const timeLabels = dataPoints.map(point => point.time);
-  return SENSOR_GROUPS.map(sensorGroup => {
-    const datasets = sensorGroup.map(label => {
-      return {
-        label: label,
-        data: dataPoints.map(point => point[label]),
-        backgroundColor: BORDER_COLORS[label], //.replace(',1)', ',.5)'), // make the background slightly transparent
-        fill: false,
-        borderColor: BORDER_COLORS[label],
-        borderWidth: 1,
-        lineTension: 0
-      }
-    });
-
+  return Object.keys(SENSOR_GROUPS).map(sensorGroupKey => {
+    const subLabels = SENSOR_GROUPS[sensorGroupKey];
+    const datasets = subLabelsToDatasets(subLabels, dataPoints);
     return {
+      title: sensorGroupKey,
       status: "Good",
       chartData: {
         labels: timeLabels,
@@ -91,6 +84,20 @@ const makeDataWithChartOptions = (dataPoints) => {
     }
   });
 }
+
+const subLabelsToDatasets = (subLabels, dataPoints) => subLabels.map(label => {
+  return {
+    label: label,
+    data: dataPoints.map(point => point[label]),
+    backgroundColor: BORDER_COLORS[label], //.replace(',1)', ',.5)'), // make the background slightly transparent
+    fill: false,
+    borderColor: BORDER_COLORS[label],
+    borderWidth: 1,
+    lineTension: 0
+  }
+});
+
+
 
 /**
  * Get list of experiment choice options from data
@@ -124,8 +131,8 @@ class OverviewPage extends Component {
    */
   changeExperiment = (event, { value }) => {
     // alert('Change detected!')
-    const newState = Object.assign(this.state, {activeExperimentID: value})
-    this.setState(newState)
+    const newState = Object.assign(this.state, { activeExperimentID: value });
+    this.setState(newState);
   }
 
   makeExperimentCard = () => {
@@ -135,38 +142,23 @@ class OverviewPage extends Component {
 
     // use the most recent datapoint for the owner and description info
     const latestDataPoint = dataPoints[dataPoints.length - 1];
-    const options = getOptions(this.props.nodes);
+    const experimentOptions = getOptions(this.props.nodes);
     const title = latestDataPoint.equipment || 'None'
     const owner = latestDataPoint.owner || 'None';
     const description = latestDataPoint.description || 'None';
 
-    // put in a NodeCard for each node
     return (
       <Card fluid centered>
         <Card.Content>
           <Card.Header>
             <Dropdown centered inline
               noResultsMessage="No experiments available"
-              options={options} defaultValue={title} placeholder="Select an experiment"
+              options={experimentOptions} defaultValue={title} placeholder="Select an experiment"
               onChange={this.changeExperiment}
             />
           </Card.Header>
-          <Card.Meta>
-            {`Experiment by ${owner}`}
-          </Card.Meta>
-          <Card.Description>
-            {description}
-          </Card.Description>
-          <Grid centered divided>
-            {
-              sensorData.map(data => <SensorCard sensorData={data} />)
-            }
-          </Grid>
-
+          <ExperimentCard sensorData={sensorData} title={title} owner={owner} description={description} />
         </Card.Content>
-        {
-          // Something down here for hidden charts? or should we put it on top? probably bottom makes more sense because they're hidden
-        }
       </Card>
     );
   }

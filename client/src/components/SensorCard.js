@@ -11,25 +11,19 @@ class SensorCard extends Component {
         // this.state.chartData =  props.sensorData.chartData
     }
     doSomething() {
-        alert('Hi! I am ' + this.props.sensorData.chartData.datasets[0].label)
+        alert('Hi! I am ' + this.props.sensorData.title)
 
     }
     render() {
         return (
             <div style={{ margin: 25 + "px" }}>
                 <div>
-                    {/* Chart Settings button */}
-                </div>
-                <div>
-                    {/* Hide/Unhide button */}
+                    {/* {this.props.title} */}
+                    {this.props.sensorData.title}
                 </div>
                 <div>
                     {/* status of the sensor */}
                     {`Status: ${this.props.sensorData.status}`}
-                </div>
-                <div>
-                    {/* {this.props.title} */}
-                    {/* CHART TITLE GOES HERE. OR DOES IT? */}
                 </div>
                 <Button icon='hide' onClick={() => this.doSomething()} />
                 <Chart data={this.props.sensorData.chartData}
