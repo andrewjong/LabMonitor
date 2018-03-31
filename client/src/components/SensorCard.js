@@ -3,9 +3,11 @@
  */
 import React, { Component } from 'react';
 import { Button, Icon, Card } from 'semantic-ui-react'
-import Chart from './Chart';
+import { Line } from 'react-chartjs-2';
 
 const toCapitalCase = str => str.split(" ").map(word => word[0].toUpperCase() + word.slice(1)).join(" ");
+const HEIGHT = 200;
+const WIDTH = 250;
 
 class SensorCard extends Component {
     constructor(props) {
@@ -18,7 +20,7 @@ class SensorCard extends Component {
     }
     render() {
         return (
-            <Card>
+            <Card color='green'>
                 <Card.Content>
                     <Button floated='right' icon='hide' size='tiny' onClick={() => this.props.hideSensor()} />
                     <Card.Header textAlign='left'>
@@ -27,8 +29,13 @@ class SensorCard extends Component {
                     <Card.Meta textAlign='left'>
                         {`Status: ${this.props.sensorData.status}`}
                     </Card.Meta>
-                    <Chart data={this.props.sensorData.chartData}
-                        options={this.props.sensorData.chartOptions}
+                </Card.Content>
+                <Card.Content>
+                    <Line
+                        height={HEIGHT}
+                        width={WIDTH}
+                        data={this.props.sensorData.chartData}
+                        options={this.props.chartOptions}
                     />
                 </Card.Content>
             </Card>
