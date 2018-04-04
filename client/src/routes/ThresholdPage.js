@@ -3,14 +3,9 @@ import { Dropdown, Button, Segment, Checkbox, Icon, Grid, Table, Accordion } fro
 import { Slider } from 'antd';
 import SlidingBar from '../components/sliders/Slider'
 import SlidingBatt from '../components/sliders/BattSlider'
-import SlidingCarb from '../components/sliders/CarbSlider'
-import SlidingHum from '../components/sliders/HumSlider'
-import SlidingHyd from '../components/sliders/HydSlider'
-import SlidingSou from '../components/sliders/SouSlider'
-import SlidingMet from '../components/sliders/MetSlider'
-import SlidingTempA from '../components/sliders/TempASlider'
-import SlidingTempIR from '../components/sliders/TempIR'
-import SlidingVib from '../components/sliders/VibSlider'
+import SlidingSouVib from '../components/sliders/SouVibSliders'
+import SlidingHumTemp from '../components/sliders/HumTempSliders'
+import SlidingGas from '../components/sliders/GasSliders'
 
 export default class AccordionExampleStyled extends Component {
   state = { activeIndex: 0 }
@@ -84,11 +79,11 @@ export default class AccordionExampleStyled extends Component {
 
               <Table.Row>
                 <Table.Cell>Methane</Table.Cell>
-                <Table.Cell>5% (Lower Explosive Limit)</Table.Cell>
+                <Table.Cell>2.5%</Table.Cell>
                 <Table.Cell>
-                  6-10%
+                  3.75%
             </Table.Cell>
-                <Table.Cell>15%+ (High Explosive Limit</Table.Cell>
+                <Table.Cell>5% (Lower Explosive Limit)</Table.Cell>
               </Table.Row>
 
               <Table.Row>
@@ -141,68 +136,28 @@ export default class AccordionExampleStyled extends Component {
 
         <Accordion.Title active={activeIndex === 2} index={2} onClick={this.handleClick}>
           <Icon name='dropdown' />
-          Carbon Monoxide Slider
+          Gases Sliders
         </Accordion.Title>
         <Accordion.Content active={activeIndex === 2}>
-          <SlidingCarb />
+          <SlidingGas />
         </Accordion.Content>
 
         <Accordion.Title active={activeIndex === 3} index={3} onClick={this.handleClick}>
           <Icon name='dropdown' />
-          Humidity Slider
+          Sound and Vibration Slider
         </Accordion.Title>
         <Accordion.Content active={activeIndex === 3}>
-          <SlidingHum />
+          <SlidingSouVib />
         </Accordion.Content>
 
         <Accordion.Title active={activeIndex === 4} index={4} onClick={this.handleClick}>
           <Icon name='dropdown' />
-          Hydrogen Slider
+          Temperature and Humidity Sliders
         </Accordion.Title>
         <Accordion.Content active={activeIndex === 4}>
-          <SlidingHyd />
+          <SlidingHumTemp />
         </Accordion.Content>
 
-        <Accordion.Title active={activeIndex === 5} index={5} onClick={this.handleClick}>
-          <Icon name='dropdown' />
-          Methane Slider
-        </Accordion.Title>
-        <Accordion.Content active={activeIndex === 5}>
-          <SlidingMet />
-        </Accordion.Content>
-
-        <Accordion.Title active={activeIndex === 6} index={6} onClick={this.handleClick}>
-          <Icon name='dropdown' />
-          Sound Slider
-        </Accordion.Title>
-        <Accordion.Content active={activeIndex === 6}>
-          <SlidingSou />
-        </Accordion.Content>
-
-        <Accordion.Title active={activeIndex === 7} index={7} onClick={this.handleClick}>
-          <Icon name='dropdown' />
-          Temperature Ambient Slider
-        </Accordion.Title>
-        <Accordion.Content active={activeIndex === 7}>
-          <SlidingTempA />
-        </Accordion.Content>
-
-        <Accordion.Title active={activeIndex === 8} index={8} onClick={this.handleClick}>
-          <Icon name='dropdown' />
-          Temperature IR Slider
-        </Accordion.Title>
-        <Accordion.Content active={activeIndex === 8}>
-          <SlidingTempIR />
-        </Accordion.Content>
-
-        <Accordion.Title active={activeIndex === 9} index={9} onClick={this.handleClick}>
-          <Icon name='dropdown' />
-          Vibration Slider
-        </Accordion.Title>
-        <Accordion.Content active={activeIndex === 9}>
-          <SlidingVib />
-          <SlidingBar />
-        </Accordion.Content>
       </Accordion>
     )
   }

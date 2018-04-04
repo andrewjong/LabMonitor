@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom'
+import ReactDOM from 'react-dom';
 import { Slider, InputNumber, Row, Col } from 'antd';
 import 'antd/dist/antd.css';
-import Slider1 from 'react-rangeslider'
+import { Grid } from 'semantic-ui-react';
+
 
 const style = {
   float: 'left',
@@ -11,8 +12,6 @@ const style = {
 };
 
 const marks = {
-  //65: '0 Volts °C',
-
   0: {
 
     style: {
@@ -33,14 +32,14 @@ const marks = {
 
 class SlidingBar extends React.Component {
   render() {
-    //const { value } = this.state;
     return (
-
       <div style={{ height: 500 }}>
-        <div style={style}>
-
-          <Slider vertical range min={0} max={4} step={0.01} defaultValue={[2, 5]} marks={marks}/>
-        </div>
+        <Grid centered>
+            <div style={style}>
+            <h4>Battery</h4>
+              <Slider vertical range min={0} max={4} step={0.01} defaultValue={[2, 5]} marks={marks} />
+            </div>
+        </Grid>
       </div>
     )
   }
