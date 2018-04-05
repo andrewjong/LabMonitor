@@ -71,7 +71,7 @@ class StartPage extends Component {
 
             <Form.Field >
               <label>Phone Number</label>
-              <input placeholder='Phone Number'   />
+              <input placeholder='10 digits'   />
             </Form.Field>
 
             <Button type='submit' color="primary">Submit</Button>
