@@ -37,13 +37,10 @@ class SlidingBar extends React.Component {
 
                 <Grid centered>
 
-
-
                     <div style={style}>
                         <h4>Temperature Ambient</h4>
                         <Slider vertical range marks={Ambient} defaultValue={[0,18,32]} min={0} max={45} />
                     </div>
-
 
                     <Table basic='very' celled collapsing>
                         <Table.Body>

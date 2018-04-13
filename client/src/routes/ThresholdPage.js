@@ -69,7 +69,11 @@ export default class AccordionExampleStyled extends Component {
           </Grid.Column>
         </Grid.Row>
 
+        <Grid.Row centered columns={2}>
+          <Grid.Column>
 <Test/>
+          </Grid.Column>
+        </Grid.Row>
       </Grid>
      
     )
