@@ -10,24 +10,24 @@ const style = {
     marginLeft: 70,
 };
 
-const Vibrations = {
-    0: '0%',
-    50: '50%',
-    75: {
-
+const Sound = {
+    0: '0 dB',
+    60: '60 dB',
+    75: '70 dB',
+    95: {
         style: {
             color: '#f50',
         },
-        label: <strong>75%</strong>,
+        label: <strong>90 dB</strong>,
     },
-    100: {
-
+    120: {
         style: {
             color: '#f50',
         },
-        label: <strong>100%</strong>,
+        label: <strong>120 dB</strong>,
     },
 }
+
 
 class SlidingBar extends React.Component {
     render() {
@@ -35,9 +35,10 @@ class SlidingBar extends React.Component {
 
             <div style={{ height: 500 }}>
                 <Grid centered>
+
                     <div style={style}>
-                        <h4>Vibration</h4>
-                        <Slider vertical range marks={Vibrations} defaultValue={[0, 50, 75]} min={0} max={100} step={1} />
+                        <h4>Sound</h4>
+                        <Slider vertical range marks={Sound} defaultValue={[0, 60, 75]} min={0} max={120} step={1} />
                     </div>
 
                     <Table basic='very' celled collapsing>
@@ -51,7 +52,7 @@ class SlidingBar extends React.Component {
                                 </Table.Cell>
 
                                 <Table.Cell>
-                                    0-50%
+                                    60 decibels (Talking/Machinery)
                     </Table.Cell>
                             </Table.Row>
 
@@ -62,7 +63,7 @@ class SlidingBar extends React.Component {
                                     </Header.Content>
                                 </Table.Cell>
                                 <Table.Cell>
-                                    51-75%
+                                    75 decibels (Constant Sound)
                   </Table.Cell>
                             </Table.Row>
 
@@ -73,12 +74,11 @@ class SlidingBar extends React.Component {
                                     </Header.Content>
                                 </Table.Cell>
                                 <Table.Cell>
-                                    76-100%
+                                    95+ decibels
                     </Table.Cell>
                             </Table.Row>
                         </Table.Body>
                     </Table>
-
                 </Grid>
             </div>
         )

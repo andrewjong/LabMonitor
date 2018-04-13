@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Slider, InputNumber, Row, Col } from 'antd';
 import 'antd/dist/antd.css';
-import { Grid, Header, Icon, Table } from 'semantic-ui-react';
+import { Grid, Icon, Table, Header } from 'semantic-ui-react';
 
 const style = {
     float: 'left',
@@ -10,35 +10,40 @@ const style = {
     marginLeft: 70,
 };
 
-const Vibrations = {
-    0: '0%',
-    50: '50%',
-    75: {
-
+const Ambient = {
+    0: '0°C/32°F',
+    18: '18°C/65°F',
+    32: '32°C/90°F',
+    38: {
         style: {
             color: '#f50',
         },
-        label: <strong>75%</strong>,
+        label: <strong>38°C/100°F</strong>,
     },
-    100: {
-
+    45: {
         style: {
             color: '#f50',
         },
-        label: <strong>100%</strong>,
+        label: <strong>45°C/113°F</strong>,
     },
 }
+
 
 class SlidingBar extends React.Component {
     render() {
         return (
 
             <div style={{ height: 500 }}>
+
                 <Grid centered>
+
+
+
                     <div style={style}>
-                        <h4>Vibration</h4>
-                        <Slider vertical range marks={Vibrations} defaultValue={[0, 50, 75]} min={0} max={100} step={1} />
+                        <h4>Temperature Ambient</h4>
+                        <Slider vertical range marks={Ambient} defaultValue={[0,18,32]} min={0} max={45} />
                     </div>
+
 
                     <Table basic='very' celled collapsing>
                         <Table.Body>
@@ -51,7 +56,7 @@ class SlidingBar extends React.Component {
                                 </Table.Cell>
 
                                 <Table.Cell>
-                                    0-50%
+                                    18-32°C (65-90°F)
                     </Table.Cell>
                             </Table.Row>
 
@@ -62,7 +67,7 @@ class SlidingBar extends React.Component {
                                     </Header.Content>
                                 </Table.Cell>
                                 <Table.Cell>
-                                    51-75%
+                                    32.1-38°C (90-100°F)
                   </Table.Cell>
                             </Table.Row>
 
@@ -73,12 +78,11 @@ class SlidingBar extends React.Component {
                                     </Header.Content>
                                 </Table.Cell>
                                 <Table.Cell>
-                                    76-100%
+                                    38.1°C+ (100°F+)
                     </Table.Cell>
                             </Table.Row>
                         </Table.Body>
                     </Table>
-
                 </Grid>
             </div>
         )

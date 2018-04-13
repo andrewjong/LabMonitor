@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Slider, InputNumber, Row, Col } from 'antd';
 import 'antd/dist/antd.css';
-import { Grid, Header, Icon, Table } from 'semantic-ui-react';
+import { Grid, Table, Icon, Header } from 'semantic-ui-react';
 
 const style = {
     float: 'left',
@@ -10,36 +10,37 @@ const style = {
     marginLeft: 70,
 };
 
-const Vibrations = {
-    0: '0%',
-    50: '50%',
-    75: {
+
+const Hydrogen = {
+    0: '0% H/O',
+    2: '2% H/O Ratio',
+    4: {
 
         style: {
             color: '#f50',
         },
-        label: <strong>75%</strong>,
+        label: <strong>4% H/O Ratio</strong>,
     },
-    100: {
+    6: {
 
         style: {
             color: '#f50',
         },
-        label: <strong>100%</strong>,
+        label: <strong>6% H/O Ratio</strong>,
     },
 }
+
 
 class SlidingBar extends React.Component {
     render() {
         return (
 
             <div style={{ height: 500 }}>
-                <Grid centered>
+                <Grid centered >
                     <div style={style}>
-                        <h4>Vibration</h4>
-                        <Slider vertical range marks={Vibrations} defaultValue={[0, 50, 75]} min={0} max={100} step={1} />
+                        <h4>Hydrogen</h4>
+                        <Slider vertical range marks={Hydrogen} defaultValue={[0, 2, 4]} min={0} max={6} step={0.01} />
                     </div>
-
                     <Table basic='very' celled collapsing>
                         <Table.Body>
 
@@ -51,7 +52,7 @@ class SlidingBar extends React.Component {
                                 </Table.Cell>
 
                                 <Table.Cell>
-                                    0-50%
+                                    >2% Hydrogen/Oxygen Ratio
                     </Table.Cell>
                             </Table.Row>
 
@@ -62,7 +63,7 @@ class SlidingBar extends React.Component {
                                     </Header.Content>
                                 </Table.Cell>
                                 <Table.Cell>
-                                    51-75%
+                                    2.01-4% Hydrogen/Oxygen Ratio
                   </Table.Cell>
                             </Table.Row>
 
@@ -73,11 +74,13 @@ class SlidingBar extends React.Component {
                                     </Header.Content>
                                 </Table.Cell>
                                 <Table.Cell>
-                                    76-100%
+                                    4.01%+ Hydrogen/Oxygen Ratio
                     </Table.Cell>
                             </Table.Row>
                         </Table.Body>
                     </Table>
+
+
 
                 </Grid>
             </div>

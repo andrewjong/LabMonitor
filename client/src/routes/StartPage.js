@@ -48,17 +48,17 @@ class StartPage extends Component {
       <div>
        
         <Grid centered>
-          <Form class="ui">
+          <Form >
             <Form.Field  onsubmit="return validateForm()" method="post">
               <p> Set Contact Information to be displayed in website </p>
               <label>First Name</label>
-              <input placeholder='First Name' id="empty" type='empty' 
+              <input placeholder='First Name'  
               />
             </Form.Field>
 
             <Form.Field>
               <label>Last Name</label>
-              <input placeholder='Last Name' type="empty" />
+              <input placeholder='Last Name'  />
             </Form.Field>
 
             <p> Input email and phone number to enter if nodes detect non-nominal behavior </p>
@@ -69,9 +69,9 @@ class StartPage extends Component {
             </Form.Field>
 
 
-            <Form.Field onsubmit="return validateForm()" method="post">
+            <Form.Field >
               <label>Phone Number</label>
-              <input type='contain' placeholder='Phone Number' length="10"  />
+              <input placeholder='10 digits'   />
             </Form.Field>
 
             <Button type='submit' color="primary">Submit</Button>

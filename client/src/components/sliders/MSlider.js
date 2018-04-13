@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Slider, InputNumber, Row, Col } from 'antd';
 import 'antd/dist/antd.css';
-import { Grid, Header, Icon, Table } from 'semantic-ui-react';
+import { Grid, Table, Icon, Header } from 'semantic-ui-react';
 
 const style = {
     float: 'left',
@@ -10,22 +10,28 @@ const style = {
     marginLeft: 70,
 };
 
-const Vibrations = {
+const Methane = {
     0: '0%',
-    50: '50%',
-    75: {
+    2.5: '2%',
+    3.5: {
 
         style: {
             color: '#f50',
         },
-        label: <strong>75%</strong>,
+        label: <strong>3.5%</strong>,
     },
-    100: {
+    5: {
+        style: {
+            color: '#f50',
+        },
+        label: <strong>5%</strong>,
+    },
+    7: {
 
         style: {
             color: '#f50',
         },
-        label: <strong>100%</strong>,
+        label: <strong>7%</strong>,
     },
 }
 
@@ -36,8 +42,8 @@ class SlidingBar extends React.Component {
             <div style={{ height: 500 }}>
                 <Grid centered>
                     <div style={style}>
-                        <h4>Vibration</h4>
-                        <Slider vertical range marks={Vibrations} defaultValue={[0, 50, 75]} min={0} max={100} step={1} />
+                        <h4>Methane</h4>
+                        <Slider vertical range marks={Methane} defaultValue={[0,2.5,5]} min={0} max={7} step={0.1} />
                     </div>
 
                     <Table basic='very' celled collapsing>
@@ -51,7 +57,7 @@ class SlidingBar extends React.Component {
                                 </Table.Cell>
 
                                 <Table.Cell>
-                                    0-50%
+                                > 2.5%
                     </Table.Cell>
                             </Table.Row>
 
@@ -62,7 +68,7 @@ class SlidingBar extends React.Component {
                                     </Header.Content>
                                 </Table.Cell>
                                 <Table.Cell>
-                                    51-75%
+                                2.51-3.75%
                   </Table.Cell>
                             </Table.Row>
 
@@ -73,12 +79,11 @@ class SlidingBar extends React.Component {
                                     </Header.Content>
                                 </Table.Cell>
                                 <Table.Cell>
-                                    76-100%
+                                5%+
                     </Table.Cell>
                             </Table.Row>
                         </Table.Body>
                     </Table>
-
                 </Grid>
             </div>
         )

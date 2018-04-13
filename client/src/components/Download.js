@@ -10,7 +10,6 @@ import Center from 'react-center';
 import './Download.css'
 
 class Download extends Component {
-  // return (
   render() {
     return (
       <Center>

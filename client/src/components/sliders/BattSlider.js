@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom'
+import ReactDOM from 'react-dom';
 import { Slider, InputNumber, Row, Col } from 'antd';
 import 'antd/dist/antd.css';
-import Slider1 from 'react-rangeslider'
+import { Grid, Table, Header, Icon } from 'semantic-ui-react';
+
+
 
 const style = {
   float: 'left',
@@ -11,8 +13,6 @@ const style = {
 };
 
 const marks = {
-  //65: '0 Volts °C',
-
   0: {
 
     style: {
@@ -33,14 +33,53 @@ const marks = {
 
 class SlidingBar extends React.Component {
   render() {
-    //const { value } = this.state;
     return (
-
       <div style={{ height: 500 }}>
-        <div style={style}>
+        <Grid centered>
+          <div style={style}>
+            <h4>Battery</h4>
+            <Slider vertical range min={0} max={4} step={0.01} defaultValue={[2, 3, 5]} marks={marks} />
+          </div>
 
-          <Slider vertical range min={0} max={4} step={0.01} defaultValue={[2, 5]} marks={marks}/>
-        </div>
+          <Table basic='very' celled collapsing>
+             <Table.Body>
+
+                <Table.Row>
+                   <Table.Cell>
+                      <Header.Content>
+                        <Icon name="check circle" color="green" size="big" />
+                      </Header.Content>
+                    </Table.Cell>
+
+                    <Table.Cell>
+                      3.2 Volts+
+                    </Table.Cell>
+                </Table.Row>
+
+                <Table.Row>
+                  <Table.Cell>
+                    <Header.Content>
+                      <Icon name="exclamation triangle" color="yellow" size="big" />
+                    </Header.Content>
+                  </Table.Cell>
+                  <Table.Cell>
+                   3.0-3.19 Volts
+                  </Table.Cell>
+                </Table.Row>
+
+                <Table.Row>
+                    <Table.Cell>
+                        <Header.Content>
+                          <Icon name="window close" color="red" size="big" />
+                        </Header.Content>
+                    </Table.Cell>
+                    <Table.Cell>
+                      > 2.99 Volts
+                    </Table.Cell>
+                </Table.Row>
+            </Table.Body>
+         </Table>
+        </Grid>
       </div>
     )
   }
