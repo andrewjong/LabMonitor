@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Slider, InputNumber, Row, Col } from 'antd';
 import 'antd/dist/antd.css';
-import { Grid } from 'semantic-ui-react';
+import { Grid, Table, Icon, Header } from 'semantic-ui-react';
 
 const style = {
     float: 'left',
@@ -85,9 +85,7 @@ class SlidingBar extends React.Component {
                                 <h4>Carbon Monoxide</h4>
                                 <Slider vertical range marks={carbon} defaultValue={[0, 5]} min={0} max={10} step={0.01} />
                             </div>
-                        </Grid.Column>
-
-                        <Grid.Column>
+                         
                             <div style={style}>
                                 <h4>Hydrogen</h4>
                                 <Slider vertical range marks={Hydrogen} defaultValue={[0, 2]} min={0} max={6} step={0.01} />
