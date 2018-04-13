@@ -18,7 +18,7 @@ const SENSOR_GROUPS = {
 const CHART_OPTIONS = {
   legend: {
     display: true,
-    position: 'top'
+    position: 'bottom'
   },
   scales: {
     yAxes: [{
@@ -35,15 +35,15 @@ const CHART_OPTIONS = {
     }],
   },
   responsive: false,
-  maintainAspectRatio: true,
+  maintainAspectRatio: false,
   animation: {
-    duration: 3000,
+    duration: 1000,
     easing: 'linear'
   },
   tooltips: {
     mode: 'index',
     intersect: false,
-    animationDuration: 200
+    animationDuration: 0.5 // in seconds???
   }
 }
 /**
@@ -61,12 +61,11 @@ const BORDER_COLORS = {
   battery: 'rgba(80,80,80,0.9)',
 }
 
-const toCapitalCase = str => str.split(" ").map(word => word[0].toUpperCase() + word.slice(1)).join(" ");
 
 /**
  * Takes the data for a node and transforms it into an object suitable for a 
  * @param {Object[]} dataPoints the array containing the stored state data for a node
- * @returns {Object} object suited for NodeCard Has 'status', 'chartData', and 'chartOptions' properties.
+ * @returns {array} array of objects
  */
 const makeDataWithChartOptions = (dataPoints) => {
   const timeLabels = dataPoints.map(point => point.time);

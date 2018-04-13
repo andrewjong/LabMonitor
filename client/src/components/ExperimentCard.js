@@ -1,10 +1,12 @@
 import React from 'react'
-import { Card, Grid, Dropdown } from 'semantic-ui-react'
+import { Button, Card, Grid, Dropdown, Item } from 'semantic-ui-react'
 import SensorCard from '../components/SensorCard'
+import { toCapitalCase } from '../utilityFunctions'
 
 class ExperimentCard extends React.Component {
     constructor(props) {
         super(props);
+        // TODO: these sensor labels should be made into constants, so that they're unified with the constants in LiveChartsPage.js
         this.state = {
             shownSensors: {
                 'humidity': true,
@@ -15,20 +17,23 @@ class ExperimentCard extends React.Component {
                 'battery': true
             }
         }
-        this.makeHideCallBack = this.makeHideCallBack.bind(this);
+        this.makeToggleHiddenCallback = this.makeToggleHiddenCallback.bind(this); // bind the 'this' context for the callback
     }
 
-    makeHideCallBack = sensorGroup => {
+    makeToggleHiddenCallback = sensorGroup => {
         return () => {
             const newState = Object.assign({}, this.state)
+            // toggle
             newState.shownSensors[sensorGroup] = !newState.shownSensors[sensorGroup];
             this.setState(newState);
-            // console.log(JSON.stringify(this.state.shownSensors))
         }
     }
 
+
     render() {
+        // filter to show only the shown sensor groups
         const shownData = this.props.sensorData.filter(data => this.state.shownSensors[data.title]);
+        const hiddenData = this.props.sensorData.filter(data => !this.state.shownSensors[data.title]);
         return (
             <Card fluid centered>
                 <Card.Content>
@@ -38,15 +43,33 @@ class ExperimentCard extends React.Component {
                     <Card.Description>
                         {this.props.description}
                     </Card.Description>
+                </Card.Content>
+                <Card.Content>
                     <Grid divided container>
                         {
-                            shownData.map(data => <SensorCard sensorData={data} hideSensor={this.makeHideCallBack(data.title)} />)
+                            shownData.map(data =>
+                                <SensorCard sensorData={data} toggleHidden={this.makeToggleHiddenCallback(data.title)} />
+                            )
                         }
                     </Grid>
                 </Card.Content>
-                {
-                    // Something down here for hidden charts? or should we put it on top? probably bottom makes more sense because they're hidden
-                }
+                <Card.Content>
+                    <Grid centered>
+                        {
+                            hiddenData.map(data => (
+                                <Item>
+                                    <Item.Content>
+                                        <Item.Header content={toCapitalCase(data.title)} />
+                                        <Button floated='right' icon='unhide' size='tiny'
+                                            onClick={() => this.makeToggleHiddenCallback(data.title)()} />
+
+                                    </Item.Content>
+                                </Item>
+                            ))
+                        }
+                    </Grid>
+
+                </Card.Content>
             </Card>
         );
     }
