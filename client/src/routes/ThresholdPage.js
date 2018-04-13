@@ -15,6 +15,7 @@ import SlidingAm from '../components/sliders/AmSlider'
 import SlidingVib from '../components/sliders/VibSlider'
 import SlidingIR from '../components/sliders/IRSlider'
 import Tables from '../components/Tables'
+import Test from '../components/sliders/Test'
 
 export default class AccordionExampleStyled extends Component {
   render() {
@@ -68,6 +69,7 @@ export default class AccordionExampleStyled extends Component {
           </Grid.Column>
         </Grid.Row>
 
+<Test/>
       </Grid>
      
     )
