@@ -13,7 +13,7 @@ import RoutingPaths from './routes/RoutingPaths';
 // time between polling for new data in seconds
 const INTERVAL_SECONDS = 2;
 // max amount of data to store in the state
-const MAX_DATA = 10;
+const MAX_DATA_POINTS = 10;
 
 class App extends Component {
   constructor(props) {
@@ -57,7 +57,12 @@ class App extends Component {
           // clone the original state
           const newState = Object.assign({}, this.state);
           // check to see if our state has this node in its mapping. if not, add it and set its data to an empty array
-          if (typeof newState.nodes[node.id] === 'undefined') newState.nodes[node.id] = [];
+          if (typeof newState.nodes[node.id] === 'undefined') {
+            const values = [];
+            values.length = MAX_DATA_POINTS;
+            values.fill(0);
+            newState.nodes[node.id] = values;
+          }
 
           const dataPoints = newState.nodes[node.id]; // the existing datapoints for this node in our state
           const lastPoint = dataPoints[dataPoints.length - 1]; // the latest datapoint for this node in our state
@@ -66,11 +71,9 @@ class App extends Component {
           // it's not the same (i.e. new data)
           if (!(JSON.stringify(node) === JSON.stringify(lastPoint))) {
             console.log('New data detected. Updating state...')
-            // don't store in the state more than max amount of datapoints
-            // if (newState.nodes[node.id].length > MAX_DATA) newState.nodes[node.id].shift();
-
             // add the new data
             newState.nodes[node.id].push(node);
+            newState.nodes[node.id].shift();
 
             // set the new state
             return this.setState({ newState });

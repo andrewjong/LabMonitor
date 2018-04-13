@@ -2,40 +2,43 @@
  * Sensor node status
  */
 import React, { Component } from 'react';
-import { Button, Icon } from 'semantic-ui-react'
-import Chart from './Chart';
+import { Button, Icon, Card } from 'semantic-ui-react'
+import { Line } from 'react-chartjs-2';
+import { toCapitalCase } from '../utilityFunctions'
 
+const HEIGHT = 200;
+const WIDTH = 250;
+
+const STATUS_COLOR_MAP = {
+    'nominal': 'green',
+    'warning': 'yellow',
+    'critical': 'red'
+}
 class SensorCard extends Component {
     constructor(props) {
         super(props)
-        // this.state.chartData =  props.sensorData.chartData
-    }
-    doSomething() {
-        alert('Hi! I am ' + this.props.sensorData.chartData.datasets[0].label)
-
     }
     render() {
         return (
-            <div style={{ margin: 25 + "px" }}>
-                <div>
-                    {/* Chart Settings button */}
-                </div>
-                <div>
-                    {/* Hide/Unhide button */}
-                </div>
-                <div>
-                    {/* status of the sensor */}
-                    {`Status: ${this.props.sensorData.status}`}
-                </div>
-                <div>
-                    {/* {this.props.title} */}
-                    {/* CHART TITLE GOES HERE. OR DOES IT? */}
-                </div>
-                <Button icon='hide' onClick={() => this.doSomething()} />
-                <Chart data={this.props.sensorData.chartData}
-                    options={this.props.sensorData.chartOptions}
-                />
-            </div>
+            <Card color='green'>
+                <Card.Content>
+                    <Button floated='right' icon='hide' size='tiny' onClick={() => this.props.toggleHidden()} />
+                    <Card.Header textAlign='left'>
+                        {toCapitalCase(this.props.sensorData.title)}
+                    </Card.Header>
+                    <Card.Meta textAlign='left'>
+                        {`Status: ${this.props.sensorData.status}`}
+                    </Card.Meta>
+                </Card.Content>
+                <Card.Content>
+                    <Line
+                        height={HEIGHT}
+                        width={WIDTH}
+                        data={this.props.sensorData.chartData}
+                        options={this.props.sensorData.chartOptions}
+                    />
+                </Card.Content>
+            </Card>
         );
     }
 }

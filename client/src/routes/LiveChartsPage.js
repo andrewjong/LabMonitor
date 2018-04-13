@@ -1,22 +1,24 @@
 import React, { Component } from 'react';
 import './LiveChartsPage.css'
 import { Card, Grid, Dropdown } from 'semantic-ui-react'
+import ExperimentCard from '../components/ExperimentCard'
 import SensorCard from '../components/SensorCard'
 
 // sensor labels for a node 
-const SENSOR_GROUPS = [
-  ["humidity"],
-  ["temp_ambient", "temp_ir"], // group temperature together
-  ["carbon_monoxide", "methane", "hydrogen"], // group gases together
-  ["sound"], 
-  ["vibration"], 
-  ["battery"]
-];
+const SENSOR_GROUPS = {
+  'humidity': ['humidity'],
+  'temperature': ['temp_ambient', 'temp_ir'],
+  'gas': ["carbon_monoxide", "methane", "hydrogen"], // group gases together
+  'sound': ['sound'],
+  'vibration': ['vibration'],
+  'battery': ['battery']
+};
+
 // graphical options for Chart.JS
 const CHART_OPTIONS = {
   legend: {
     display: true,
-    position: 'top'
+    position: 'bottom'
   },
   scales: {
     yAxes: [{
@@ -31,17 +33,17 @@ const CHART_OPTIONS = {
         maxTicksLimit: 4
       }
     }],
-  }, 
+  },
   responsive: false,
-  maintainAspectRatio: true,
+  maintainAspectRatio: false,
   animation: {
-    duration: 3000,
+    duration: 1000,
     easing: 'linear'
   },
   tooltips: {
     mode: 'index',
     intersect: false,
-    animationDuration: 200
+    animationDuration: 0.5 // in seconds???
   }
 }
 /**
@@ -59,30 +61,19 @@ const BORDER_COLORS = {
   battery: 'rgba(80,80,80,0.9)',
 }
 
-const toCapitalCase = str => {
-  str.split(" ").map(word => word[0].toUpperCase()+word.slice(1)).join(" ")
-}
+
 /**
  * Takes the data for a node and transforms it into an object suitable for a 
  * @param {Object[]} dataPoints the array containing the stored state data for a node
- * @returns {Object} object suited for NodeCard Has 'status', 'chartData', and 'chartOptions' properties.
+ * @returns {array} array of objects
  */
 const makeDataWithChartOptions = (dataPoints) => {
   const timeLabels = dataPoints.map(point => point.time);
-  return SENSOR_GROUPS.map(sensorGroup => {
-    const datasets = sensorGroup.map(label => {
-      return {
-        label: label,
-        data: dataPoints.map(point => point[label]),
-        backgroundColor: BORDER_COLORS[label], //.replace(',1)', ',.5)'), // make the background slightly transparent
-        fill: false,
-        borderColor: BORDER_COLORS[label],
-        borderWidth: 1,
-        lineTension: 0
-      }
-    });
-
+  return Object.keys(SENSOR_GROUPS).map(sensorGroupKey => {
+    const subLabels = SENSOR_GROUPS[sensorGroupKey];
+    const datasets = subLabelsToDatasets(subLabels, dataPoints);
     return {
+      title: sensorGroupKey,
       status: "Good",
       chartData: {
         labels: timeLabels,
@@ -92,6 +83,20 @@ const makeDataWithChartOptions = (dataPoints) => {
     }
   });
 }
+
+const subLabelsToDatasets = (subLabels, dataPoints) => subLabels.map(label => {
+  return {
+    label: label,
+    data: dataPoints.map(point => point[label]),
+    backgroundColor: BORDER_COLORS[label], //.replace(',1)', ',.5)'), // make the background slightly transparent
+    fill: false,
+    borderColor: BORDER_COLORS[label],
+    borderWidth: 1,
+    lineTension: 0
+  }
+});
+
+
 
 /**
  * Get list of experiment choice options from data
@@ -113,61 +118,47 @@ class OverviewPage extends Component {
   constructor(props) {
     super(props);
     const nodes = this.props.nodes;
-    const firstExperiment = nodes[Object.keys(nodes)[0]]
+    const firstID = Object.keys(nodes)[0] // because the first id is not necessarily 0. eg. where 0 has been deleted
     this.state = {
-      activeExperiment: firstExperiment
+      activeExperimentID: firstID,
+      experiments: nodes
     };
-
   }
 
   /**
    * Change the experiment based on the selected option
    */
-  handleChange = (event, { name, value }) => {
+  changeExperiment = (event, { value }) => {
     // alert('Change detected!')
-    const experiment = this.props.nodes[value]
-    this.setState({ experiment })
+    const newState = Object.assign(this.state, { activeExperimentID: value });
+    this.setState(newState);
   }
 
-  makeNodeCard = () => {
-    const dataPoints = this.state.activeExperiment;
+  makeMainDisplay = () => {
+    const id = this.state.activeExperimentID;
+    const dataPoints = this.state.experiments[id];
     const sensorData = makeDataWithChartOptions(dataPoints);
 
     // use the most recent datapoint for the owner and description info
     const latestDataPoint = dataPoints[dataPoints.length - 1];
-    const options = getOptions(this.props.nodes);
+    const experimentOptions = getOptions(this.props.nodes);
     const title = latestDataPoint.equipment || 'None'
     const owner = latestDataPoint.owner || 'None';
     const description = latestDataPoint.description || 'None';
 
-    // put in a NodeCard for each node
     return (
-      <Card fluid centered>
-        <Card.Content>
-          <Card.Header>
-            <Dropdown centered inline
-              noResultsMessage="No experiments available"
-              options={options} defaultValue={title} placeholder="Select an experiment"
-              onChange={this.handleChange}
-            />
-          </Card.Header>
-          <Card.Meta>
-            {`Experiment by ${owner}`}
-          </Card.Meta>
-          <Card.Description>
-            {description}
-          </Card.Description>
-          <Grid centered divided>
-            {
-              sensorData.map(data => <SensorCard sensorData={data} />)
-            }
-          </Grid>
-
-        </Card.Content>
-        {
-          // Something down here for hidden charts? or should we put it on top? probably bottom makes more sense because they're hidden
-        }
-      </Card>
+      <Grid centered>
+        <Grid.Row>
+          <Dropdown centered inline
+            noResultsMessage="No experiments available"
+            options={experimentOptions} defaultValue={title} placeholder="Select an experiment"
+            onChange={this.changeExperiment}
+          />
+        </Grid.Row>
+        <Grid.Row>
+          <ExperimentCard sensorData={sensorData} title={title} owner={owner} description={description} />
+        </Grid.Row>
+      </Grid>
     );
   }
 
@@ -175,14 +166,14 @@ class OverviewPage extends Component {
    * Render the graphs on the overview page.
    */
   render() {
-    let nodeCard;
-    if (this.state.activeExperiment)
-      nodeCard = this.makeNodeCard(this.state.activeExperiment)
+    let experimentCard;
+    if (this.state.activeExperimentID)
+      experimentCard = this.makeMainDisplay()
     else
-      nodeCard = 'Please refresh the state';
+      experimentCard = 'Please refresh the state';
     return (
       <div>
-        {nodeCard}
+        {experimentCard}
       </div>
     );
 
