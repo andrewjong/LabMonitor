@@ -74,7 +74,7 @@ const makeDataWithChartOptions = (dataPoints) => {
     const datasets = subLabelsToDatasets(subLabels, dataPoints);
     return {
       title: sensorGroupKey,
-      status: "Good",
+      status: "Nominal",
       chartData: {
         labels: timeLabels,
         datasets: datasets,

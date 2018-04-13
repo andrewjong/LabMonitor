@@ -20,7 +20,7 @@ class SensorCard extends Component {
     }
     render() {
         return (
-            <Card color='green'>
+            <Card color={STATUS_COLOR_MAP[this.props.sensorData.status.toLowerCase()] || 'gray'}>
                 <Card.Content>
                     <Button floated='right' icon='hide' size='tiny' onClick={() => this.props.toggleHidden()} />
                     <Card.Header textAlign='left'>
