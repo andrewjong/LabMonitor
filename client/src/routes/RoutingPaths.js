@@ -2,10 +2,10 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Router, Route, IndexRoute, Switch } from "react-router";
 
-import LiveChartsPage from "./LiveChartsPage";
-import DownloadPage from "./DownloadPage";
-import ThresholdPage from "./ThresholdPage";
-import StartPage from "./StartPage";
+import LiveChartsPage from "./LiveCharts/LiveCharts";
+import DownloadPage from "./Download/Download";
+import ThresholdPage from "./Threshold";
+import StartPage from "./Start/Start";
 
 
 const RoutingPaths = (extraProps) => (

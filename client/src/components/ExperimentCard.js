@@ -6,7 +6,7 @@ import { toCapitalCase } from '../utilityFunctions'
 class ExperimentCard extends React.Component {
     constructor(props) {
         super(props);
-        // TODO: these sensor labels should be made into constants, so that they're unified with the constants in LiveChartsPage.js
+        // TODO: these sensor labels should be made into constants, so that they're unified with the constants in LiveChartsjs
         this.state = {
             shownSensors: {
                 'humidity': true,

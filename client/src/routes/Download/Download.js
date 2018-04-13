@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Dropdown, Button, Segment, Checkbox, Icon, Grid } from 'semantic-ui-react'
-import './DownloadPage.css'
+import './Download.css'
 
 const nodeSamples = [
   "1", "2", "3", "4"

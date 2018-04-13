@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import MenuItem, { Tab, Menu, Grid, Segment, Icon, Dropdown, Image } from 'semantic-ui-react'
 import { Link, NavLink } from 'react-router-dom'
-import './SideTab.css';
 
 const Nav = props => (
 	<NavLink

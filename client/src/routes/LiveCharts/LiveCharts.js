@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import './LiveChartsPage.css'
+import './LiveCharts.css'
 import { Card, Grid, Dropdown } from 'semantic-ui-react'
-import ExperimentCard from '../components/ExperimentCard'
-import SensorCard from '../components/SensorCard'
+import ExperimentCard from '../../components/ExperimentCard'
+import SensorCard from '../../components/SensorCard'
 
 // sensor labels for a node 
 const SENSOR_GROUPS = {
@@ -114,7 +114,7 @@ const getOptions = (nodes) => {
   });
 }
 
-class OverviewPage extends Component {
+class LiveChartsPage extends Component {
   constructor(props) {
     super(props);
     const nodes = this.props.nodes;
@@ -180,4 +180,4 @@ class OverviewPage extends Component {
   }
 }
 
-export default OverviewPage
+export default LiveChartsPage
