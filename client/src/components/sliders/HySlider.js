@@ -4,25 +4,28 @@ import { Slider, InputNumber, Row, Col } from 'antd';
 import 'antd/dist/antd.css';
 import { Grid, Table, Icon, Header } from 'semantic-ui-react';
 
+/*
+ * Padding for slider
+ */
 const style = {
     float: 'left',
     height: 300,
     marginLeft: 70,
 };
 
-
+/*
+ * Colors text of slider
+ */
 const Hydrogen = {
     0: '0% H/O',
     2: '2% H/O Ratio',
     4: {
-
         style: {
             color: '#f50',
         },
         label: <strong>4% H/O Ratio</strong>,
     },
     6: {
-
         style: {
             color: '#f50',
         },
@@ -30,7 +33,9 @@ const Hydrogen = {
     },
 }
 
-
+/*
+ * Renders Hydrogen slider and legend
+ */
 class SlidingBar extends React.Component {
     render() {
         return (

@@ -8,6 +8,10 @@ import ThresholdPage from "./Threshold";
 import StartPage from "./Start/Start";
 
 
+/**
+ * Routes each page and components in them
+ * @param {Object} extraProps 
+ */
 const RoutingPaths = (extraProps) => (
   <Switch>
     <Route exact path="/" render={(props) => (

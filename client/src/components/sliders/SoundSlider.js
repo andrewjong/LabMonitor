@@ -4,12 +4,18 @@ import { Slider, InputNumber, Row, Col } from 'antd';
 import 'antd/dist/antd.css';
 import { Grid, Header, Icon, Table } from 'semantic-ui-react';
 
+/**
+ * Paadding for slider 
+ */
 const style = {
     float: 'left',
     height: 300,
     marginLeft: 70,
 };
 
+/**
+ * Sets the slider's text color
+ */
 const Sound = {
     0: '0 dB',
     60: '60 dB',
@@ -28,7 +34,9 @@ const Sound = {
     },
 }
 
-
+/**
+ * Renders slider for sound and its threshold legend 
+ */
 class SlidingBar extends React.Component {
     render() {
         return (

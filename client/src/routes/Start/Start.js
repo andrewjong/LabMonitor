@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import { Form, Grid, Table, Button } from 'semantic-ui-react'
+import { Form, Grid, Table, Button } from 'semantic-ui-react';
+
+/**
+ * This the page for the user to input the lab information
+ */
 class StartPage extends Component {
   render() {
-
-
     return (
       <Grid centered>
         <Form >
@@ -37,7 +39,6 @@ class StartPage extends Component {
       </Grid>
     )
   }
-
 }
 
 export default StartPage;

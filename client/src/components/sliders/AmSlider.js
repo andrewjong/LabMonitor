@@ -4,12 +4,18 @@ import { Slider, InputNumber, Row, Col } from 'antd';
 import 'antd/dist/antd.css';
 import { Grid, Icon, Table, Header } from 'semantic-ui-react';
 
+/*
+ * Padding for slider
+ */
 const style = {
     float: 'left',
     height: 300,
     marginLeft: 70,
 };
 
+/*
+ * Set text color of slider
+ */
 const Ambient = {
     0: '0°C/32°F',
     18: '18°C/65°F',
@@ -28,22 +34,20 @@ const Ambient = {
     },
 }
 
-
+/*
+ * Renders slider for Temperature Ambient and its legend
+ */
 class SlidingBar extends React.Component {
     render() {
         return (
-
             <div style={{ height: 500 }}>
 
                 <Grid centered>
-
-
 
                     <div style={style}>
                         <h4>Temperature Ambient</h4>
                         <Slider vertical range marks={Ambient} defaultValue={[0,18,32]} min={0} max={45} />
                     </div>
-
 
                     <Table basic='very' celled collapsing>
                         <Table.Body>
@@ -87,7 +91,6 @@ class SlidingBar extends React.Component {
             </div>
         )
     }
-
 }
 
 export default SlidingBar;

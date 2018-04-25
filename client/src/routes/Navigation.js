@@ -2,6 +2,10 @@ import React, { Component } from 'react'
 import MenuItem, { Tab, Menu, Grid, Segment, Icon, Dropdown, Image } from 'semantic-ui-react'
 import { Link, NavLink } from 'react-router-dom'
 
+/**
+ * NavLink for the React Routing paths
+ * @param {*} props 
+ */
 const Nav = props => (
 	<NavLink
 		exact
@@ -10,6 +14,9 @@ const Nav = props => (
 	/>
 );
 
+/*
+ * Navigation for the tabs throught React Router
+ */
 const Navigation = () => (
 	<Grid>
 		<Grid.Row centered>

@@ -4,25 +4,29 @@ import { Slider, InputNumber, Row, Col } from 'antd';
 import 'antd/dist/antd.css';
 import { Grid, Table, Header, Icon} from 'semantic-ui-react';
 
+/*
+ * Padding for slider
+ */
 const style = {
     float: 'left',
     height: 300,
     marginLeft: 70,
 };
 
+/*
+ * Colors the text of slider red
+ */
 const IR = {
     0: '0°C/32°F',
     38: '38°C/100°F',
     66: '66°C/150°F',
     93: {
-
         style: {
             color: '#f50',
         },
         label: <strong>93°C/200°F</strong>,
     },
     120: {
-
         style: {
             color: '#f50',
         },
@@ -30,6 +34,9 @@ const IR = {
     }
 }
 
+/*
+ * Renders slider for temperature IR and legend 
+ */
 class SlidingBar extends React.Component {
     render() {
         return (

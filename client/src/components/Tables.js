@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { Grid, Table, Header, Icon } from 'semantic-ui-react';
 
+/**
+ * Legend for the set threshold 
+ */
 class Legend extends React.Component {
   render() {
     return (
@@ -42,6 +45,7 @@ class Legend extends React.Component {
                 Critical
                     </Table.Cell>
             </Table.Row>
+
           </Table.Body>
         </Table>
       </div>

@@ -4,12 +4,18 @@ import { Slider, InputNumber, Row, Col } from 'antd';
 import 'antd/dist/antd.css';
 import { Grid, Table, Icon, Header } from 'semantic-ui-react';
 
+/*
+ * Padding for slider
+ */
 const style = {
     float: 'left',
     height: 300,
     marginLeft: 70,
 };
 
+/*
+ * Colors the slider text
+ */
 const carbon = {
     0: '0 PPM',
     4: '4 PPM',
@@ -28,6 +34,9 @@ const carbon = {
     },
 }
 
+/*
+ * Slider for carbon monoxide 
+ */
 class SlidingBar extends React.Component {
     render() {
         return (

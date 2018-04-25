@@ -4,12 +4,18 @@ import { Slider, InputNumber, Row, Col } from 'antd';
 import 'antd/dist/antd.css';
 import { Grid, Header, Table, Icon } from 'semantic-ui-react';
 
+/*
+ * Add padding between sliders
+ */
 const style = {
     float: 'left',
     height: 300,
     marginLeft: 70,
 };
 
+/*
+ * Colors the text of the slider
+ */
 const Humidity = {
     0: '0% RH',
     40: '40% RH',
@@ -28,7 +34,9 @@ const Humidity = {
     }
 }
 
-
+/*
+ * Slider for the humidity and its legend 
+ */
 class SlidingBar extends React.Component {
     render() {
         return (

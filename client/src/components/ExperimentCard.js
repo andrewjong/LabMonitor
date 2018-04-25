@@ -6,7 +6,7 @@ import { toCapitalCase } from '../utilityFunctions'
 class ExperimentCard extends React.Component {
     constructor(props) {
         super(props);
-        // TODO: these sensor labels should be made into constants, so that they're unified with the constants in LiveChartsjs
+        // TODO: these sensor labels should be made into constants, so that they're unified with the constants in LiveChartsPage.js
         this.state = {
             shownSensors: {
                 'humidity': true,
@@ -38,7 +38,9 @@ class ExperimentCard extends React.Component {
             <Card fluid centered>
                 <Card.Content>
                     <Card.Header>
-                        {`Experiment by ${this.props.owner}`}
+                        {/*{`Experiment by ${this.props.owner}`}*/}
+                        {`LabMonitor System Demo`}
+
                     </Card.Header>
                     <Card.Description>
                         {this.props.description}

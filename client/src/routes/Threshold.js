@@ -1,22 +1,21 @@
 import React, { Component } from 'react';
-import { Dropdown, Button, Segment, Checkbox, Icon, Grid, Table, Accordion } from 'semantic-ui-react'
+import { Dropdown, Button, Segment, Checkbox, Icon, Grid, Table, Accordion } from 'semantic-ui-react';
 import { Slider } from 'antd';
-import SlidingBar from '../components/sliders/Slider'
-import SlidingBatt from '../components/sliders/BattSlider'
-import SlidingSouVib from '../components/sliders/SouVibSliders'
-import SlidingHumTemp from '../components/sliders/HumTempSliders'
-import SlidingGas from '../components/sliders/GasSliders'
-import SlidingCM from '../components/sliders/CMSlider'
-import SlidingM from '../components/sliders/MSlider'
-import SlidingHy from '../components/sliders/HySlider'
-import SlidingHu from '../components/sliders/HuSlider'
-import SlidingSou from '../components/sliders/SoundSlider'
-import SlidingAm from '../components/sliders/AmSlider'
-import SlidingVib from '../components/sliders/VibSlider'
-import SlidingIR from '../components/sliders/IRSlider'
-import Tables from '../components/Tables'
+import SlidingBatt from '../components/sliders/BattSlider';
+import SlidingCM from '../components/sliders/CMSlider';
+import SlidingM from '../components/sliders/MSlider';
+import SlidingHy from '../components/sliders/HySlider';
+import SlidingHu from '../components/sliders/HuSlider';
+import SlidingSou from '../components/sliders/SoundSlider';
+import SlidingAm from '../components/sliders/AmSlider';
+import SlidingVib from '../components/sliders/VibSlider';
+import SlidingIR from '../components/sliders/IRSlider';
+import Tables from '../components/Tables';
 
-export default class AccordionExampleStyled extends Component {
+/**
+ * Layout for for the Threshold tab with all the slider 
+ */
+export default class ThresholdLayout extends Component {
   render() {
 
     return (

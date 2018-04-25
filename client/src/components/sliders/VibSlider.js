@@ -4,12 +4,18 @@ import { Slider, InputNumber, Row, Col } from 'antd';
 import 'antd/dist/antd.css';
 import { Grid, Header, Icon, Table } from 'semantic-ui-react';
 
+/*
+ * Padding for slider 
+ */
 const style = {
     float: 'left',
     height: 300,
     marginLeft: 70,
 };
 
+/*
+ * Colors the vibration slider text
+ */
 const Vibrations = {
     0: '0%',
     50: '50%',
@@ -29,6 +35,9 @@ const Vibrations = {
     },
 }
 
+/**
+ * Creates the slider for vibration and its legend
+ */
 class SlidingBar extends React.Component {
     render() {
         return (
