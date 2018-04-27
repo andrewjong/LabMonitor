@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import './LiveCharts.css'
-import { Card, Grid, Dropdown } from 'semantic-ui-react'
+import { Grid, Dropdown } from 'semantic-ui-react'
 import ExperimentCard from '../../components/ExperimentCard'
-import SensorCard from '../../components/SensorCard'
 
 // sensor labels for a node 
 const SENSOR_GROUPS = {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Dropdown, Button, Segment, Checkbox, Icon, Grid } from 'semantic-ui-react'
+import { Button, Segment, Checkbox, Grid } from 'semantic-ui-react'
 import './Download.css'
 
 /**

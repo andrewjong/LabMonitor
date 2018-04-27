@@ -2,7 +2,7 @@
  * Sensor node status
  */
 import React, { Component } from 'react';
-import { Button, Icon, Card } from 'semantic-ui-react'
+import { Button, Card } from 'semantic-ui-react'
 import { Line } from 'react-chartjs-2';
 import { toCapitalCase } from '../utilityFunctions'
 

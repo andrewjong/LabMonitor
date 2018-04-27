@@ -1,6 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom";
-import { Router, Route, IndexRoute, Switch } from "react-router";
+import { Route, Switch } from "react-router";
 
 import LiveChartsPage from "./LiveCharts/LiveCharts";
 import DownloadPage from "./Download/Download";

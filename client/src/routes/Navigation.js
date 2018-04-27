@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
-import MenuItem, { Tab, Menu, Grid, Segment, Icon, Dropdown, Image } from 'semantic-ui-react'
-import { Link, NavLink } from 'react-router-dom'
+import React from 'react'
+import { Menu, Grid, Icon} from 'semantic-ui-react'
+import { NavLink } from 'react-router-dom'
 
 /**
  * NavLink for the React Routing paths

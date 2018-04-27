@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Grid, Table, Header, Icon } from 'semantic-ui-react';
+import React from 'react';
+import { Table, Header, Icon } from 'semantic-ui-react';
 
 /**
  * Legend for the set threshold 

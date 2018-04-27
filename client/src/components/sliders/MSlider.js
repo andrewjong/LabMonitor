@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import { Slider, InputNumber, Row, Col } from 'antd';
+import React from 'react';
+import { Slider } from 'antd';
 import 'antd/dist/antd.css';
 import { Grid, Table, Icon, Header } from 'semantic-ui-react';
+
 
 const style = {
     float: 'left',

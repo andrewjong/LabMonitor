@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Card, Grid, Dropdown, Item } from 'semantic-ui-react'
+import { Button, Card, Grid, Item } from 'semantic-ui-react'
 import SensorCard from '../components/SensorCard'
 import { toCapitalCase } from '../utilityFunctions'
 
@@ -38,9 +38,7 @@ class ExperimentCard extends React.Component {
             <Card fluid centered>
                 <Card.Content>
                     <Card.Header>
-                        {/*{`Experiment by ${this.props.owner}`}*/}
-                        {`LabMonitor System Demo`}
-
+                        {`Experiment by ${this.props.owner}`}
                     </Card.Header>
                     <Card.Description>
                         {this.props.description}

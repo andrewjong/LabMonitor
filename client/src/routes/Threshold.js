@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Dropdown, Button, Segment, Checkbox, Icon, Grid, Table, Accordion } from 'semantic-ui-react';
-import { Slider } from 'antd';
+import { Grid } from 'semantic-ui-react';
 import SlidingBatt from '../components/sliders/BattSlider';
 import SlidingCM from '../components/sliders/CMSlider';
 import SlidingM from '../components/sliders/MSlider';

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Grid, Table, Button } from 'semantic-ui-react';
+import { Form, Grid, Button } from 'semantic-ui-react';
 
 /**
  * This the page for the user to input the lab information
